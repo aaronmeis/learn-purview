@@ -28,7 +28,9 @@ NBLM_CAVEAT = (
 
 # (slug, source path, section, title override or None, nblm?)
 PAGES = [
+    ("hub", PACK / "00 - Microsoft Purview Hub.md", "Plan", "Microsoft Purview deep dive hub", False),
     ("mission", PACK / "MISSION.md", "Plan", None, False),
+    ("intake", PACK / "intake" / "interview-answers.md", "Plan", "Scope interview", False),
     ("day-plan", PACK / "day-plan.md", "Plan", None, False),
     ("mindmap", PACK / "intake" / "mindmap.md", "Plan", "Mind map (scope)", False),
     ("view-01-conceptual", PACK / "views" / "01 - Conceptual View.md", "Architecture views", None, False),
@@ -43,6 +45,7 @@ PAGES = [
     ("source-ledger", PACK / "reference" / "source-ledger.md", "Reference", None, False),
     ("resources", PACK / "RESOURCES.md", "Reference", None, False),
     ("prompt-library", PACK / "prompts" / "00 - Prompt Library.md", "Prompts", None, False),
+    ("prompts-all", PACK / "prompts" / "notebooklm-all-prompts.md", "Prompts", "All NotebookLM prompts (archive)", False),
     ("prompts-tailored", PACK / "prompts" / "tailored-prompts.md", "Prompts", None, False),
     ("prompts-notebooklm-set", PACK / "prompts" / "notebooklm-prompt-set.md", "Prompts", None, False),
     ("prompts-decision-packet", PACK / "prompts" / "notebooklm-room-craft-decision-packet.md", "Prompts", None, False),
@@ -60,6 +63,10 @@ PAGES = [
     ("nblm-key-claims", EXP / "Key Claims and Architectural Implications of Microsoft Purview.csv", "NotebookLM reports", "Key claims and architectural implications", True),
     ("nblm-mindmap", EXP / "Microsoft Purview Architecture.json", "NotebookLM reports", "NotebookLM mind map", True),
 ]
+
+
+# Vault notes whose content lives on a console view rather than a library page.
+CONSOLE_LINKS = {"Deep Dive Cut": "deck", "Presentation slides": "deck", "shorts-topics": "shorts"}
 
 
 def load_sources():
@@ -111,7 +118,12 @@ def convert_obsidian(md):
         inner = m.group(1).replace("\\|", "|")
         label = inner.split("|", 1)[1] if "|" in inner else inner.split("/")[-1].removesuffix(".md")
         slug = slug_for_target(inner)
-        return f"[{label}]({slug}.html)" if slug else f"*{label}*"
+        if slug:
+            return f"[{label}]({slug}.html)"
+        stem = inner.split("|")[0].split("/")[-1].removesuffix(".md")
+        if stem in CONSOLE_LINKS:
+            return f"[{label}](../index.html#/{CONSOLE_LINKS[stem]})"
+        return f"*{label}*"
     md = re.sub(r"\[\[([^\]]+)\]\]", wikilink, md)
 
     # Obsidian callouts -> html blocks

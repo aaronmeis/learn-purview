@@ -13,6 +13,19 @@
       "name": "01-boundary",
       "title": "Where Purview's boundary sits",
       "tag": "Block 1 \u00b7 scope",
+      "pillar": "Architecture",
+      "keywords": [
+        "boundary",
+        "defender",
+        "sentinel",
+        "entra",
+        "data map",
+        "dspm",
+        "audit",
+        "capabilit"
+      ],
+      "duration": 78,
+      "poster": "media/posters/01-boundary.webp",
       "file": "media/shorts/01-boundary.mp4",
       "youtube": "",
       "status": "ready"
@@ -22,6 +35,18 @@
       "name": "02-labels-oversharing",
       "title": "How sensitivity labels stop AI oversharing",
       "tag": "Block 5 \u00b7 AI",
+      "pillar": "AI protections",
+      "keywords": [
+        "sensitivity label",
+        "label",
+        "oversharing",
+        "grounding",
+        "dlp",
+        "copilot",
+        "agent"
+      ],
+      "duration": 80,
+      "poster": "media/posters/02-labels-oversharing.webp",
       "file": "media/shorts/02-labels-oversharing.mp4",
       "youtube": "RCx803xilMU",
       "status": "ready"
@@ -31,6 +56,17 @@
       "name": "03-ai-oversharing",
       "title": "How Purview blocks AI oversharing",
       "tag": "Block 5 \u00b7 AI",
+      "pillar": "AI protections",
+      "keywords": [
+        "oversharing",
+        "dspm for ai",
+        "sharepoint",
+        "grounding",
+        "permission",
+        "copilot"
+      ],
+      "duration": 77,
+      "poster": "media/posters/03-ai-oversharing.webp",
       "file": "media/shorts/03-ai-oversharing.mp4",
       "youtube": "",
       "status": "ready"
@@ -40,6 +76,18 @@
       "name": "04-ai-prompts",
       "title": "How Purview secures AI prompts",
       "tag": "Block 5 \u00b7 AI",
+      "pillar": "AI protections",
+      "keywords": [
+        "prompt",
+        "collection policy",
+        "copilotinteraction",
+        "audit",
+        "transcript",
+        "itemclass",
+        "ediscovery"
+      ],
+      "duration": 64,
+      "poster": "media/posters/04-ai-prompts.webp",
       "file": "media/shorts/04-ai-prompts.mp4",
       "youtube": "",
       "status": "ready"
@@ -49,6 +97,18 @@
       "name": "05-snowflake-scan",
       "title": "How Purview scans Snowflake (and breaks)",
       "tag": "Block 5 \u00b7 integration",
+      "pillar": "Data governance",
+      "keywords": [
+        "snowflake",
+        "key pair",
+        "runtime",
+        "data map",
+        "classification",
+        "connector",
+        "metadata"
+      ],
+      "duration": 76,
+      "poster": "media/posters/05-snowflake-scan.webp",
       "file": "media/shorts/05-snowflake-scan.mp4",
       "youtube": "",
       "status": "ready"
@@ -58,6 +118,18 @@
       "name": "06-snowflake-fail",
       "title": "Why Snowflake connections fail",
       "tag": "Block 7 \u00b7 failure modes",
+      "pillar": "Data governance",
+      "keywords": [
+        "snowflake",
+        "basic auth",
+        "key pair",
+        "azure cli",
+        "salesforce",
+        "connector",
+        "catalog"
+      ],
+      "duration": 73,
+      "poster": "media/posters/06-snowflake-fail.webp",
       "file": "media/shorts/06-snowflake-fail.mp4",
       "youtube": "",
       "status": "ready"

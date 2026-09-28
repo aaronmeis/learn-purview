@@ -4,6 +4,7 @@ Re-run after regenerating the NotebookLM suite. Skips files that already exist u
 """
 import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -16,12 +17,18 @@ PACK = Path(r"C:\obsidian\personal_research_2026\Learning\tech-deep-dive\microso
 FORCE = "--force" in sys.argv
 
 SHORTS = [
-    ("01-boundary", "Where Microsoft Purview's Boundary Actually Sits", "Where Purview's boundary sits", "Block 1 · scope"),
-    ("02-labels-oversharing", "How Sensitivity Labels Stop AI Oversharing", "How sensitivity labels stop AI oversharing", "Block 5 · AI"),
-    ("03-ai-oversharing", "How Purview Blocks AI Oversharing", "How Purview blocks AI oversharing", "Block 5 · AI"),
-    ("04-ai-prompts", "How Purview Secures AI Prompts", "How Purview secures AI prompts", "Block 5 · AI"),
-    ("05-snowflake-scan", "How Purview Scans Snowflake (and Breaks)", "How Purview scans Snowflake (and breaks)", "Block 5 · integration"),
-    ("06-snowflake-fail", "Why Purview Snowflake Connections Fail", "Why Snowflake connections fail", "Block 7 · failure modes"),
+    ("01-boundary", "Where Microsoft Purview's Boundary Actually Sits", "Where Purview's boundary sits", "Block 1 · scope", "Architecture",
+     ["boundary", "defender", "sentinel", "entra", "data map", "dspm", "audit", "capabilit"]),
+    ("02-labels-oversharing", "How Sensitivity Labels Stop AI Oversharing", "How sensitivity labels stop AI oversharing", "Block 5 · AI", "AI protections",
+     ["sensitivity label", "label", "oversharing", "grounding", "dlp", "copilot", "agent"]),
+    ("03-ai-oversharing", "How Purview Blocks AI Oversharing", "How Purview blocks AI oversharing", "Block 5 · AI", "AI protections",
+     ["oversharing", "dspm for ai", "sharepoint", "grounding", "permission", "copilot"]),
+    ("04-ai-prompts", "How Purview Secures AI Prompts", "How Purview secures AI prompts", "Block 5 · AI", "AI protections",
+     ["prompt", "collection policy", "copilotinteraction", "audit", "transcript", "itemclass", "ediscovery"]),
+    ("05-snowflake-scan", "How Purview Scans Snowflake (and Breaks)", "How Purview scans Snowflake (and breaks)", "Block 5 · integration", "Data governance",
+     ["snowflake", "key pair", "runtime", "data map", "classification", "connector", "metadata"]),
+    ("06-snowflake-fail", "Why Purview Snowflake Connections Fail", "Why Snowflake connections fail", "Block 7 · failure modes", "Data governance",
+     ["snowflake", "basic auth", "key pair", "azure cli", "salesforce", "connector", "catalog"]),
 ]
 
 
@@ -35,6 +42,12 @@ YOUTUBE = {
     "05-snowflake-scan": "",
     "06-snowflake-fail": "",
 }
+
+
+def duration(path: Path) -> float:
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                         capture_output=True, text=True, check=True).stdout
+    return float(out.strip())
 
 
 def copy(src: Path, dst: Path):
@@ -64,9 +77,17 @@ def crop_square(src: Path, dst: Path, cx: int, cy: int, size: int, out=320):
 
 def main():
     items = []
-    for name, src_title, title, tag in SHORTS:
-        copy(NBLM / f"{src_title}.mp4", SITE / "media" / "shorts" / f"{name}.mp4")
-        items.append({"id": name, "name": name, "title": title, "tag": tag,
+    for name, src_title, title, tag, pillar, keywords in SHORTS:
+        mp4 = SITE / "media" / "shorts" / f"{name}.mp4"
+        copy(NBLM / f"{src_title}.mp4", mp4)
+        poster = SITE / "media" / "posters" / f"{name}.webp"
+        if FORCE or not poster.exists():
+            poster.parent.mkdir(parents=True, exist_ok=True)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "4", "-i", str(mp4), "-frames:v", "1",
+                            "-vf", "scale=360:-2", "-q:v", "70", str(poster)], check=True)
+            print("poster", poster.relative_to(SITE))
+        items.append({"id": name, "name": name, "title": title, "tag": tag, "pillar": pillar, "keywords": keywords,
+                      "duration": round(duration(mp4)), "poster": f"media/posters/{name}.webp",
                       "file": f"media/shorts/{name}.mp4", "youtube": YOUTUBE.get(name, ""), "status": "ready"})
     catalog = {
         "notebook_alias": "tdd-microsoft-purview",
@@ -91,6 +112,12 @@ def main():
     crop_square(s1, SITE / "assets" / "governance.jpg", 2490, 900, 640)
     crop_square(s1, SITE / "assets" / "compliance.jpg", 1420, 1480, 640)
     crop_square(s1, SITE / "assets" / "ai.jpg", 2490, 1480, 640)
+    for size in (192, 512):
+        icon = SITE / "assets" / "icons" / f"icon-{size}.png"
+        if FORCE or not icon.exists():
+            icon.parent.mkdir(parents=True, exist_ok=True)
+            Image.open(SITE / "assets" / "hero.jpg").resize((size, size), Image.LANCZOS).save(icon, "PNG", optimize=True)
+            print("icon", icon.relative_to(SITE))
 
 
 if __name__ == "__main__":

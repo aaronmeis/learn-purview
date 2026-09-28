@@ -1,9 +1,23 @@
 [
   {
+    "slug": "hub",
+    "title": "Microsoft Purview deep dive hub",
+    "section": "Plan",
+    "desc": "Technical deep dive hub for Microsoft Purview.",
+    "nblm": false
+  },
+  {
     "slug": "mission",
     "title": "Mission \u2014 Microsoft Purview",
     "section": "Plan",
     "desc": "Mission for the technical deep dive on Microsoft Purview.",
+    "nblm": false
+  },
+  {
+    "slug": "intake",
+    "title": "Scope interview",
+    "section": "Plan",
+    "desc": "",
     "nblm": false
   },
   {
@@ -151,6 +165,13 @@
     "title": "Prompt library \u2014 Microsoft Purview",
     "section": "Prompts",
     "desc": "Prompt library index for Microsoft Purview.",
+    "nblm": false
+  },
+  {
+    "slug": "prompts-all",
+    "title": "All NotebookLM prompts (archive)",
+    "section": "Prompts",
+    "desc": "Full prompt archive for Microsoft Purview tech deep dive NotebookLM suite.",
     "nblm": false
   },
   {

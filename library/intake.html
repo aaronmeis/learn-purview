@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scope interview | Learn Purview</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Plan</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Plan</div>
+  <h1 class="doctitle">Scope interview</h1>
+  
+  
+  <article><h1>Technical interview — Microsoft Purview</h1>
+<h2>scope</h2>
+<p>Which part of the platform is in scope, and what is explicitly out? Name the sub-products.</p>
+<p><strong>Answer:</strong></p>
+<p>All of Purview: Information Protection and sensitivity labels, Data Loss Prevention, Insider Risk Management, eDiscovery, Audit, Data Map and Data Catalog (data governance), Compliance Manager, and DSPM for AI.</p>
+<h2>tenant_cloud</h2>
+<p>Which cloud and tenant type: commercial, GCC, GCC High, DoD, Azure Government Secret/Top Secret? Any air gap?</p>
+<p><strong>Answer:</strong></p>
+<p>Commercial (global), GCC, GCC High, DoD, and Azure Government. No Secret or Top Secret clouds for now. No air gaps.</p>
+<h2>prior_knowledge</h2>
+<p>What do you already know about this platform and its neighbors? What is brand new?</p>
+<p><strong>Answer:</strong></p>
+<p>Assume no prior knowledge of Purview.</p>
+<h2>integrations</h2>
+<p>Which integrations matter: third-party and external systems (SIEM, ITSM, other clouds, SaaS, on-prem), APIs, identity providers?</p>
+<p><strong>Answer:</strong></p>
+<p>AWS, Snowflake, Salesforce, on-prem file shares, OneTrust (third-party and external). SharePoint (first-party Microsoft 365, in scope as an integration target).</p>
+<h2>ai_features</h2>
+<p>Which AI features or AI data paths are in scope (copilots, AI governance, model data flows)?</p>
+<p><strong>Answer:</strong></p>
+<p>DSPM for AI, AI interaction logging (audit and retention of Copilot/AI interactions), and AI fundamentals for models and agents as Purview governs them.</p>
+<h2>lab_access</h2>
+<p>What can you touch hands-on today: a tenant, a trial, a sandbox, or docs only?</p>
+<p><strong>Answer:</strong></p>
+<p>Real tenant.</p>
+<h2>falsifiers</h2>
+<p>What would make this deep dive a waste (wrong altitude, marketing depth, wrong cloud)?</p>
+<p><strong>Answer:</strong></p>
+<p>Any information that is not validated and grounded in Microsoft or Purview sources. Every use case must be traceable to Microsoft reference architectures.</p></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\intake\interview-answers.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="mission.html">&larr; Previous</a><a href="day-plan.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>
