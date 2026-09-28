@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake record | Learn Purview</title>
+<meta name="description" content="Intake for the Microsoft Purview technical deep dive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Plan</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Plan</div>
+  <h1 class="doctitle">Intake record</h1>
+  <p class="lead">Intake for the Microsoft Purview technical deep dive.</p>
+  
+  <article><h1>Intake — Microsoft Purview</h1>
+<p><strong>Mode:</strong> B (interview, draft mind map)</p>
+<h2>Blocks</h2>
+<ul>
+<li>
+<ol>
+<li>Context and scope (45m)</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Conceptual view (60m)</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Logical view (60m)</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>Physical view (60m)</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>Integration and AI elements (60m)</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>Hands-on lab (60m)</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>Failure modes and security (45m)</li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li>Design review and teach-back (30m)</li>
+</ol>
+</li>
+</ul>
+<h2>Interview answers</h2>
+<h3>scope</h3>
+<p>All of Purview: Information Protection and sensitivity labels, Data Loss Prevention, Insider Risk Management, eDiscovery, Audit, Data Map and Data Catalog (data governance), Compliance Manager, and DSPM for AI.</p>
+<h3>tenant_cloud</h3>
+<p>Commercial (global), GCC, GCC High, DoD, and Azure Government. No Secret or Top Secret clouds for now. No air gaps.</p>
+<h3>prior_knowledge</h3>
+<p>Assume no prior knowledge of Purview.</p>
+<h3>integrations</h3>
+<p>AWS, Snowflake, Salesforce, on-prem file shares, OneTrust (third-party and external). SharePoint (first-party Microsoft 365, in scope as an integration target).</p>
+<h3>ai_features</h3>
+<p>DSPM for AI, AI interaction logging (audit and retention of Copilot/AI interactions), and AI fundamentals for models and agents as Purview governs them.</p>
+<h3>lab_access</h3>
+<p>Real tenant.</p>
+<h3>falsifiers</h3>
+<p>Any information that is not validated and grounded in Microsoft or Purview sources. Every use case must be traceable to Microsoft reference architectures.</p>
+<h2>Next</h2>
+<ol>
+<li>Review <a href="mindmap.html">mindmap</a></li>
+<li>Fill <a href="source-ledger.html">source-ledger</a> (≥3 URLs, ≥1 named talk)</li>
+<li><code>python -m tech_deep_dive blocks --slug microsoft-purview</code> and <code>views --slug microsoft-purview</code></li>
+<li>Human gate on <a href="day-plan.html">day-plan</a> and the view stubs</li>
+</ol></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\intake\2026-09-26 - Intake.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="intake.html">&larr; Previous</a><a href="progress-log.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

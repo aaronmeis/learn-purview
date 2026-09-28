@@ -104,8 +104,11 @@ def main():
     for i in range(1, 16):
         resize(OUT / "tdd-microsoft-purview-presentation" / f"Slide{i}.JPG",
                SITE / "assets" / "slides" / f"slide-{i:02d}.jpg", 1600)
-    for png in (PACK / "assets" / "diagrams").glob("*.png"):
-        copy(png, SITE / "assets" / "diagrams" / png.name)
+    for f in (PACK / "assets" / "diagrams").iterdir():
+        if f.suffix in (".png", ".drawio", ".mmd"):
+            copy(f, SITE / "assets" / "diagrams" / f.name)
+    copy(NBLM / "Microsoft Purview Technical Blueprint.pdf", SITE / "assets" / "downloads" / "purview-technical-blueprint.pdf")
+    copy(OUT / "tdd-microsoft-purview-presentation.pptx", SITE / "assets" / "downloads" / "purview-deck.pptx")
 
     s1 = OUT / "tdd-microsoft-purview-presentation" / "Slide1.JPG"
     crop_square(s1, SITE / "assets" / "hero.jpg", 1956, 1190, 900)

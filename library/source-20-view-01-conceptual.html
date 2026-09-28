@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Source as uploaded: 20-view-01-conceptual | Learn Purview</title>
+<meta name="description" content="Conceptual view of Microsoft Purview - capabilities, actors, and value with no products named. Pre-filled from Microsoft sources; cite rows as [S#].">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · NotebookLM source bundle</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">NotebookLM source bundle</div>
+  <h1 class="doctitle">Source as uploaded: 20-view-01-conceptual</h1>
+  <p class="lead">Conceptual view of Microsoft Purview - capabilities, actors, and value with no products named. Pre-filled from Microsoft sources; cite rows as [S#].</p>
+  
+  <article><h1>Conceptual View — Microsoft Purview</h1>
+<p>Pack: <a href="hub.html">00 - Microsoft Purview Hub</a> · Block: <a href="block-02-conceptual-view.html">Block 2</a> · Next: <a href="view-02-logical.html">Logical view</a> · Sources: <a href="source-ledger.html">source-ledger</a></p>
+<div class="callout info" markdown="0"><div class="callout-title">Altitude rule</div><p>Conceptual means <strong>what and why</strong>, not how. Capabilities and actors only. Product names appear here only where Microsoft uses them as the capability name.</p></div>
+
+<h2>Problem and purpose</h2>
+<p>Microsoft states the problem as four pressures: data fragmented across the organization, a lack of visibility that hampers protection and governance, fast AI adoption, and blurred IT management roles [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]. Purview is Microsoft's answer: one platform to <strong>govern, protect, and manage data wherever it lives</strong> [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>].</p>
+<h2>Capabilities</h2>
+<p>Microsoft's five stated outcomes, used here as the top-level capability map [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Capability</th>
+<th>Outcome it delivers</th>
+<th>Actors</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>Know your data</td>
+<td>Visibility into data across the organization</td>
+<td>Data owner, steward, compliance admin</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Protect sensitive data</td>
+<td>Safeguard and manage sensitive data across its lifecycle, wherever it lives</td>
+<td>Compliance admin, end user</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Govern data</td>
+<td>Catalog, classify, and curate the data estate</td>
+<td>Data steward, data source admin</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>]</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Manage risk and regulation</td>
+<td>Manage critical data risks and regulatory requirements</td>
+<td>Compliance admin, investigator, auditor</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>Secure AI use</td>
+<td>Prevent oversharing and sensitive data leakage in generative AI</td>
+<td>Security and compliance analyst</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Solution families (how Microsoft groups the capabilities)</h2>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>What it answers</th>
+<th>Solutions in scope for this deep dive</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data security</td>
+<td>Is sensitive data protected and not leaking?</td>
+<td>Information Protection, Data Loss Prevention, Insider Risk Management, DSPM</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Data governance</td>
+<td>What data do we have, where, and who owns it?</td>
+<td>Data Map, Unified Catalog</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Data compliance</td>
+<td>Can we prove and enforce obligations?</td>
+<td>Audit, eDiscovery, Compliance Manager (also Data Lifecycle Management, Communication Compliance, Records Management)</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>AI protections</td>
+<td>Is AI use safe and auditable?</td>
+<td>DSPM for AI, AI interaction auditing</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+</tbody>
+</table>
+<p>Shared across families: classifiers, connectors, data explorer and activity explorer, sensitivity labels [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>].</p>
+<h2>Actors</h2>
+<table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>Role</th>
+<th>Goal</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compliance administrator</td>
+<td>Configures policies and DSPM for AI</td>
+<td>Policy coverage</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Security and compliance analyst</td>
+<td>Triages DLP and insider risk alerts</td>
+<td>Act on real risk</td>
+<td>[<a class="cite" href="https://www.youtube.com/watch?v=cu2FJ2f7Jho" target="_blank" rel="noopener" title="Microsoft Mechanics: New Agents in Microsoft Purview">S30</a>]</td>
+</tr>
+<tr>
+<td>Data source admin / data reader</td>
+<td>Registers and scans sources in the Data Map</td>
+<td>Complete catalog</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-snowflake" target="_blank" rel="noopener" title="Connect to and manage Snowflake">S10</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-salesforce" target="_blank" rel="noopener" title="Connect to and manage Salesforce">S11</a>]</td>
+</tr>
+<tr>
+<td>Investigator</td>
+<td>Runs eDiscovery cases and audit searches</td>
+<td>Evidence</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>End user</td>
+<td>Labels and handles content, uses Copilot and agents</td>
+<td>Work safely</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>Agent (non-human)</td>
+<td>Reads and writes data on a user's behalf</td>
+<td>Governed like its parent app</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-agents" target="_blank" rel="noopener" title="Purview protections for AI agents (support matrix)">S17</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Key concepts</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classification</td>
+<td>Detecting sensitive information types with classifiers</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Sensitivity label</td>
+<td>Persistent marking that can carry protection</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Policy</td>
+<td>Rule that acts on classified or labeled data (DLP, retention, insider risk)</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Data estate</td>
+<td>All sources the Data Map knows about, including non-Microsoft ones</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>]</td>
+</tr>
+<tr>
+<td>AI interaction</td>
+<td>A prompt and response between a user or agent and an AI app</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Operational concept (OV-1 style)</h2>
+<pre class="mermaid">flowchart LR
+  subgraph Org[&quot;Organization boundary&quot;]
+    U[&quot;People and agents&quot;] --&gt; WORK[&quot;Work with data&quot;]
+    WORK --&gt; CAP[&quot;Know, protect, govern, comply, secure AI&quot;]
+  end
+  EXT[&quot;Non-Microsoft clouds, SaaS, on-prem stores&quot;] --&gt; CAP
+  AIAPPS[&quot;Copilots, agents, third-party AI apps&quot;] &lt;--&gt; CAP
+  REG[&quot;Regulators and auditors&quot;] -.evidence.-&gt; CAP
+</pre>
+
+<h2>Open questions</h2>
+<ul>
+<li>Which capabilities does the real tenant license today? Check [<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description" target="_blank" rel="noopener" title="Microsoft Purview service description (licensing)">S25</a>] during block 4.</li>
+</ul>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Architecture Vision (Phase A) · Business Architecture (Phase B)</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>OV-1 High-Level Operational Concept · CV-2 Capability Taxonomy · DIV-1 Conceptual Data Model</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Conceptual: capabilities and concepts only, vendor-neutral</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>C:\output\obsidian\notebooklm\tdd-microsoft-purview\sources\20-view-01-conceptual.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="source-08-prompt-set.html">&larr; Previous</a><a href="source-20-view-02-logical.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

@@ -262,6 +262,7 @@ function renderDeck(){
   <h3 style="margin:1.4rem 0 .5rem;font-size:1.05rem">Audio overview <span class="pill">8 min 44 s</span></h3>
   <p class="obj">NotebookLM audio overview from the same notebook ("Fixing Microsoft Purview technical curriculum gaps").</p>
   <audio controls preload="none" src="media/audio-overview.m4a" style="width:100%;max-width:640px"></audio>
+  <p class="obj" style="margin-top:1rem"><b>Downloads:</b> <a href="assets/downloads/purview-technical-blueprint.pdf" download>Deck as PDF (12 MB)</a> · <a href="assets/downloads/purview-deck.pptx" download>Deck as PowerPoint (12 MB)</a> · ${lib("media-cut-script","Cut script: narration and question cards")} · ${lib("media-shorts-plan","Shorts plan")} · ${lib("diagram-sources","Diagram sources (draw.io, Mermaid)")}</p>
   <h3 style="margin:1.6rem 0 .6rem;font-size:1.05rem">Slides</h3>
   <div class="deckrows">`;
   for(let i=1;i<=15;i++){
@@ -410,6 +411,7 @@ function renderLibrary(){
   if(!L.length) h+=`<div class="note danger">Library manifest not found. Run <code>python scripts/build_library.py</code>.</div>`;
   secs.forEach(s=>{
     h+=`<h3 style="margin:1.2rem 0 .6rem;font-size:1rem;color:var(--accent-color)">${esc(s)}</h3>`;
+    if(s==="NotebookLM source bundle") h+=`<div class="note" style="margin-bottom:.8rem"><b>As uploaded.</b> The exact files sent to NotebookLM on 2026-09-26 to build the notebook. The vault notes above are newer and win where they differ.</div>`;
     if(s==="NotebookLM reports") h+=`<div class="note danger" style="margin-bottom:.8rem"><b>Secondary.</b> NotebookLM reports carry a caveat banner; where they differ from the architecture views, the views win.</div>`;
     h+=`<div class="libgrid">${L.filter(p=>p.section===s).map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc||"")}</span></a>`).join("")}</div>`;
   });

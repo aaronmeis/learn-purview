@@ -21,6 +21,20 @@
     "nblm": false
   },
   {
+    "slug": "intake-record",
+    "title": "Intake record",
+    "section": "Plan",
+    "desc": "Intake for the Microsoft Purview technical deep dive.",
+    "nblm": false
+  },
+  {
+    "slug": "progress-log",
+    "title": "Progress log",
+    "section": "Plan",
+    "desc": "Execution checklist.",
+    "nblm": false
+  },
+  {
     "slug": "day-plan",
     "title": "Day plan \u2014 Microsoft Purview",
     "section": "Plan",
@@ -67,6 +81,13 @@
     "title": "Diagram index",
     "section": "Architecture views",
     "desc": "Diagram index for Microsoft Purview \u2014 click any thumbnail to view it full size.",
+    "nblm": false
+  },
+  {
+    "slug": "diagram-sources",
+    "title": "Diagram sources (draw.io and Mermaid)",
+    "section": "Architecture views",
+    "desc": "Rendered diagrams with their editable draw.io and Mermaid sources.",
     "nblm": false
   },
   {
@@ -313,6 +334,153 @@
     "section": "NotebookLM study sets",
     "desc": "General flashcards (unfocused run). NotebookLM flashcards from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
     "nblm": true
+  },
+  {
+    "slug": "media-deep-dive-cut",
+    "title": "Deep dive cut",
+    "section": "Media",
+    "desc": "Pointer to the stitched Deep Dive Cut video for Microsoft Purview. The MP4 stays in heavy output.",
+    "nblm": false
+  },
+  {
+    "slug": "media-cut-script",
+    "title": "Deep dive cut script (narration and question cards)",
+    "section": "Media",
+    "desc": "Every narration line and question card from the deep-dive cut, with the slide it belongs to.",
+    "nblm": false
+  },
+  {
+    "slug": "media-slides",
+    "title": "Presentation slides",
+    "section": "Media",
+    "desc": "Slide image gallery for Microsoft Purview NotebookLM deck. JPG only; PPTX stays under C:\\output.",
+    "nblm": false
+  },
+  {
+    "slug": "media-shorts-plan",
+    "title": "Shorts plan",
+    "section": "Media",
+    "desc": "The six planned shorts with their one-job prompts, and the published videos.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-suite",
+    "title": "NotebookLM suite",
+    "section": "Pipeline",
+    "desc": "NotebookLM W8 suite stub for Microsoft Purview.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-inventory",
+    "title": "NotebookLM download inventory",
+    "section": "Pipeline",
+    "desc": "Local download status for tdd-microsoft-purview NotebookLM suite.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-run-record",
+    "title": "NotebookLM run record",
+    "section": "Pipeline",
+    "desc": "Machine-readable record of the NotebookLM W8 run for this pack.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-operator",
+    "title": "Operator commands",
+    "section": "Pipeline",
+    "desc": "Copy-paste Python / nlm / PowerShell commands for this ODM pack.",
+    "nblm": false
+  },
+  {
+    "slug": "pipeline-runner",
+    "title": "NotebookLM W8 runner script",
+    "section": "Pipeline",
+    "desc": "The script that ran the NotebookLM W8 suite for this pack.",
+    "nblm": false
+  },
+  {
+    "slug": "source-00-mission",
+    "title": "Source as uploaded: 00-mission",
+    "section": "NotebookLM source bundle",
+    "desc": "Mission for the technical deep dive on Microsoft Purview.",
+    "nblm": false
+  },
+  {
+    "slug": "source-01-mindmap",
+    "title": "Source as uploaded: 01-mindmap",
+    "section": "NotebookLM source bundle",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "source-02-day-plan",
+    "title": "Source as uploaded: 02-day-plan",
+    "section": "NotebookLM source bundle",
+    "desc": "Timed schedule for the eight deep-dive blocks.",
+    "nblm": false
+  },
+  {
+    "slug": "source-03-source-ledger",
+    "title": "Source as uploaded: 03-source-ledger",
+    "section": "NotebookLM source bundle",
+    "desc": "Source ledger for the Microsoft Purview deep dive. Microsoft-grounded sources only.",
+    "nblm": false
+  },
+  {
+    "slug": "source-04-cheatsheet",
+    "title": "Source as uploaded: 04-cheatsheet",
+    "section": "NotebookLM source bundle",
+    "desc": "Decision rules and tells.",
+    "nblm": false
+  },
+  {
+    "slug": "source-05-resources",
+    "title": "Source as uploaded: 05-resources",
+    "section": "NotebookLM source bundle",
+    "desc": "High-trust sources for this deep dive.",
+    "nblm": false
+  },
+  {
+    "slug": "source-06-pedagogy-blocks",
+    "title": "Source as uploaded: 06-pedagogy-blocks",
+    "section": "NotebookLM source bundle",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "source-08-prompt-set",
+    "title": "Source as uploaded: 08-prompt-set",
+    "section": "NotebookLM source bundle",
+    "desc": "",
+    "nblm": false
+  },
+  {
+    "slug": "source-20-view-01-conceptual",
+    "title": "Source as uploaded: 20-view-01-conceptual",
+    "section": "NotebookLM source bundle",
+    "desc": "Conceptual view of Microsoft Purview - capabilities, actors, and value with no products named. Pre-filled from Microsoft sources; cite rows as [S#].",
+    "nblm": false
+  },
+  {
+    "slug": "source-20-view-02-logical",
+    "title": "Source as uploaded: 20-view-02-logical",
+    "section": "NotebookLM source bundle",
+    "desc": "Logical view of Microsoft Purview - components, data entities, and flows. Pre-filled from Microsoft sources; cite rows as [S#].",
+    "nblm": false
+  },
+  {
+    "slug": "source-20-view-03-physical",
+    "title": "Source as uploaded: 20-view-03-physical",
+    "section": "NotebookLM source bundle",
+    "desc": "Physical view of Microsoft Purview - portals, runtimes, scanners, clouds, and licensing. Pre-filled from Microsoft sources; cite rows as [S#].",
+    "nblm": false
+  },
+  {
+    "slug": "source-20-view-04-integration-ai",
+    "title": "Source as uploaded: 20-view-04-integration-ai",
+    "section": "NotebookLM source bundle",
+    "desc": "Integration and AI elements of Microsoft Purview - third-party and external systems, identity, AI features and AI data paths. Pre-filled from Microsoft sources; cite rows as [S#].",
+    "nblm": false
   },
   {
     "slug": "nblm-key-claims",

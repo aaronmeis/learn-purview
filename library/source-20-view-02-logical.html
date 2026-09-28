@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Source as uploaded: 20-view-02-logical | Learn Purview</title>
+<meta name="description" content="Logical view of Microsoft Purview - components, data entities, and flows. Pre-filled from Microsoft sources; cite rows as [S#].">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · NotebookLM source bundle</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">NotebookLM source bundle</div>
+  <h1 class="doctitle">Source as uploaded: 20-view-02-logical</h1>
+  <p class="lead">Logical view of Microsoft Purview - components, data entities, and flows. Pre-filled from Microsoft sources; cite rows as [S#].</p>
+  
+  <article><h1>Logical View — Microsoft Purview</h1>
+<p>Pack: <a href="hub.html">00 - Microsoft Purview Hub</a> · Block: <a href="block-03-logical-view.html">Block 3</a> · Prev: <a href="view-01-conceptual.html">Conceptual</a> · Next: <a href="view-03-physical.html">Physical</a></p>
+<div class="callout info" markdown="0"><div class="callout-title">Altitude rule</div><p>Logical means <strong>which parts and how they talk</strong>. Components have responsibilities and interfaces; no regions, SKUs, or hostnames.</p></div>
+
+<h2>Logical components</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+<th>Realizes</th>
+<th>Inputs</th>
+<th>Outputs</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classification engine</td>
+<td>Detect sensitive info types with classifiers</td>
+<td>C1</td>
+<td>Content, scan results</td>
+<td>Classifications</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Information Protection</td>
+<td>Define and apply sensitivity labels and protection</td>
+<td>C2</td>
+<td>Label policies, classifications</td>
+<td>Labeled or encrypted content</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Data Loss Prevention</td>
+<td>Detect and act on sensitive data in use and in motion</td>
+<td>C2</td>
+<td>DLP policies, classifications</td>
+<td>Alerts, blocks, activity events</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dlp-on-premises-scanner-get-started" target="_blank" rel="noopener" title="DLP for on-premises repositories">S14</a>]</td>
+</tr>
+<tr>
+<td>Insider Risk Management</td>
+<td>Detect risky user activity from signals</td>
+<td>C4, C5</td>
+<td>Activity signals, AI interactions</td>
+<td>Alerts, cases</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+<tr>
+<td>Data Map</td>
+<td>Register sources, scan, extract metadata, classify, build lineage</td>
+<td>C1, C3</td>
+<td>Registered sources, credentials</td>
+<td>Assets, classifications, lineage</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>]</td>
+</tr>
+<tr>
+<td>Unified Catalog</td>
+<td>Search and curate assets from the Data Map</td>
+<td>C3</td>
+<td>Data Map assets</td>
+<td>Curated catalog</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>Audit</td>
+<td>Record user and admin activity, including AI interactions, in the unified audit log</td>
+<td>C4, C5</td>
+<td>Activity events</td>
+<td>Searchable audit records</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>eDiscovery</td>
+<td>Search, hold, review, and export content as evidence</td>
+<td>C4</td>
+<td>Mailboxes, sites, Teams, AI interactions</td>
+<td>Cases, holds, exports</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Compliance Manager</td>
+<td>Assess posture against regulations</td>
+<td>C4</td>
+<td>Assessments, improvement actions</td>
+<td>Compliance score</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description" target="_blank" rel="noopener" title="Microsoft Purview service description (licensing)">S25</a>]</td>
+</tr>
+<tr>
+<td>DSPM / DSPM for AI</td>
+<td>Front door: discover AI use, recommend and apply policies, assess oversharing</td>
+<td>C5</td>
+<td>AI interactions, SharePoint data, other solutions' signals</td>
+<td>Reports, one-click policies, risk assessments</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Logical data model</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Key attributes</th>
+<th>Relationships</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensitivity label</td>
+<td>name, protection settings</td>
+<td>applied to content items; published by label policy</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Sensitive information type</td>
+<td>pattern or classifier</td>
+<td>detected in content items and assets</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Policy</td>
+<td>type (DLP, retention, IRM, collection), scope, action</td>
+<td>targets locations; uses SITs and labels</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+<tr>
+<td>Data source</td>
+<td>type, endpoint, collection</td>
+<td>contains assets; scanned via credential and runtime</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>]</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td>qualified name, schema, classifications, lineage</td>
+<td>belongs to a data source; appears in catalog</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>]</td>
+</tr>
+<tr>
+<td>Audit record</td>
+<td>timestamp, user, workload, activity (for example CopilotInteraction)</td>
+<td>references content and labels touched</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-logging-copilot-studio" target="_blank" rel="noopener" title="Copilot Studio audit fields (CopilotInteraction)">S21</a>]</td>
+</tr>
+<tr>
+<td>AI interaction</td>
+<td>prompt, response, app, agent, referenced files</td>
+<td>produces audit record; retained by retention policy</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Case</td>
+<td>type (eDiscovery, IRM), holds, review sets</td>
+<td>collects content and interactions</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid">erDiagram
+  LABEL_POLICY ||--o{ SENSITIVITY_LABEL : publishes
+  SENSITIVITY_LABEL }o--o{ CONTENT_ITEM : &quot;applied to&quot;
+  SIT }o--o{ CONTENT_ITEM : &quot;detected in&quot;
+  DATA_SOURCE ||--o{ ASSET : contains
+  SIT }o--o{ ASSET : classifies
+  POLICY }o--o{ SIT : uses
+  AI_INTERACTION ||--|| AUDIT_RECORD : emits
+  AI_INTERACTION }o--o{ CONTENT_ITEM : references
+  CASE }o--o{ AI_INTERACTION : collects
+</pre>
+
+<h2>Logical flows</h2>
+<pre class="mermaid">flowchart LR
+  SRC[&quot;Data sources&quot;] --&gt; SCAN[&quot;Scan and extract metadata&quot;]
+  SCAN --&gt; CLS[&quot;Classify&quot;]
+  CLS --&gt; CAT[&quot;Data Map and catalog&quot;]
+  CLS --&gt; LBL[&quot;Label and protect&quot;]
+  LBL --&gt; DLP[&quot;DLP policy decision&quot;]
+  DLP --&gt; EVT[&quot;Activity events and alerts&quot;]
+  AI[&quot;AI interaction&quot;] --&gt; EVT
+  EVT --&gt; AUD[&quot;Unified audit log&quot;]
+  AUD --&gt; INV[&quot;DSPM, IRM, eDiscovery&quot;]
+</pre>
+
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>From</th>
+<th>To</th>
+<th>Payload</th>
+<th>Trigger</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1 Scan</td>
+<td>Data source</td>
+<td>Data Map</td>
+<td>Metadata and classifications only</td>
+<td>Schedule or once</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>F2 On-prem label</td>
+<td>Scanner</td>
+<td>File share</td>
+<td>Label and protection applied in place</td>
+<td>Scan job</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner" target="_blank" rel="noopener" title="Learn about the information protection scanner">S12</a>]</td>
+</tr>
+<tr>
+<td>F3 DLP evaluation</td>
+<td>Content activity</td>
+<td>DLP engine</td>
+<td>Content plus classifications</td>
+<td>User action or scan</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/dlp-on-premises-scanner-get-started" target="_blank" rel="noopener" title="DLP for on-premises repositories">S14</a>]</td>
+</tr>
+<tr>
+<td>F4 AI audit</td>
+<td>AI app</td>
+<td>Unified audit log</td>
+<td>Interaction metadata; prompt and response where captured</td>
+<td>Each interaction</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>F5 AI insight</td>
+<td>Audit log</td>
+<td>DSPM for AI activity explorer</td>
+<td>AI interaction events</td>
+<td>Continuous</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>F6 Retain or discover</td>
+<td>AI interactions</td>
+<td>Retention and eDiscovery</td>
+<td>Interaction items</td>
+<td>Policy or case</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+</tbody>
+</table>
+<h2>Design decisions at this level</h2>
+<ul>
+<li>The multicloud connector returns <strong>metadata and classification only</strong> to Purview, not content [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>].</li>
+<li>Prompts and responses for Copilot in Fabric and Security Copilot are <strong>not</strong> captured without a collection policy; only the audit events are [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>].</li>
+</ul>
+<h2>Framework lens</h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Maps to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOGAF</td>
+<td>Information Systems Architectures (Phase C: Data and Application)</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>OV-2 Operational Resource Flow · OV-5b Operational Activity Model · SV-1 (logical) · DIV-2 Logical Data Model</td>
+</tr>
+<tr>
+<td>Altitude</td>
+<td>Logical: components, entities, flows; vendor-neutral</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>C:\output\obsidian\notebooklm\tdd-microsoft-purview\sources\20-view-02-logical.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="source-20-view-01-conceptual.html">&larr; Previous</a><a href="source-20-view-03-physical.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

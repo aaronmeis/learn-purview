@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Source as uploaded: 01-mindmap | Learn Purview</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · NotebookLM source bundle</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">NotebookLM source bundle</div>
+  <h1 class="doctitle">Source as uploaded: 01-mindmap</h1>
+  
+  
+  <article><h1>Mind map — Microsoft Purview</h1>
+<div class="callout warning" markdown="0"><div class="callout-title">Agent draft — review before GO</div><p>Drafted from the 2026-09-26 technical interview. Branches are the scope you named, not researched claims. Edit freely, then give GO.</p></div>
+
+<div class="callout important" markdown="0"><div class="callout-title">Source rule (your falsifier)</div><p>Only Microsoft-grounded sources: Microsoft Learn (Purview, Microsoft 365 and Azure Government docs), the Azure Architecture Center and Microsoft reference architectures, Microsoft Tech Community, and Microsoft-owned video (Microsoft Mechanics, Ignite, Build). Every use case must trace to a Microsoft reference architecture. Third-party vendor docs are allowed only to confirm the far side of a connector, and they are labeled as such. Anything else is marked UNVERIFIED and kept out of the views.</p></div>
+
+<h2>Microsoft Purview</h2>
+<ul>
+<li>Context and boundary (block 1)</li>
+<li>Assume no prior knowledge: what Purview is, and what it is not (vs Defender, Entra, Sentinel)</li>
+<li>Two halves: Microsoft 365 data security and compliance · data governance (Data Map, Data Catalog)</li>
+<li>Clouds: Commercial (global), GCC, GCC High, DoD, Azure Government. No Secret or Top Secret, no air gap.</li>
+<li>Conceptual view (block 2)</li>
+<li>Capabilities: know your data · protect it · prevent loss · manage insider risk · respond and investigate · govern data estate · manage compliance posture · secure AI use</li>
+<li>Actors: compliance admin, security analyst, data owner and steward, investigator, end user, auditor</li>
+<li>Logical view (block 3)</li>
+<li>Classification: sensitive information types, trainable classifiers</li>
+<li>Information Protection: sensitivity labels and label policies</li>
+<li>Data Loss Prevention: policies, locations, actions</li>
+<li>Insider Risk Management: indicators, policies, alerts and cases</li>
+<li>eDiscovery: cases, holds, search, review, export</li>
+<li>Audit: unified audit log, retention of audit records</li>
+<li>Data Map and Data Catalog: sources, scans, assets, lineage, glossary</li>
+<li>Compliance Manager: assessments, improvement actions, score</li>
+<li>DSPM for AI: discovery of AI use, policies, reports</li>
+<li>Physical view (block 4)</li>
+<li>Portals, services, agents, and scanners that realize each logical component</li>
+<li>Licensing tiers per capability</li>
+<li>Cloud variants table: which capabilities exist in Commercial, GCC, GCC High, DoD, Azure Government</li>
+<li>Integration (block 5)</li>
+<li>Third-party and external: AWS · Snowflake · Salesforce · on-prem file shares · OneTrust</li>
+<li>First-party target: SharePoint</li>
+<li>Per system: direction, mechanism, data exchanged, auth, gov-cloud support</li>
+<li>AI elements (block 5)</li>
+<li>AI fundamentals for models and agents, as Purview governs them</li>
+<li>DSPM for AI</li>
+<li>AI interaction logging: audit and retention of Copilot and AI interactions</li>
+<li>AI data path: prompt → grounding data → label, DLP, and access checks → response → log</li>
+<li>Hands-on lab (block 6, real tenant)</li>
+<li>One end-to-end flow, chosen after the views are drafted (candidate: label → DLP → audit trail on SharePoint content)</li>
+<li>Failure modes and security (block 7)</li>
+<li>Per view: misconfiguration, licensing gaps, gov-cloud feature gaps, connector breakage, AI oversharing</li>
+<li>Design review (block 8)</li>
+<li>Defend the views against the Microsoft reference architectures used as sources</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>C:\output\obsidian\notebooklm\tdd-microsoft-purview\sources\01-mindmap.md</code>. The Obsidian vault is the source of truth. Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="source-00-mission.html">&larr; Previous</a><a href="source-02-day-plan.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>
