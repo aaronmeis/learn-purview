@@ -26,8 +26,8 @@
       ],
       "duration": 78,
       "poster": "media/posters/01-boundary.webp",
-      "file": "media/shorts/01-boundary.mp4",
-      "youtube": "",
+      "file": "",
+      "youtube": "uwRFIavbaQg",
       "status": "ready"
     },
     {
@@ -47,7 +47,7 @@
       ],
       "duration": 80,
       "poster": "media/posters/02-labels-oversharing.webp",
-      "file": "media/shorts/02-labels-oversharing.mp4",
+      "file": "",
       "youtube": "RCx803xilMU",
       "status": "ready"
     },
@@ -67,8 +67,8 @@
       ],
       "duration": 77,
       "poster": "media/posters/03-ai-oversharing.webp",
-      "file": "media/shorts/03-ai-oversharing.mp4",
-      "youtube": "",
+      "file": "",
+      "youtube": "UrPaE1FK9KY",
       "status": "ready"
     },
     {
@@ -88,8 +88,8 @@
       ],
       "duration": 64,
       "poster": "media/posters/04-ai-prompts.webp",
-      "file": "media/shorts/04-ai-prompts.mp4",
-      "youtube": "",
+      "file": "",
+      "youtube": "ehuSE6iEdmU",
       "status": "ready"
     },
     {
@@ -109,8 +109,8 @@
       ],
       "duration": 76,
       "poster": "media/posters/05-snowflake-scan.webp",
-      "file": "media/shorts/05-snowflake-scan.mp4",
-      "youtube": "",
+      "file": "",
+      "youtube": "1mCyDgg_uXA",
       "status": "ready"
     },
     {
@@ -130,8 +130,8 @@
       ],
       "duration": 73,
       "poster": "media/posters/06-snowflake-fail.webp",
-      "file": "media/shorts/06-snowflake-fail.mp4",
-      "youtube": "",
+      "file": "",
+      "youtube": "bmr2dXXL9iI",
       "status": "ready"
     }
   ]

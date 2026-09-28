@@ -9,4 +9,4 @@ __pycache__/
 
 # Hosted on YouTube (see YOUTUBE map in scripts/stage_assets.py)
 media/deep-dive-cut.mp4
-media/shorts/02-labels-oversharing.mp4
+media/shorts/*.mp4

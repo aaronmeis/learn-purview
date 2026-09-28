@@ -35,12 +35,12 @@ SHORTS = [
 # YouTube IDs (unlisted uploads). Leave "" to play the local MP4 instead.
 YOUTUBE = {
     "deep-dive-cut": "KqB4eX0uf-M",
-    "01-boundary": "",
+    "01-boundary": "uwRFIavbaQg",
     "02-labels-oversharing": "RCx803xilMU",
-    "03-ai-oversharing": "",
-    "04-ai-prompts": "",
-    "05-snowflake-scan": "",
-    "06-snowflake-fail": "",
+    "03-ai-oversharing": "UrPaE1FK9KY",
+    "04-ai-prompts": "ehuSE6iEdmU",
+    "05-snowflake-scan": "1mCyDgg_uXA",
+    "06-snowflake-fail": "bmr2dXXL9iI",
 }
 
 
@@ -88,7 +88,8 @@ def main():
             print("poster", poster.relative_to(SITE))
         items.append({"id": name, "name": name, "title": title, "tag": tag, "pillar": pillar, "keywords": keywords,
                       "duration": round(duration(mp4)), "poster": f"media/posters/{name}.webp",
-                      "file": f"media/shorts/{name}.mp4", "youtube": YOUTUBE.get(name, ""), "status": "ready"})
+                      "file": "" if YOUTUBE.get(name) else f"media/shorts/{name}.mp4",  # YouTube-hosted MP4s are not in git
+                      "youtube": YOUTUBE.get(name, ""), "status": "ready"})
     catalog = {
         "notebook_alias": "tdd-microsoft-purview",
         "title": "Learn Purview - NotebookLM shorts",
