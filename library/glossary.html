@@ -238,6 +238,380 @@
 <td>3, 5</td>
 </tr>
 </tbody>
+</table>
+<h2>Platform edges (added 2026-09-28)</h2>
+<p>Terms the study site used but this glossary did not define. Drafted by a NotebookLM data table (<a href="nblm-gap-table.html">Glossary Gap Data Table</a>), then checked against <a href="source-ledger.html">source-ledger</a>; the Review column there records every correction.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+<th>Category</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Sentinel</td>
+<td>The SIEM next to Purview. It hosts the OneTrust partner solution that feeds findings into DSPM, and can ingest Purview audit and alert data.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://marketplace.microsoft.com/en-us/product/azure-applications/onetrustllc1594047340198.azure-sentinel-solution-onetrust?tab=overview" target="_blank" rel="noopener" title="OneTrust for Purview DSPM (Microsoft Marketplace listing, partner-authored)">S27</a>]</td>
+</tr>
+<tr>
+<td>Microsoft Defender for Endpoint</td>
+<td>Endpoint security product whose device onboarding Purview shares: onboarded devices are what Endpoint DLP and third-party AI site visibility run on.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-microsoft-purview-considerations" target="_blank" rel="noopener" title="Considerations for deploying DSPM for AI">S19</a>, <a class="cite" href="https://learn.microsoft.com/en-us/security/security-for-ai/discover" target="_blank" rel="noopener" title="Discover AI apps and agents (Entra Agent ID + DSPM for AI)">S22</a>]</td>
+</tr>
+<tr>
+<td>Microsoft Entra ID</td>
+<td>The identity service Purview relies on for sign-in, roles, and Conditional Access. GCC High and DoD tenants pair with Entra ID in Azure Government.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices" target="_blank" rel="noopener" title="Data governance best practices for security (private endpoints, RBAC)">S23</a>]</td>
+</tr>
+<tr>
+<td>Copilot Studio</td>
+<td>Microsoft's maker platform for custom agents. Its agents inherit protections and their interactions are audited, retained, and discoverable in Purview.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-agents" target="_blank" rel="noopener" title="Purview protections for AI agents (support matrix)">S17</a>]</td>
+</tr>
+<tr>
+<td>Microsoft Foundry</td>
+<td>Microsoft's platform for building enterprise AI apps and agents. Foundry agents are covered by Purview's agent protections and appear in Entra Agent ID.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-agents" target="_blank" rel="noopener" title="Purview protections for AI agents (support matrix)">S17</a>, <a class="cite" href="https://learn.microsoft.com/en-us/security/security-for-ai/discover" target="_blank" rel="noopener" title="Discover AI apps and agents (Entra Agent ID + DSPM for AI)">S22</a>]</td>
+</tr>
+<tr>
+<td>Microsoft 365 Copilot</td>
+<td>The Microsoft 365 AI assistant. Purview supplies its DLP, labels, auditing, retention, and risk detection; it grounds on data the user can already open.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>]</td>
+</tr>
+<tr>
+<td>SharePoint Online</td>
+<td>Microsoft 365 content service and Purview's main first-party target: labels, auto-labeling, DLP, eDiscovery, audit, and DSPM for AI's weekly oversharing assessment.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC deployments">S5</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+<tr>
+<td>OneTrust</td>
+<td>Third-party privacy platform whose sensitive-data findings reach Purview DSPM through a Microsoft Sentinel partner solution (preview). Government cloud support is UNVERIFIED.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://marketplace.microsoft.com/en-us/product/azure-applications/onetrustllc1594047340198.azure-sentinel-solution-onetrust?tab=overview" target="_blank" rel="noopener" title="OneTrust for Purview DSPM (Microsoft Marketplace listing, partner-authored)">S27</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/whats-new" target="_blank" rel="noopener" title="What&#x27;s new in Microsoft Purview">S26</a>]</td>
+</tr>
+<tr>
+<td>OneLake</td>
+<td>Microsoft Fabric's single data lake. Microsoft's landing-zone guidance makes it the convergence layer for governed data that applications reach through approved paths.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/data/architecture-azure-landing-zones-unify-data-platform" target="_blank" rel="noopener" title="CAF reference architecture: unified data platform (Purview in a data management landing zone)">S24</a>]</td>
+</tr>
+<tr>
+<td>Fabric mirroring</td>
+<td>Fabric feature that replicates operational data (for example SAP or Oracle) into OneLake in near real time, instead of apps querying those systems directly.</td>
+<td>Neighbors &amp; platform</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/data/architecture-azure-landing-zones-unify-data-platform" target="_blank" rel="noopener" title="CAF reference architecture: unified data platform (Purview in a data management landing zone)">S24</a>]</td>
+</tr>
+<tr>
+<td>Azure Government</td>
+<td>Microsoft's isolated US government Azure cloud. Its Purview Data Map excludes Amazon S3, Amazon RDS, commercial Power BI, preview sources, and Synapse lineage.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability" target="_blank" rel="noopener" title="Feature availability for Microsoft Purview (Azure Government exclusions)">S4</a>, <a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>FedRAMP P-ATO</td>
+<td>The formal FedRAMP authorization instrument for a cloud service. GCC's P-ATO is FedRAMP Moderate (from DHHS); separately, Microsoft completed FedRAMP High audits and claims High equivalency.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://techcommunity.microsoft.com/blog/publicsectorblog/understanding-compliance-between-commercial-government-dod--secret-offerings---m/4225436" target="_blank" rel="noopener" title="Understanding Compliance Between Commercial, Government, DoD &amp; Secret Offerings (Microsoft Public Sector Blog)">S35</a>]</td>
+</tr>
+<tr>
+<td>Agency ATO</td>
+<td>An authorization to operate issued by a specific federal agency. GCC High holds agency ATOs at both FedRAMP Moderate and High (DHS, DoJ, FBI, Treasury).</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://techcommunity.microsoft.com/blog/publicsectorblog/understanding-compliance-between-commercial-government-dod--secret-offerings---m/4225436" target="_blank" rel="noopener" title="Understanding Compliance Between Commercial, Government, DoD &amp; Secret Offerings (Microsoft Public Sector Blog)">S35</a>]</td>
+</tr>
+<tr>
+<td>Security Assessment Report (SAR)</td>
+<td>The audit evidence from a FedRAMP assessment. Microsoft's completed High-level SARs for GCC are the basis for its FedRAMP High equivalency claim.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://techcommunity.microsoft.com/blog/publicsectorblog/understanding-compliance-between-commercial-government-dod--secret-offerings---m/4225436" target="_blank" rel="noopener" title="Understanding Compliance Between Commercial, Government, DoD &amp; Secret Offerings (Microsoft Public Sector Blog)">S35</a>]</td>
+</tr>
+<tr>
+<td>DoD Impact Level 4 and 5 (IL4/IL5)</td>
+<td>DoD security levels for controlled unclassified and mission data. Microsoft's sources list both GCC High and DoD as meeting IL4 and IL5.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>CJIS</td>
+<td>FBI Criminal Justice Information Services security policy. Listed among GCC's compliance posture claims.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC deployments">S5</a>, <a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>IRS 1075</td>
+<td>IRS Publication 1075 safeguards for federal tax information. Listed among GCC's compliance posture claims.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC deployments">S5</a>, <a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>DFARS 7012</td>
+<td>DFARS 252.204-7012, the defense clause for safeguarding covered defense information. Listed for GCC High and DoD.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>NIST SP 800-171</td>
+<td>NIST controls for protecting controlled unclassified information in nonfederal systems. Listed for GCC High and DoD.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>ITAR</td>
+<td>US export controls on defense articles and data. Listed for GCC High and DoD.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability" target="_blank" rel="noopener" title="Cloud feature availability for US Government customers">S8</a>]</td>
+</tr>
+<tr>
+<td>Commercial baseline</td>
+<td>The commercial (enterprise) Purview feature set. Government deployment guides list only differences from it, so a blank cell usually means parity.</td>
+<td>Gov cloud &amp; compliance</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - DoD deployments">S7</a>]</td>
+</tr>
+<tr>
+<td>Azure integration runtime (Azure IR)</td>
+<td>The default, Microsoft-managed scan compute for sources with publicly reachable endpoints. Nothing to install; it runs in the source's region when Purview can detect it.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>]</td>
+</tr>
+<tr>
+<td>AWS integration runtime (AWS IR)</td>
+<td>Fully managed scan compute that Microsoft hosts in its own AWS account, used for Amazon S3 and RDS.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>Kubernetes self-hosted integration runtime</td>
+<td>A self-hosted runtime on the customer's Kubernetes cluster for on-prem or virtual-network sources. Scales with the job; updates are manual today.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>]</td>
+</tr>
+<tr>
+<td>Managed VNet IR hibernation</td>
+<td>A Managed VNet integration runtime with no scans for more than 90 days hibernates. The first Test Connection fails and asks you to retry in 15 minutes; a direct scan waits up to 15 extra minutes (Queued_Waking Up IR).</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>]</td>
+</tr>
+<tr>
+<td>Private endpoint</td>
+<td>A private IP interface into a service over Azure Private Link. Used to keep the Purview account and its portal off the public internet, and by Managed VNet IR to reach sources.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices" target="_blank" rel="noopener" title="Data governance best practices for security (private endpoints, RBAC)">S23</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>]</td>
+</tr>
+<tr>
+<td>Azure Key Vault</td>
+<td>Where Purview scan credentials live: passwords, client secrets, and private keys referenced by Purview credentials.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-snowflake" target="_blank" rel="noopener" title="Connect to and manage Snowflake">S10</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-salesforce" target="_blank" rel="noopener" title="Connect to and manage Salesforce">S11</a>]</td>
+</tr>
+<tr>
+<td>Role-based access control (RBAC) in Purview</td>
+<td>Purview roles (for example Data Reader, Data Source Admin) assigned to Entra groups and scoped by collection, with least privilege.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices" target="_blank" rel="noopener" title="Data governance best practices for security (private endpoints, RBAC)">S23</a>]</td>
+</tr>
+<tr>
+<td>Conditional Access</td>
+<td>Entra ID policy that enforces requirements such as MFA; Microsoft recommends it for privileged Purview roles.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices" target="_blank" rel="noopener" title="Data governance best practices for security (private endpoints, RBAC)">S23</a>]</td>
+</tr>
+<tr>
+<td>AWS IAM role (for S3 scanning)</td>
+<td>An AWS role that trusts Microsoft's account ID with an external ID; the AWS IR assumes it to read S3. No access key is stored.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>kms:Decrypt</td>
+<td>The AWS KMS permission the scanning role needs for buckets encrypted with customer-managed keys. Without it, those buckets fail to scan.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>AWS Service Control Policy (SCP)</td>
+<td>An AWS Organizations guardrail that can silently block the scanner. It must allow AssumeRole, GetBucketLocation, GetObject, ListBucket, GetBucketPublicAccessBlock, and region us-east-1.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>]</td>
+</tr>
+<tr>
+<td>SMB</td>
+<td>The Windows file-sharing protocol the information protection scanner uses to reach on-prem shares.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner" target="_blank" rel="noopener" title="Learn about the information protection scanner">S12</a>]</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>The Unix/Linux file-sharing protocol; scanner support is in preview.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner" target="_blank" rel="noopener" title="Learn about the information protection scanner">S12</a>]</td>
+</tr>
+<tr>
+<td>UNC path</td>
+<td>A \server\share path. How scanner content-scan jobs name the on-prem repositories to scan.</td>
+<td>Runtime &amp; network</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner" target="_blank" rel="noopener" title="Learn about the information protection scanner">S12</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/dlp-on-premises-scanner-get-started" target="_blank" rel="noopener" title="DLP for on-premises repositories">S14</a>]</td>
+</tr>
+<tr>
+<td>Lineage</td>
+<td>How data moves between assets, captured by the Data Map (for Snowflake, static lineage). Shown in the catalog.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-snowflake" target="_blank" rel="noopener" title="Connect to and manage Snowflake">S10</a>]</td>
+</tr>
+<tr>
+<td>Qualified name</td>
+<td>An asset's unique identifier in the Data Map, built from the source's endpoint and object path.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-snowflake" target="_blank" rel="noopener" title="Connect to and manage Snowflake">S10</a>]</td>
+</tr>
+<tr>
+<td>Label policy</td>
+<td>Publishes sensitivity labels to users and groups and sets defaults; labels do nothing until a label policy publishes them.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Auto-labeling</td>
+<td>Applies sensitivity labels automatically when content matches sensitive information types or trainable classifiers. Available across commercial and US government clouds.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>, <a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC deployments">S5</a>]</td>
+</tr>
+<tr>
+<td>Trainable classifier</td>
+<td>A classifier trained on example content to recognize a category (such as contracts or source code) where a fixed pattern would not work.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Named-entity SIT</td>
+<td>Sensitive information types that detect names, addresses, and similar entities. Not yet at parity in government clouds (in development or backlog).</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC deployments">S5</a>, <a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - GCC High deployments">S6</a>, <a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - DoD deployments">S7</a>]</td>
+</tr>
+<tr>
+<td>Retention policy</td>
+<td>Keeps or deletes content after a set time. For AI, the Data Lifecycle Management location is Microsoft Copilot Experiences.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Data Lifecycle Management</td>
+<td>The Purview solution for retention and deletion of content, including AI interactions.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Legal hold</td>
+<td>Preserves content in place inside an eDiscovery case so it cannot be permanently deleted while the matter is open.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Review set</td>
+<td>The eDiscovery (Premium) container where collected items, including AI interactions, are analyzed, tagged, and exported.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Activity explorer</td>
+<td>Shows activity on labeled and sensitive content; in DSPM for AI it is where AI interactions, including Copilot Studio chat text, are reviewed.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>, <a class="cite" href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-logging-copilot-studio" target="_blank" rel="noopener" title="Copilot Studio audit fields (CopilotInteraction)">S21</a>]</td>
+</tr>
+<tr>
+<td>Data explorer</td>
+<td>Shared view of where classified and labeled content sits across locations, used across Purview solutions.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Compliance score</td>
+<td>Compliance Manager's measure of posture against assessed regulations, raised by completing improvement actions.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>, <a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description" target="_blank" rel="noopener" title="Microsoft Purview service description (licensing)">S25</a>]</td>
+</tr>
+<tr>
+<td>Improvement action</td>
+<td>A recommended control task in Compliance Manager; completing it raises the compliance score.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>]</td>
+</tr>
+<tr>
+<td>Adaptive Protection</td>
+<td>Links Insider Risk user risk levels to DLP: higher-risk users are blocked, lower-risk users are warned or audited, for example when pasting into AI sites.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://www.youtube.com/watch?v=4BcVWkSTZ3I" target="_blank" rel="noopener" title="Microsoft Mechanics: AI and Agent Data Security Controls in Microsoft Purview">S28</a>]</td>
+</tr>
+<tr>
+<td>Purview browser extension</td>
+<td>Browser add-on on onboarded devices that lets DLP and Insider Risk see sensitive data going to third-party AI sites.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-microsoft-purview-considerations" target="_blank" rel="noopener" title="Considerations for deploying DSPM for AI">S19</a>]</td>
+</tr>
+<tr>
+<td>Browse-to-URL policy</td>
+<td>A DSPM for AI policy about visits to AI sites. It cannot be created in GCC High or DoD, where only supported AI sites are available.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - DoD deployments">S7</a>]</td>
+</tr>
+<tr>
+<td>Know Your Data policy</td>
+<td>The DSPM for AI policy that brings a custom AI app's prompts and responses (sent through the Purview SDK and Graph APIs) under governance.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/developer/configurepurview" target="_blank" rel="noopener" title="Configure DSPM for AI for custom AI apps (Purview SDK)">S20</a>]</td>
+</tr>
+<tr>
+<td>ItemClass</td>
+<td>The item property eDiscovery uses to find AI interactions, for example IPM.SkypeTeams.Message.Copilot.Studio.* for Copilot Studio agents.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-copilot-studio" target="_blank" rel="noopener" title="Purview protections for Copilot Studio agents">S18</a>]</td>
+</tr>
+<tr>
+<td>Oversharing</td>
+<td>Data reachable by more people, or AI, than intended, usually from broad permissions plus missing labels. DSPM for AI assesses it; it does not fix ACLs.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+<tr>
+<td>Grounding data</td>
+<td>The organizational content (SharePoint, OneDrive, Teams) an AI app retrieves to answer a prompt. Labels, DLP, and access checks decide what reaches the response.</td>
+<td>Purview features</td>
+<td>[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>, <a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>]</td>
+</tr>
+<tr>
+<td>TOGAF ADM</td>
+<td>The Open Group's Architecture Development Method. Here: conceptual view in Phases A-B, logical in Phase C, physical in Phases D-E, plus governance for AI.</td>
+<td>Frameworks</td>
+<td>views</td>
+</tr>
+<tr>
+<td>DoDAF</td>
+<td>The DoD Architecture Framework. Its viewpoints (OV, CV, SV, DIV, StdV) organize the four Purview views.</td>
+<td>Frameworks</td>
+<td>views</td>
+</tr>
+<tr>
+<td>OV-1</td>
+<td>DoDAF high-level operational concept graphic: the one-picture conceptual view of people, agents, external stores, AI apps, and regulators.</td>
+<td>Frameworks</td>
+<td>views</td>
+</tr>
+<tr>
+<td>SV-1</td>
+<td>DoDAF systems interface description: components and their interfaces, used for the logical view and, with named systems, the physical view.</td>
+<td>Frameworks</td>
+<td>views</td>
+</tr>
+</tbody>
 </table></article>
   <footer class="docfoot">
     Rendered from <code>Learning\tech-deep-dive\microsoft-purview\GLOSSARY.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.

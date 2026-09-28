@@ -196,6 +196,13 @@
     "nblm": false
   },
   {
+    "slug": "prompts-glossary-gap",
+    "title": "Glossary gap prompts",
+    "section": "Prompts",
+    "desc": "NotebookLM prompts for the glossary gap pass: terms the learn-purview site uses but the glossary did not define.",
+    "nblm": false
+  },
+  {
     "slug": "prompts-deep-dive-extra",
     "title": "Extra deep-dive prompts \u2014 Microsoft Purview",
     "section": "Prompts",
@@ -270,6 +277,41 @@
     "title": "Executive decision packet",
     "section": "NotebookLM reports",
     "desc": "",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-gap-table",
+    "title": "Glossary gap data table",
+    "section": "NotebookLM study sets",
+    "desc": "Glossary gap data table. NotebookLM data-table from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-gap-quiz",
+    "title": "Glossary gap quiz (platform edges)",
+    "section": "NotebookLM study sets",
+    "desc": "Glossary gap quiz (platform edges). NotebookLM quiz from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-gap-cards",
+    "title": "Glossary gap flashcards",
+    "section": "NotebookLM study sets",
+    "desc": "Glossary gap flashcards (platform edges). NotebookLM flashcards from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-general-quiz",
+    "title": "General quiz",
+    "section": "NotebookLM study sets",
+    "desc": "General quiz (unfocused run). NotebookLM quiz from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
+    "nblm": true
+  },
+  {
+    "slug": "nblm-general-cards",
+    "title": "General flashcards",
+    "section": "NotebookLM study sets",
+    "desc": "General flashcards (unfocused run). NotebookLM flashcards from notebook tdd-microsoft-purview (d00ca45f-85c4-4f11-8793-f48374114e95), converted to markdown.",
     "nblm": true
   },
   {

@@ -714,3 +714,606 @@ DATA.drills = {
       {p:"Prompt, grounding, label/DLP/access check, response, then audit",a:3,why:"The AI data path lives in the integration and AI view.",src:"S15"}
     ]}
 };
+
+/* Glossary gap pass 2026-09-28: NotebookLM data table, quiz, and flashcards on terms the site used but did not define.
+   Every glossary definition and quiz answer was checked against the source ledger; see vault notebooklm/exports/Glossary Gap *.md. */
+DATA.glossary.push(...[
+{
+"category": "Neighbors & platform",
+"term": "Microsoft Sentinel",
+"rung": 200,
+"definition": "The SIEM next to Purview. It hosts the OneTrust partner solution that feeds findings into DSPM, and can ingest Purview audit and alert data. [S27]",
+"source": "nblm-gap"
+},
+{
+"category": "Neighbors & platform",
+"term": "Microsoft Defender for Endpoint",
+"rung": 200,
+"definition": "Endpoint security product whose device onboarding Purview shares: onboarded devices are what Endpoint DLP and third-party AI site visibility run on. [S19, S22]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Neighbors & platform",
+"term": "Microsoft Entra ID",
+"rung": 100,
+"definition": "The identity service Purview relies on for sign-in, roles, and Conditional Access. GCC High and DoD tenants pair with Entra ID in Azure Government. [S8, S23]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Neighbors & platform",
+"term": "Copilot Studio",
+"rung": 200,
+"definition": "Microsoft's maker platform for custom agents. Its agents inherit protections and their interactions are audited, retained, and discoverable in Purview. [S18, S17]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Neighbors & platform",
+"term": "Microsoft Foundry",
+"rung": 200,
+"definition": "Microsoft's platform for building enterprise AI apps and agents. Foundry agents are covered by Purview's agent protections and appear in Entra Agent ID. [S17, S22]",
+"source": "nblm-gap"
+},
+{
+"category": "Neighbors & platform",
+"term": "Microsoft 365 Copilot",
+"rung": 100,
+"definition": "The Microsoft 365 AI assistant. Purview supplies its DLP, labels, auditing, retention, and risk detection; it grounds on data the user can already open. [S16]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Neighbors & platform",
+"term": "SharePoint Online",
+"rung": 100,
+"definition": "Microsoft 365 content service and Purview's main first-party target: labels, auto-labeling, DLP, eDiscovery, audit, and DSPM for AI's weekly oversharing assessment. [S5, S15]",
+"source": "nblm-gap"
+},
+{
+"category": "Neighbors & platform",
+"term": "OneTrust",
+"rung": 300,
+"definition": "Third-party privacy platform whose sensitive-data findings reach Purview DSPM through a Microsoft Sentinel partner solution (preview). Government cloud support is UNVERIFIED. [S27, S26]",
+"source": "nblm-gap"
+},
+{
+"category": "Neighbors & platform",
+"term": "OneLake",
+"rung": 300,
+"definition": "Microsoft Fabric's single data lake. Microsoft's landing-zone guidance makes it the convergence layer for governed data that applications reach through approved paths. [S24]",
+"source": "nblm-gap"
+},
+{
+"category": "Neighbors & platform",
+"term": "Fabric mirroring",
+"rung": 300,
+"definition": "Fabric feature that replicates operational data (for example SAP or Oracle) into OneLake in near real time, instead of apps querying those systems directly. [S24]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "Azure Government",
+"rung": 200,
+"definition": "Microsoft's isolated US government Azure cloud. Its Purview Data Map excludes Amazon S3, Amazon RDS, commercial Power BI, preview sources, and Synapse lineage. [S4, S8]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Gov cloud & compliance",
+"term": "FedRAMP P-ATO",
+"rung": 300,
+"definition": "The formal FedRAMP authorization instrument for a cloud service. GCC's P-ATO is FedRAMP Moderate (from DHHS); separately, Microsoft completed FedRAMP High audits and claims High equivalency. [S35]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Gov cloud & compliance",
+"term": "Agency ATO",
+"rung": 300,
+"definition": "An authorization to operate issued by a specific federal agency. GCC High holds agency ATOs at both FedRAMP Moderate and High (DHS, DoJ, FBI, Treasury). [S35]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "Security Assessment Report (SAR)",
+"rung": 300,
+"definition": "The audit evidence from a FedRAMP assessment. Microsoft's completed High-level SARs for GCC are the basis for its FedRAMP High equivalency claim. [S35]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "DoD Impact Level 4 and 5 (IL4/IL5)",
+"rung": 200,
+"definition": "DoD security levels for controlled unclassified and mission data. Microsoft's sources list both GCC High and DoD as meeting IL4 and IL5. [S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "CJIS",
+"rung": 200,
+"definition": "FBI Criminal Justice Information Services security policy. Listed among GCC's compliance posture claims. [S5, S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "IRS 1075",
+"rung": 200,
+"definition": "IRS Publication 1075 safeguards for federal tax information. Listed among GCC's compliance posture claims. [S5, S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "DFARS 7012",
+"rung": 200,
+"definition": "DFARS 252.204-7012, the defense clause for safeguarding covered defense information. Listed for GCC High and DoD. [S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "NIST SP 800-171",
+"rung": 200,
+"definition": "NIST controls for protecting controlled unclassified information in nonfederal systems. Listed for GCC High and DoD. [S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "ITAR",
+"rung": 200,
+"definition": "US export controls on defense articles and data. Listed for GCC High and DoD. [S8]",
+"source": "nblm-gap"
+},
+{
+"category": "Gov cloud & compliance",
+"term": "Commercial baseline",
+"rung": 200,
+"definition": "The commercial (enterprise) Purview feature set. Government deployment guides list only differences from it, so a blank cell usually means parity. [S7]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Runtime & network",
+"term": "Azure integration runtime (Azure IR)",
+"rung": 200,
+"definition": "The default, Microsoft-managed scan compute for sources with publicly reachable endpoints. Nothing to install; it runs in the source's region when Purview can detect it. [S3]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Runtime & network",
+"term": "AWS integration runtime (AWS IR)",
+"rung": 200,
+"definition": "Fully managed scan compute that Microsoft hosts in its own AWS account, used for Amazon S3 and RDS. [S3, S9]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Runtime & network",
+"term": "Kubernetes self-hosted integration runtime",
+"rung": 300,
+"definition": "A self-hosted runtime on the customer's Kubernetes cluster for on-prem or virtual-network sources. Scales with the job; updates are manual today. [S3]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "Managed VNet IR hibernation",
+"rung": 300,
+"definition": "A Managed VNet integration runtime with no scans for more than 90 days hibernates. The first Test Connection fails and asks you to retry in 15 minutes; a direct scan waits up to 15 extra minutes (Queued_Waking Up IR). [S3]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "Private endpoint",
+"rung": 200,
+"definition": "A private IP interface into a service over Azure Private Link. Used to keep the Purview account and its portal off the public internet, and by Managed VNet IR to reach sources. [S23, S3]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "Azure Key Vault",
+"rung": 100,
+"definition": "Where Purview scan credentials live: passwords, client secrets, and private keys referenced by Purview credentials. [S10, S11]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Runtime & network",
+"term": "Role-based access control (RBAC) in Purview",
+"rung": 200,
+"definition": "Purview roles (for example Data Reader, Data Source Admin) assigned to Entra groups and scoped by collection, with least privilege. [S23]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "Conditional Access",
+"rung": 200,
+"definition": "Entra ID policy that enforces requirements such as MFA; Microsoft recommends it for privileged Purview roles. [S23]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "AWS IAM role (for S3 scanning)",
+"rung": 200,
+"definition": "An AWS role that trusts Microsoft's account ID with an external ID; the AWS IR assumes it to read S3. No access key is stored. [S9]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "kms:Decrypt",
+"rung": 200,
+"definition": "The AWS KMS permission the scanning role needs for buckets encrypted with customer-managed keys. Without it, those buckets fail to scan. [S9]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "AWS Service Control Policy (SCP)",
+"rung": 300,
+"definition": "An AWS Organizations guardrail that can silently block the scanner. It must allow AssumeRole, GetBucketLocation, GetObject, ListBucket, GetBucketPublicAccessBlock, and region us-east-1. [S9]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "SMB",
+"rung": 100,
+"definition": "The Windows file-sharing protocol the information protection scanner uses to reach on-prem shares. [S12]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "NFS",
+"rung": 200,
+"definition": "The Unix/Linux file-sharing protocol; scanner support is in preview. [S12]",
+"source": "nblm-gap"
+},
+{
+"category": "Runtime & network",
+"term": "UNC path",
+"rung": 100,
+"definition": "A \\\\server\\share path. How scanner content-scan jobs name the on-prem repositories to scan. [S12, S14]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Lineage",
+"rung": 100,
+"definition": "How data moves between assets, captured by the Data Map (for Snowflake, static lineage). Shown in the catalog. [S2, S10]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Qualified name",
+"rung": 200,
+"definition": "An asset's unique identifier in the Data Map, built from the source's endpoint and object path. [S2, S10]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Label policy",
+"rung": 100,
+"definition": "Publishes sensitivity labels to users and groups and sets defaults; labels do nothing until a label policy publishes them. [S1]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Auto-labeling",
+"rung": 200,
+"definition": "Applies sensitivity labels automatically when content matches sensitive information types or trainable classifiers. Available across commercial and US government clouds. [S1, S5]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Trainable classifier",
+"rung": 200,
+"definition": "A classifier trained on example content to recognize a category (such as contracts or source code) where a fixed pattern would not work. [S1]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Named-entity SIT",
+"rung": 300,
+"definition": "Sensitive information types that detect names, addresses, and similar entities. Not yet at parity in government clouds (in development or backlog). [S5, S6, S7]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Retention policy",
+"rung": 100,
+"definition": "Keeps or deletes content after a set time. For AI, the Data Lifecycle Management location is Microsoft Copilot Experiences. [S18]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Data Lifecycle Management",
+"rung": 200,
+"definition": "The Purview solution for retention and deletion of content, including AI interactions. [S1, S18]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Legal hold",
+"rung": 100,
+"definition": "Preserves content in place inside an eDiscovery case so it cannot be permanently deleted while the matter is open. [S1]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Review set",
+"rung": 200,
+"definition": "The eDiscovery (Premium) container where collected items, including AI interactions, are analyzed, tagged, and exported. [S1, S18]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Activity explorer",
+"rung": 200,
+"definition": "Shows activity on labeled and sensitive content; in DSPM for AI it is where AI interactions, including Copilot Studio chat text, are reviewed. [S15, S21]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Data explorer",
+"rung": 200,
+"definition": "Shared view of where classified and labeled content sits across locations, used across Purview solutions. [S1]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Compliance score",
+"rung": 100,
+"definition": "Compliance Manager's measure of posture against assessed regulations, raised by completing improvement actions. [S1, S25]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Improvement action",
+"rung": 100,
+"definition": "A recommended control task in Compliance Manager; completing it raises the compliance score. [S1]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Adaptive Protection",
+"rung": 300,
+"definition": "Links Insider Risk user risk levels to DLP: higher-risk users are blocked, lower-risk users are warned or audited, for example when pasting into AI sites. [S28]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Purview browser extension",
+"rung": 200,
+"definition": "Browser add-on on onboarded devices that lets DLP and Insider Risk see sensitive data going to third-party AI sites. [S19]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Browse-to-URL policy",
+"rung": 300,
+"definition": "A DSPM for AI policy about visits to AI sites. It cannot be created in GCC High or DoD, where only supported AI sites are available. [S7]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "Know Your Data policy",
+"rung": 300,
+"definition": "The DSPM for AI policy that brings a custom AI app's prompts and responses (sent through the Purview SDK and Graph APIs) under governance. [S20]",
+"source": "nblm-gap"
+},
+{
+"category": "Purview features",
+"term": "ItemClass",
+"rung": 300,
+"definition": "The item property eDiscovery uses to find AI interactions, for example IPM.SkypeTeams.Message.Copilot.Studio.* for Copilot Studio agents. [S18]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Oversharing",
+"rung": 100,
+"definition": "Data reachable by more people, or AI, than intended, usually from broad permissions plus missing labels. DSPM for AI assesses it; it does not fix ACLs. [S15]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Purview features",
+"term": "Grounding data",
+"rung": 100,
+"definition": "The organizational content (SharePoint, OneDrive, Teams) an AI app retrieves to answer a prompt. Labels, DLP, and access checks decide what reaches the response. [S16, S15]",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Frameworks",
+"term": "TOGAF ADM",
+"rung": 200,
+"definition": "The Open Group's Architecture Development Method. Here: conceptual view in Phases A-B, logical in Phase C, physical in Phases D-E, plus governance for AI.",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Frameworks",
+"term": "DoDAF",
+"rung": 200,
+"definition": "The DoD Architecture Framework. Its viewpoints (OV, CV, SV, DIV, StdV) organize the four Purview views.",
+"source": "nblm-gap",
+"essential": true
+},
+{
+"category": "Frameworks",
+"term": "OV-1",
+"rung": 200,
+"definition": "DoDAF high-level operational concept graphic: the one-picture conceptual view of people, agents, external stores, AI apps, and regulators.",
+"source": "nblm-gap"
+},
+{
+"category": "Frameworks",
+"term": "SV-1",
+"rung": 200,
+"definition": "DoDAF systems interface description: components and their interfaces, used for the logical view and, with named systems, the physical view.",
+"source": "nblm-gap"
+}
+]);
+DATA.quizSections[6]="Platform edges (NotebookLM)";
+DATA.quiz.push(...[
+{
+"week": 6,
+"rung": 300,
+"pillar": "Physical",
+"type": "mc",
+"question": "An architect is designing a data governance strategy for a US Federal agency using a Microsoft Purview account deployed in the Azure Government (US Gov Virginia) region. The agency requires scanning of unstructured data stored in Amazon S3 buckets. Which architectural constraint must the architect address regarding this specific integration?",
+"options": [
+"The Data Map multicloud scanning connector for Amazon S3 is not supported in the Azure Government environment.",
+"The connection must use a Self-hosted Integration Runtime (SHIR) as Azure Integration Runtimes cannot traverse the government cloud boundary.",
+"The agency must use a Basic Authentication credential because Role ARN authentication is restricted to Commercial tenants.",
+"Metadata extracted from S3 must be stored in a separate 'Gov-Only' Data Map instance to maintain FedRAMP High compliance."
+],
+"answer": "The Data Map multicloud scanning connector for Amazon S3 is not supported in the Azure Government environment.",
+"explanation": "According to the Purview feature availability matrix, while multicloud scanning is GA in public clouds, Amazon S3 is explicitly listed as not supported for the Azure Government Virginia region. [S4] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 200,
+"pillar": "Integration",
+"type": "mc",
+"question": "A financial services firm is transitioning their Snowflake scan authentication from basic credentials to an RSA Key Pair. The architect instructs the team to store the private key in Azure Key Vault. Why is it a critical requirement to use the Azure CLI or Cloud Shell, rather than the Azure Portal UI, to save the secret?",
+"options": [
+"The Portal UI text input converts line breaks into spaces, which corrupts the multi-line PEM format required for Snowflake connections.",
+"The Portal UI does not support the encryption entropy needed for RSA 2048-bit keys.",
+"Secrets stored via the Portal are assigned a metadata tag that is incompatible with the Snowflake Managed Private Endpoint.",
+"Snowflake requires the private key to be uploaded as a binary file (Certificate) rather than a secret string."
+],
+"answer": "The Portal UI text input converts line breaks into spaces, which corrupts the multi-line PEM format required for Snowflake connections.",
+"explanation": "Snowflake connections require a specific PKCS#8 PEM format; the Azure Portal's failure to preserve multi-line formatting leads to 'malformed key' errors during the handshake. [S10] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "Integration",
+"type": "mc",
+"question": "When configuring a multicloud scan for Amazon S3, the Purview scanner must be able to perform default API calls. Which AWS Region must the Service Control Policy (SCP) allow for these default calls, even if the target bucket is hosted elsewhere?",
+"options": [
+"us-east-1",
+"us-gov-west-1",
+"The region geographically closest to the Purview primary account.",
+"All AWS regions where S3 buckets are registered."
+],
+"answer": "us-east-1",
+"explanation": "The documentation specifies that the us-east-1 region is the default for AWS API calls and must be allowed by the SCP to ensure connectivity. [S9] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "AI",
+"type": "open",
+"question": "A security architect is implementing Data Security Posture Management (DSPM) for AI. They want to ensure that high-risk users are blocked from sharing sensitive data with generative AI tools, while low-risk users are simply audited. Which components are required to realize this 'Adaptive Protection' scenario? (Select all that apply.)",
+"answer": "Insider Risk Management (IRM) to provide the risk level indicators for users.; Purview Data Loss Prevention (DLP) policies configured with 'Adaptive Protection' as a condition.; The Microsoft Purview browser extension or device onboarding.",
+"explanation": "Adaptive Protection relies on IRM to analyze user behavior and assign a high, medium, or low risk level. DLP is the enforcement engine that takes different actions (block vs. audit) based on the risk level provided by IRM. To intercept interactions with web-based AI sites like ChatGPT, the solution requires visibility at the device or browser level. [S28, S19] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "AI",
+"type": "open",
+"question": "During a forensic investigation into AI agent misuse, an analyst needs to filter eDiscovery results to specifically find interactions with maker-created agents from Copilot Studio. The analyst should search for the specific property known as ___ which will follow a naming convention such as 'IPM.SkypeTeams.Message.Copilot.Studio.*'.",
+"answer": "ItemClass",
+"explanation": "The ItemClass property is the metadata attribute used by eDiscovery and retention solutions to distinguish between different types of AI interactions and messages. [S18] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 200,
+"pillar": "AI",
+"type": "open",
+"question": "In the context of the AI data path, if a user prompt is grounded in data from a SharePoint site, explain how Microsoft Purview ensures that a sensitivity label like 'Highly Confidential' prevents data leakage through the AI response.",
+"answer": "Labels, DLP, and access checks sit between grounding and the response: every grounding result is re-checked against the user's own access, and agents inherit their parent app's protections. Content the user cannot open, or that a label or DLP policy restricts, never reaches the answer. The interaction is still written to the unified audit log as CopilotInteraction. NotebookLM's answer also names a 'Restrict Access by Label' control in DSPM for AI; that comes from the Microsoft Mechanics videos (S28-S30), not Microsoft Learn docs.",
+"explanation": "The architecture requires grounding data to pass through label, DLP, and access checks before the AI can incorporate that data into a response. [S15, S16] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 200,
+"pillar": "Physical",
+"type": "mc",
+"question": "An architect is reviewing the licensing for an Information Protection scanner deployment on-premises. Which of the following statements correctly identifies the licensing requirement for enforcing DLP on these repositories?",
+"options": [
+"Every user who adds or consumes files in the scanned on-premises repository requires a license.",
+"Only the scanner service account requires a Microsoft 365 G5/E5 license.",
+"Licensing is only required for the SQL Server instance hosting the scanner configuration database.",
+"On-premises scanning is a 'pay-as-you-go' feature linked to an Azure subscription and does not use M365 per-user licenses."
+],
+"answer": "Every user who adds or consumes files in the scanned on-premises repository requires a license.",
+"explanation": "Purview service descriptions specify that licensing for DLP on on-premises repositories is based on the users interacting with the data, not just the scanner service account. [S14] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "Physical",
+"type": "mc",
+"question": "A Department of Defense (DoD) customer is using DSPM for AI to manage their environment. According to the service description, which feature of DSPM for AI has a specific functional limitation in DoD and GCC High environments compared to Commercial?",
+"options": [
+"Administrators cannot create 'browse-to-URL' policies.",
+"AI interaction logging is disabled for all user-created agents.",
+"The weeky data risk assessment is limited to the top 10 SharePoint sites instead of 100.",
+"Exact Data Match (EDM) cannot be used as a classifier in AI policies."
+],
+"answer": "Administrators cannot create 'browse-to-URL' policies.",
+"explanation": "The DoD deployment guide specifically notes that browse-to-URL policies cannot be created and only supported AI sites are available in these sovereign clouds. [S7] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 200,
+"pillar": "Integration",
+"type": "mc",
+"question": "An architect is troubleshooting a failed Amazon S3 scan where the bucket uses AWS-KMS encryption. The IAM role has 'AmazonS3ReadOnlyAccess' but the scan results show no classifications. What specific permission is likely missing?",
+"options": [
+"KMS Decrypt",
+"KMS GenerateDataKey",
+"S3 PutObjectTagging",
+"IAM PassRole"
+],
+"answer": "KMS Decrypt",
+"explanation": "The troubleshooting guide for S3 multicloud scanning explicitly states that for buckets using AWS-KMS, the role must be granted the 'Decrypt' action in a KMS policy. [S9] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "Physical",
+"type": "mc",
+"question": "When configuring a Self-hosted Integration Runtime (SHIR) for scanning Snowflake, what is a mandatory software prerequisite on the host machine to support advanced encrypted algorithms?",
+"options": [
+"Microsoft Open JDK 11",
+".NET Framework 4.8.1",
+"Python 3.10 with the Snowflake-Connector-Python library",
+"Visual C++ Redistributable 2008"
+],
+"answer": "Microsoft Open JDK 11",
+"explanation": "The Snowflake connector prerequisites specify that Microsoft Open JDK 11 is required, as other JDK variants may have issues with advanced encryption. [S10] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "AI",
+"type": "open",
+"question": "To ensure that custom-built generative AI applications provide full visibility within the Data Security Posture Management (DSPM) for AI Activity Explorer, which of the following configuration steps are required? (Select all that apply.)",
+"answer": "Developing the application to interface with the Microsoft Purview APIs in Microsoft Graph.; Creating a Microsoft Purview 'Know Your Data' (KYD) policy for the specific application.",
+"explanation": "The Purview SDK and Graph APIs are the primary mechanism for bringing prompts and responses from custom (non-Copilot) apps into the Purview governance boundary. A KYD policy is necessary to authorize the collection, analysis, and display of interaction data within the DSPM for AI reports. [S20] (NotebookLM quiz, reviewed.)"
+},
+{
+"week": 6,
+"rung": 300,
+"pillar": "Physical",
+"type": "open",
+"question": "When a Managed Virtual Network Integration Runtime (IR) has been inactive for more than 90 days, it enters a state of ___, which causes a mandatory 15-minute delay for the next 'Test Connection' or scan job.",
+"answer": "hibernation",
+"explanation": "Verified against Microsoft Learn 'Choose the right integration runtime': after more than 90 days without scans the Managed VNet IR hibernates; the first Test Connection fails and asks you to retry in 15 minutes, and a direct scan shows Queued_Waking Up IR for up to 15 extra minutes. [S3]"
+}
+]);
+DATA.checklist.push({"title": "Managed VNet runtime asleep after 90 days", "view": "Physical", "src": "S3", "good": "Run Test Connection about 15 minutes before a critical scan, or keep a scheduled scan inside 90 days so the runtime never hibernates.", "bad": "Tell: Test Connection fails with a retry-in-15-minutes message, or the scan sits in Queued_Waking Up IR. Root cause: no scans on the Managed VNet IR for more than 90 days."});
+DATA.nblmDecks={gap:{title:"NotebookLM: platform edges",cards:[{"front": "What role does Microsoft Sentinel play at the edge of Microsoft Purview?", "back": "Microsoft Sentinel acts as a SIEM/SOAR platform that ingests Purview data connectors and third-party solutions like OneTrust to correlate threat analytics with sensitive data findings."}, {"front": "How does Microsoft Defender for Endpoint integrate with Microsoft Purview Endpoint DLP?", "back": "Device onboarding is shared between Defender for Endpoint and Purview, allowing Purview Endpoint DLP policies to enforce warn or block actions on local file system and browser operations."}, {"front": "What is the primary function of Microsoft Entra ID within Microsoft Purview's operational boundary?", "back": "Entra ID provides central identity authentication, role-based access control (RBAC), and Conditional Access policies for both control plane and data plane operations in Purview."}, {"front": "How are non-human agent identities created in Copilot Studio and Foundry cataloged for Purview governance?", "back": "They are assigned a Microsoft Entra Agent ID, providing a unified directory across Copilot Studio and Foundry for tracking agent lifecycle and permissions."}, {"front": "What capability does Microsoft Copilot Studio provide when integrating with Microsoft Purview?", "back": "It allows makers to build custom AI agents whose interactions and grounded content are audited, retained, eDiscovered, and governed by Purview policies."}, {"front": "Which compliance standards are supported in Office 365 GCC High deployments according to Purview service descriptions?", "back": "GCC High deployments satisfy FedRAMP High, DoD IL4/IL5, DFARS 7012, NIST SP 800-171, and ITAR compliance requirements."}, {"front": "Scenario: A government agency must adhere to IRS 1075 and CJIS regulations. Which Microsoft Purview deployment environment meets these standards?", "back": "Microsoft Purview in Office 365 GCC (Government Community Cloud) meets CJIS and IRS 1075 requirements."}, {"front": "What conflict exists between Microsoft sources regarding FedRAMP certification levels for Office 365 GCC?", "back": "It is not a live conflict. GCC's formal P-ATO is FedRAMP Moderate (from DHHS), and Microsoft completed FedRAMP High audits (SARs) and claims High equivalency; GCC High holds agency ATOs at both levels [S35]."}, {"front": "What is the primary operational difference between Azure Commercial and Azure Government regarding Microsoft Purview Data Map multicloud scanning?", "back": "Azure Government Data Map does not support scanning multicloud sources like Amazon S3 or Amazon RDS."}, {"front": "In Microsoft Purview Data Map, what is the role of the Azure Integration Runtime (Azure IR)?", "back": "Azure IR provides cloud-managed compute to connect to, scan, and extract metadata from public cloud data sources without customer infrastructure."}, {"front": "How does the Amazon S3 Multicloud Scanning Connector execute scans within AWS?", "back": "It runs an AWS Integration Runtime hosted by Purview inside a Microsoft-owned AWS account that accesses customer S3 buckets via an IAM Role ARN."}, {"front": "What component is deployed on a customer virtual machine to scan on-premises databases or private network sources in Purview Data Map?", "back": "Self-Hosted Integration Runtime (SHIR)."}, {"front": "When using Azure Private Link with a Microsoft Purview account, what is the specific function of the Account Private Endpoint?", "back": "It restricts client calls to the Purview account so access is only allowed from within the approved virtual network."}, {"front": "What network component is required to allow admins to privately access the Purview user interface over an isolated virtual network?", "back": "Portal Private Endpoint."}, {"front": "Where must credentials and private keys be stored when configuring Microsoft Purview Data Map scanners for non-managed identity authentication?", "back": "Azure Key Vault."}, {"front": "How does Microsoft Purview authenticate to an Amazon S3 bucket for metadata scanning?", "back": "It assumes an AWS IAM Role using a Role ARN, Microsoft Account ID, and an External ID."}, {"front": "If an Amazon S3 bucket is encrypted with AWS KMS, what permissions must be added to the scanner's IAM role?", "back": "The `kms:Decrypt` permission."}, {"front": "How can an AWS Service Control Policy (SCP) inadvertently break the Purview S3 multicloud scanner?", "back": "By denying `AssumeRole`, restricting bucket list/read actions, or blocking traffic outside specific AWS regions."}, {"front": "Which protocols and path format does the Microsoft Purview Information Protection Scanner use to scan on-premises file shares?", "back": "SMB protocol (with NFS in preview) accessing network locations via UNC paths."}, {"front": "What is data lineage in Microsoft Purview Data Map and Catalog?", "back": "A visual representation tracking the movement, origin, transformation, and destination of data assets across the estate."}, {"front": "What is a Sensitivity Label Policy?", "back": "A rule set configured by compliance admins that publishes specific sensitivity labels and protection settings to designated users or groups."}, {"front": "What is Auto-Labeling in Microsoft Purview Information Protection?", "back": "The automatic application of sensitivity labels to documents or emails in transit or at rest based on matched Sensitive Information Types or classifiers."}, {"front": "What is a Trainable Classifier in Microsoft Purview?", "back": "A machine learning model trained to categorize content by analyzing contextual examples rather than matching rigid patterns or keywords."}, {"front": "In Microsoft Purview Data Lifecycle Management, what is the function of a Retention Policy?", "back": "It automatically retains or deletes organizational content across workloads after a specified timeframe to satisfy legal or regulatory obligations."}, {"front": "What is the purpose of placing content on a Legal Hold during an eDiscovery investigation?", "back": "It preserves responsive content in-place, preventing users from permanently modifying or deleting data relevant to the legal matter."}, {"front": "In Microsoft Purview eDiscovery (Premium), what is a Review Set?", "back": "A secure, frozen subset of collected data where investigators can analyze, tag, redact, and review content prior to export."}, {"front": "What is the purpose of Activity Explorer in Microsoft Purview?", "back": "It provides a single historical dashboard for auditing events related to labeled or classified content, DLP rule matches, and endpoint activities."}, {"front": "How does Purview Adaptive Protection prevent data loss?", "back": "It dynamically adjusts DLP controls—such as blocking file downloads or prompt submissions—based on a user's calculated risk level from Insider Risk Management."}, {"front": "What is a browse-to-URL policy in DSPM for AI?", "back": "A policy that monitors or blocks visits to unsanctioned third-party AI websites using the Purview browser extension on onboarded devices."}, {"front": "What is the function of a Know Your Data policy (Collection Policy) in DSPM for AI?", "back": "It captures prompt texts and generated responses from custom AI apps or Copilots to enable monitoring, eDiscovery, and compliance evaluation."}, {"front": "In Microsoft Purview eDiscovery, what search property is used to filter agent interactions created in Microsoft Copilot Studio?", "back": "The `ItemClass` property set to `IPM.SkypeTeams.Message.Copilot.Studio.*`."}, {"front": "What audit record type is generated in the Unified Audit Log whenever a user or agent interacts with Microsoft 365 Copilot?", "back": "`CopilotInteraction`."}, {"front": "What is the Cloud Adoption Framework (CAF) recommendation for placing a Microsoft Purview account in an Azure environment?", "back": "Deploy the Purview account into its own dedicated Data Management Landing Zone (DMLZ), using one DMLZ per Entra ID tenant."}, {"front": "What data does the Multicloud Scanning Connector return to Microsoft Purview when scanning Amazon S3 buckets?", "back": "Metadata and classifications only; raw document content is never returned or stored in Azure."}, {"front": "Which authentication method is recommended when setting up a Snowflake source scan in Microsoft Purview Data Map?", "back": "RSA key pair authentication."}, {"front": "Why should Snowflake private keys be registered via Azure CLI rather than the Microsoft Purview portal UI?", "back": "The portal UI can corrupt multi-line PEM formatting required for PKCS#8 private keys."}, {"front": "What software prerequisites are required on a host running the Microsoft Purview Information Protection Scanner?", "back": "64-bit Windows Server (2016-2025), SQL Server 2016+, full Information Protection client, and an AD service account synced to Entra ID."}, {"front": "Scenario: An organization needs to prevent AI agents from reasoning over a sensitive M&A site in SharePoint. Which Purview capability accomplishes this?", "back": "Configure a 'Restrict Access by Label' policy in DSPM for AI targeting the specific sensitivity label applied to the M&A content. (Video-sourced: Microsoft Mechanics S28-S30, not Microsoft Learn docs.)"}, {"front": "What happens when a user attempts to paste credit card details into consumer ChatGPT on a computer onboarded to Purview Endpoint DLP?", "back": "Endpoint DLP evaluates the action against configured policies and blocks or warns the user directly in the browser or OS."}, {"front": "What is the role of Compliance Manager in Microsoft Purview?", "back": "It translates regulatory requirements into actionable improvement actions and provides a continuously calculated compliance score."}, {"front": "What is a Sensitive Information Type (SIT) in Microsoft Purview?", "back": "A pattern-based data classification entity defined by regular expressions, keywords, or checksums (e.g., credit card numbers or SSNs)."}, {"front": "What is the boundary between Microsoft Purview and Microsoft Defender XDR?", "back": "Purview focuses on data security, governance, and compliance controls, whereas Defender XDR focuses on threat protection, endpoint detection, and device security."}, {"front": "What capability does Microsoft Data Security Posture Management (DSPM) for AI provide?", "back": "A unified portal to discover AI usage, identify data risks/oversharing, enforce one-click protection policies, and audit AI prompts and responses."}, {"front": "Scenario: A compliance admin needs to retain user AI prompt interactions for 3 years. Where is this configured in Purview?", "back": "In Data Lifecycle Management under Retention Policies by selecting the 'Microsoft Copilot Experiences' location."}, {"front": "What is Double Key Encryption (DKE) in Microsoft Purview Information Protection?", "back": "An encryption feature where two keys protect data—one stored in Microsoft Azure and one managed privately by the customer—ensuring only the customer can decrypt content."}, {"front": "What is Microsoft Purview Information Barriers?", "back": "A policy solution that prevents specified internal groups or departments from communicating or sharing files with each other to avoid conflicts of interest."}, {"front": "How does Purview Communication Compliance assist in governance of generative AI?", "back": "It inspects AI prompts and responses for inappropriate content, code-of-conduct violations, or regulatory non-compliance."}, {"front": "What is the Purview Unified Catalog?", "back": "The business-facing portal layer built on the Data Map that enables users to search, browse, curate, and understand organizational data assets."}, {"front": "How are third-party SaaS AI sites like DeepSeek or Google Gemini monitored for sensitive data exfiltration by Purview?", "back": "Via Purview Endpoint DLP and browser signal detection enabled through device onboarding and the Purview browser extension."}, {"front": "What is the function of the Data Map in Microsoft Purview?", "back": "It is the core metadata graph engine that registers data sources, executes automated scans, extracts technical metadata, and maps lineage."}, {"front": "Scenario: A developer builds a custom enterprise AI app using Azure OpenAI. How do they bring its prompts under Purview DSPM for AI?", "back": "By integrating the application with the Microsoft Purview SDK and Microsoft Graph Purview APIs."}, {"front": "What licensing requirement applies to on-premises file share users when deploying Purview DLP for on-premises repositories?", "back": "Every user who adds or consumes files in a scanned location requires a license, not just the scanner service account."}, {"front": "What network port and protocol are required for the Information Protection Scanner to communicate with the Microsoft cloud?", "back": "Outbound HTTPS over port 443."}, {"front": "What is the function of Microsoft Purview Customer Key (BYOK)?", "back": "It allows organizations to provide and manage their own encryption keys used for encrypting M365 data at rest at the tenant or service level."}, {"front": "What data security capability is provided when integrating Salesforce with Microsoft Purview Data Map?", "back": "Purview extracts technical metadata (organizations, objects, fields) over REST API, but does not perform content classification."}, {"front": "Scenario: An admin turns off the Know Your Data collection policy for Security Copilot. What is the impact on Purview auditing?", "back": "Audit log events are still recorded, but prompt text and response bodies will not be captured for eDiscovery or investigations."}, {"front": "What is the primary role of Insider Risk Management at the AI edge in Purview?", "back": "It analyzes user risk signals across M365 and AI prompts to detect risky activity, such as departing employees exfiltrating IP via GenAI tools."}, {"front": "What happens to Microsoft Purview data in transit?", "back": "All data in transit across public and private networks is encrypted using Transport Layer Security (TLS) version 1.2 or higher."}]},general:{title:"NotebookLM: core",cards:[{"front": "What is the primary overarching purpose of Microsoft Purview as a platform?", "back": "To govern, protect, and manage organizational data wherever it resides."}, {"front": "Name the five top-level outcome capabilities defined in Microsoft Purview's conceptual architecture.", "back": "Know your data, protect sensitive data, govern data, manage risk and regulation, and secure AI use."}, {"front": "Which solution family within Microsoft Purview encompasses Information Protection, DLP, Insider Risk Management, and DSPM?", "back": "The Data Security solution family."}, {"front": "What solutions are included in the Microsoft Purview Data Governance solution family?", "back": "Data Map and Unified Catalog."}, {"front": "What solutions constitute the Data Compliance solution family in Microsoft Purview?", "back": "Audit, eDiscovery, Compliance Manager, Data Lifecycle Management, Communication Compliance, and Records Management."}, {"front": "In Microsoft Purview's logical architecture, what is the primary responsibility of the Classification Engine?", "back": "To detect sensitive information types within content using predefined or trainable classifiers."}, {"front": "What is the main operational output of Microsoft Purview Information Protection?", "back": "Content that has sensitivity labels or persistent encryption applied to it."}, {"front": "What data entity is emitted by an AI interaction with Microsoft Copilot or a custom agent?", "back": "An audit record (recorded under CopilotInteraction in the unified audit log)."}, {"front": "What type of data is returned to Microsoft Purview when scanning an AWS S3 bucket?", "back": "Technical metadata and classification findings only (no file content is returned)."}, {"front": "What mechanism allows Microsoft Purview's Data Map to securely access Amazon S3 buckets across clouds?", "back": "An AWS IAM role with a trust relationship configured using a Microsoft Account ID and External ID."}, {"front": "Why does prompt text for Copilot in Fabric or Security Copilot fail to appear in eDiscovery without extra configuration?", "back": "Capturing full prompt and response text for those services requires an explicitly configured collection policy."}, {"front": "According to Cloud Adoption Framework (CAF) best practices, where should a tenant's primary Microsoft Purview account be deployed?", "back": "In its own dedicated Data Management Landing Zone (DMLZ), with one account per Microsoft Entra ID tenant."}, {"front": "Which integration runtime type should be selected to scan on-premises file shares or SQL Server instances behind a corporate firewall?", "back": "Self-Hosted Integration Runtime (SHIR) or Kubernetes-supported SHIR."}, {"front": "What hibernation behavior occurs when a Managed Virtual Network Integration Runtime remains unused for more than 90 days?", "back": "It automatically enters a hibernated state and requires up to 15 extra minutes to wake up during the next scan."}, {"front": "Which Windows Server installation options are explicitly unsupported for hosting the Microsoft Purview Information Protection scanner?", "back": "Windows Server Core and Windows Server Nano editions."}, {"front": "What database software is required to store configuration data for an on-premises Information Protection scanner installation?", "back": "SQL Server 2016 or later with a case-insensitive collation."}, {"front": "Which identity platform is paired with Microsoft 365 GCC High and DoD deployments?", "back": "Microsoft Entra ID hosted in Azure Government."}, {"front": "What major Amazon S3 governance feature is explicitly excluded in Azure Government cloud environments?", "back": "Amazon S3 Data Map scanning using the multicloud scanning connector."}, {"front": "What key limitation exists for Data Security Posture Management (DSPM) for AI policies in GCC High and DoD clouds?", "back": "Administrators cannot create browse-to-URL policies and are restricted to supported AI sites."}, {"front": "What authentication method is recommended for connecting Microsoft Purview to Snowflake data sources?", "back": "RSA key pair authentication."}, {"front": "When configuring a private key for Snowflake scanning in Azure CLI, why must multi-line PEM strings be handled carefully?", "back": "Entering multi-line PEM strings directly through the Azure portal interface can corrupt formatting."}, {"front": "What API protocol and authorization model does Microsoft Purview use to connect to Salesforce?", "back": "Salesforce REST API v41.0 utilizing an OAuth connected app with a Consumer Key."}, {"front": "How does Microsoft Purview ingest data governance signals from OneTrust-scanned sources into DSPM?", "back": "Through a partner solution integration deployed via Microsoft Sentinel Content Hub."}, {"front": "What weekly automated process does DSPM for AI execute on SharePoint sites by default?", "back": "A weekly oversharing assessment scanning the top 100 SharePoint sites ranked by usage."}, {"front": "In DSPM for AI, what policy action occurs when a user flagged as high-risk attempts to enter sensitive data into ChatGPT?", "back": "The prompt submission containing sensitive information is actively blocked."}, {"front": "In DSPM for AI, what policy action occurs when a low-risk user enters sensitive information into a non-managed GenAI prompt?", "back": "The prompt is allowed but the user is notified that their action is being audited."}, {"front": "What information regarding Copilot Studio agent chats is stored in the standard Purview Audit solution versus DSPM for AI?", "back": "Standard Audit stores only the transcript thread ID, while DSPM for AI retrieves full chat text."}, {"front": "How do custom AI agents built with Copilot Studio or Microsoft Foundry receive classification and DLP guardrails?", "back": "They automatically inherit security controls, classifications, and labels from their parent host application."}, {"front": "The sequence of steps in an AI data request path is: Prompt submission $\\rightarrow$ Grounding data fetch $\\rightarrow$ _____ $\\rightarrow$ Response generation $\\rightarrow$ Audit logging.", "back": "Security evaluation (sensitivity labels, DLP rules, and access permissions checks)"}, {"front": "What minimum AWS IAM permission is required to enable Microsoft Purview to scan S3 buckets encrypted with AWS KMS?", "back": "The `kms:Decrypt` permission attached to the AWS IAM scanner role."}, {"front": "Which AWS region must always be allowed in Service Control Policies (SCPs) when scanning AWS S3 with Purview?", "back": "The `us-east-1` AWS region, which serves as the default endpoint for AWS global API calls."}, {"front": "What licensing requirement applies to users of file shares scanned by the on-premises DLP scanner?", "back": "Every user who adds or consumes files in a scanned share location requires an appropriate Purview license."}, {"front": "Which tool allows security operations teams to extend Purview DSPM tracking to custom enterprise AI applications?", "back": "Microsoft Graph Purview APIs and the Purview SDK using a Know Your Data (KYD) policy."}, {"front": "What integration pattern allows Azure Databricks workspaces to utilize Microsoft Fabric OneLake without duplicate storage accounts?", "back": "Configuring OneLake as the direct system of record for reading and writing Databricks data."}, {"front": "What integration pattern connects existing Azure Data Lake Storage Gen2 (ADLS) data managed by Databricks into OneLake without moving files?", "back": "Exposing ADLS storage locations into OneLake via managed OneLake shortcuts."}, {"front": "Concept: Trainable Classifier", "back": "Definition: An AI-driven classification model in Purview trained on sample files to detect specific context-based data categories."}, {"front": "Concept: Sensitivity Label Policy", "back": "Definition: An administrative rule set that publishes sensitivity labels to specific users, groups, or locations."}, {"front": "Concept: Adaptive Protection", "back": "Definition: A Purview security feature that dynamically adjusts DLP enforcement strictness based on a user's calculated risk level."}, {"front": "Concept: Data Estate", "back": "Definition: The total collection of data sources, assets, and repositories managed or cataloged across an organization."}, {"front": "Concept: Unified Audit Log", "back": "Definition: A centralized repository capturing user, administrator, and AI activity events across Microsoft 365 workloads."}, {"front": "How does Microsoft Purview distinguish between Standard Audit and Premium Audit regarding record retention?", "back": "Standard Audit retains records for a baseline period (180 days), while Premium Audit allows retention up to 1 or 10 years."}, {"front": "What is the primary purpose of Microsoft Purview Compliance Manager?", "back": "To evaluate organizational risk posture against regulatory frameworks and provide recommended improvement actions."}, {"front": "In Microsoft Purview eDiscovery, what is the role of a hold?", "back": "To preserve content in place to prevent deletion during legal or investigative review."}, {"front": "What service account requirement must be met for the on-premises Information Protection scanner?", "back": "An Active Directory service account synchronized to Entra ID with read/write permissions on target shares."}, {"front": "What port and protocol are required for outbound communication from the on-premises Information Protection scanner to Microsoft cloud endpoints?", "back": "Outbound HTTPS over port 443."}, {"front": "How are agent identity objects managed and cataloged in Microsoft Entra for governance by Purview?", "back": "Through Microsoft Entra Agent ID, which creates directory entries for agents created in Copilot Studio or Foundry."}, {"front": "What happens to a Copilot agent's ability to summarize a file if 'Restrict Access by Label' is configured for that file's label?", "back": "The agent is blocked from reasoning over or summarizing the protected file content. (Video-sourced: Microsoft Mechanics S28-S30, not Microsoft Learn docs.)"}, {"front": "Which Purview location scope is selected in Data Lifecycle Management to set retention rules specifically for AI interaction history?", "back": "The 'Microsoft Copilot Experiences' retention location."}, {"front": "In Microsoft Purview Data Map, what is a Collection?", "back": "A hierarchical structure used to organize data sources, manage assets, and delegate access permissions."}, {"front": "What is the main operational difference between an Azure Integration Runtime and a Self-Hosted Integration Runtime?", "back": "Azure IR is fully managed cloud compute for public endpoints, whereas SHIR runs on customer-managed infrastructure inside private networks."}, {"front": "What type of scan schedule triggers an immediate, non-repeating execution of an Amazon S3 bucket scan in Purview?", "back": "A trigger configured as 'Once'."}, {"front": "What is the purpose of a Custom Scan Rule Set in Microsoft Purview Data Map?", "back": "To define specific file types, custom delimiters, and classification rules applied during source scanning."}, {"front": "What mechanism replicates operational Azure OLTP database changes into OneLake in near real-time for governed analytics?", "back": "Fabric Mirroring."}, {"front": "Under TOGAF ADM, which phase maps directly to defining Purview's conceptual capabilities and business outcomes?", "back": "Phase A (Architecture Vision) and Phase B (Business Architecture)."}, {"front": "In DoDAF architecture terms, what diagram type represents Purview's high-level operational concept?", "back": "OV-1 (High-Level Operational Concept Graphic)."}, {"front": "What is the primary risk of utilizing non-managed consumer AI applications like ChatGPT or DeepSeek in an enterprise without DSPM?", "back": "Sensitive enterprise data exfiltration through user prompts and unencrypted external data processing."}, {"front": "What specific ItemClass prefix can be used in Purview eDiscovery searches to isolate Copilot Studio interaction messages?", "back": "`IPM.SkypeTeams.Message.Copilot.Studio.*`"}, {"front": "Which Purview component provides one-click policy recommendations to fortify AI data security right from its overview portal?", "back": "Data Security Posture Management (DSPM) for AI."}, {"front": "What AWS permission policy attachment provides the minimum required read access for Purview to scan an individual S3 bucket?", "back": "An IAM policy granting `s3:GetBucketLocation`, `s3:GetBucketPublicAccessBlock`, `s3:GetObject`, and `s3:ListBucket` scoped to the bucket ARN."}, {"front": "Why must the AWS IAM Role ARN used by Purview include a unique External ID in its trust policy?", "back": "To prevent the confused deputy problem during cross-account role assumption."}]}};

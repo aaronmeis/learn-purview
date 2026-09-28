@@ -17,11 +17,11 @@ Every claim traces to a 36-row source ledger restricted to Microsoft Learn, Micr
 
   The page also has a day streak, goal rings (challenge, one Short, five reviews), a 7-day chart, and a copyable score line.
 - **Learn:** the 8-block curriculum (about 7 hours) with the scope mind map, the architecture views (with diagrams and the government cloud matrix), Shorts, the deck and deep-dive cut (each slide with its narration and question card), and the library.
-- **Practice:** flashcards (39 terms), the 30-question design-review quiz, 20 failure modes, and prompts.
+- **Practice:** flashcards (99 glossary terms plus two NotebookLM decks of 58 and 60 cards), the 42-question design-review quiz, 21 failure modes, and prompts.
 - **Reference:** decision rules, progress map, glossary, EA mapping, source ledger, overview.
 - **Shorts:** watched tracking, a "check yourself" panel of linked questions and terms, keyboard shortcuts (J/K/Q), and a swipeable vertical feed on phones.
 - **Everywhere:** Ctrl+K search (views, terms, failure modes, notes, sources), mobile tab bar, offline support, progress export/import.
-- `library/`: 41 HTML pages rendered from the Obsidian pack and the NotebookLM exports. These include the hub, mission, scope interview, day plan, views, blocks, glossary, cheatsheet, quiz bank, source ledger, prompt notes, and reports. `[S#]` citations link to the source, and Mermaid diagrams render in the browser.
+- `library/`: 47 HTML pages rendered from the Obsidian pack and the NotebookLM exports. These include the hub, mission, scope interview, day plan, views, blocks, glossary, cheatsheet, quiz bank, source ledger, prompt notes, and reports. `[S#]` citations link to the source, and Mermaid diagrams render in the browser.
 
 ## Layout
 
@@ -46,6 +46,8 @@ The Obsidian pack at `Learning/tech-deep-dive/microsoft-purview/` is the source 
 ```
 python scripts/stage_assets.py          # media, posters, durations, icons, shorts catalog (--force to overwrite)
 python scripts/build_library.py         # re-render library/*.html and library/manifest.js
+node scripts/glossary_gap.mjs           # terms the site uses but the glossary does not define
+python scripts/nlm_to_markdown.py table|quiz|cards <in> <out.md> "<title>" --review review.json   # NotebookLM exports to vault notes
 ```
 
 Videos play from YouTube (unlisted) when an ID is set in the `YOUTUBE` map at the top of `scripts/stage_assets.py`. If YouTube can't play a video (private, removed, or blocked), the local MP4 in `media/` plays instead. Re-run `stage_assets.py` after editing the map.

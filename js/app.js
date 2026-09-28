@@ -174,9 +174,15 @@ function renderMap(){
 let fcQueue=[],fcIdx=0,fcShown=false;
 const BOX_DELAY=[0,0,12e5,864e5,2592e5,6048e5,18144e5];
 function fcState(t){return LS.get(KEY+"fc:"+t,{box:1,due:0});}
+function deckCards(deck){
+  if(deck==="essential") return DATA.glossary.filter(g=>g.essential);
+  if(deck==="full") return DATA.glossary;
+  const d=(DATA.nblmDecks||{})[deck.replace("nlm-","")];
+  return d?d.cards.map(c=>({term:c.front,definition:c.back,category:d.title,rung:"",nblm:true})):DATA.glossary;
+}
 function buildFcQueue(){
   const deck=LS.get(KEY+"fcDeck","essential"), now=Date.now();
-  const src=deck==="essential"?DATA.glossary.filter(g=>g.essential):DATA.glossary;
+  const src=deckCards(deck);
   const all=src.map(g=>({...g,st:fcState(g.term)}));
   const duec=all.filter(g=>g.st.due<=now).sort((a,b)=>a.st.box-b.st.box||a.st.due-b.st.due);
   fcQueue=duec.length?duec:all; fcIdx=0; fcShown=false;
@@ -184,7 +190,7 @@ function buildFcQueue(){
 function renderFlash(){
   const el=$("#v-flash");
   const deck=LS.get(KEY+"fcDeck","essential");
-  const src=deck==="essential"?DATA.glossary.filter(g=>g.essential):DATA.glossary;
+  const src=deckCards(deck);
   if(!fcQueue.length) buildFcQueue();
   const learned=src.filter(g=>fcState(g.term).box>=4).length;
   let h=`<h2 class="vh">Flashcards</h2>
@@ -192,6 +198,7 @@ function renderFlash(){
   <div class="deck-selector">
     <button class="deck-btn ${deck==="essential"?"active":""}" data-fdeck="essential">Quick essentials (${DATA.glossary.filter(g=>g.essential).length} cards)</button>
     <button class="deck-btn ${deck==="full"?"active":""}" data-fdeck="full">Full mastery (${DATA.glossary.length} cards)</button>
+    ${Object.entries(DATA.nblmDecks||{}).map(([k,d])=>`<button class="deck-btn ${deck==="nlm-"+k?"active":""}" data-fdeck="nlm-${k}">${esc(d.title)} (${d.cards.length})</button>`).join("")}
   </div>`;
   const bindDeck=()=>$$(".deck-btn",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"fcDeck",b.dataset.fdeck);buildFcQueue();renderFlash();});
   const reset=()=>{src.forEach(g=>LS.del(KEY+"fc:"+g.term));buildFcQueue();renderFlash();renderDashboard();};
@@ -201,7 +208,7 @@ function renderFlash(){
     bindDeck(); $("#fcRestart").onclick=()=>{buildFcQueue();renderFlash();}; $("#fcReset").onclick=reset; return;
   }
   const c=fcQueue[fcIdx];
-  h+=`<div class="fc-meta"><span>Card ${fcIdx+1} / ${fcQueue.length} · box ${fcState(c.term).box} · rung ${c.rung}</span><span>${learned} / ${src.length} in long-term memory</span></div>
+  h+=`<div class="fc-meta"><span>Card ${fcIdx+1} / ${fcQueue.length} · box ${fcState(c.term).box}${c.rung?" · rung "+c.rung:""}</span><span>${learned} / ${src.length} in long-term memory</span></div>
     <div class="fc-stage" id="fcStage" title="Click or press Space to flip">
       <div class="fc-cat">${esc(c.category)} ${c.essential?'<span class="pill r100">Essential</span>':''}</div>
       <div class="fc-term">${esc(c.term)}</div>
@@ -306,14 +313,14 @@ function renderGlossary(){
   const q=(LS.get(KEY+"gq","")||"").toLowerCase(), cat=LS.get(KEY+"gcat","all");
   const cats=[...new Set(DATA.glossary.map(g=>g.category))];
   let h=`<h2 class="vh">Glossary <span style="font-size:1rem;color:var(--text-dim)">${DATA.glossary.length} terms</span></h2>
-  <p class="lead">Feeds the flashcard deck. Grouped by the view where the term is earned. ${lib("glossary","Glossary note")}</p>
+  <p class="lead">Feeds the flashcard decks. The first four groups follow the view where a term is earned; the rest came from the 2026-09-28 glossary gap pass (NotebookLM data table, checked against the source ledger). ${lib("glossary","Glossary note")} · ${lib("nblm-gap-table","Gap pass data table")}</p>
   <input class="search" id="gSearch" placeholder="filter terms…" value="${esc(q)}">
   <div class="gfilters"><button class="b ${cat==="all"?"on":""}" data-gc="all">All (${DATA.glossary.length})</button>${cats.map(c=>`<button class="b ${cat===c?"on":""}" data-gc="${esc(c)}">${esc(c)} (${DATA.glossary.filter(g=>g.category===c).length})</button>`).join("")}</div>`;
   cats.filter(c=>cat==="all"||c===cat).forEach(c=>{
     const items=DATA.glossary.filter(g=>g.category===c&&(!q||(g.term+g.definition+(g.see_also||"")).toLowerCase().includes(q)));
     if(!items.length)return;
     h+=`<h3 style="margin:1.1rem 0 .5rem;font-size:.95rem">${esc(c)} <span style="color:var(--text-dim);font-weight:400">· ${items.length}</span></h3>`;
-    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''}</h4><p>${ec(g.definition)}</p>${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
+    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''} ${g.source==="nblm-gap"?'<span class="pill" title="Drafted by a NotebookLM data table, checked against the source ledger">gap pass</span>':''}</h4><p>${ec(g.definition)}</p>${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
   });
   el.innerHTML=h;
   const s=$("#gSearch");

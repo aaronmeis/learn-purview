@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary gap prompts | Learn Purview</title>
+<meta name="description" content="NotebookLM prompts for the glossary gap pass: terms the learn-purview site uses but the glossary did not define.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Prompts</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Prompts</div>
+  <h1 class="doctitle">Glossary gap prompts</h1>
+  <p class="lead">NotebookLM prompts for the glossary gap pass: terms the learn-purview site uses but the glossary did not define.</p>
+  
+  <article><h1>Glossary gap prompts — Microsoft Purview</h1>
+<p>Notebook: <code>tdd-microsoft-purview</code> (<code>d00ca45f-85c4-4f11-8793-f48374114e95</code>). Run on 2026-09-28 after a scan of the learn-purview site data (<code>js/data.js</code>) against the 39-term glossary. Scan script: <code>C:\projects\claude\learn-purview\scripts\glossary_gap.mjs</code>.</p>
+<h2>Terms in the gap (58)</h2>
+<p>Neighbor and platform: Microsoft Sentinel · Microsoft Defender for Endpoint · Microsoft Entra ID · Copilot Studio · Microsoft Foundry · Microsoft 365 Copilot · SharePoint Online · OneTrust · OneLake · Fabric mirroring</p>
+<p>Government cloud and compliance: Azure Government · FedRAMP P-ATO · Agency ATO · Security Assessment Report (SAR) · DoD Impact Level 4 and 5 · CJIS · IRS 1075 · DFARS 7012 · NIST SP 800-171 · ITAR · Commercial baseline</p>
+<p>Runtime, identity, network: Azure integration runtime · AWS integration runtime · Kubernetes self-hosted integration runtime · Private endpoint · Azure Key Vault · Role-based access control (RBAC) · Conditional Access · AWS IAM role · AWS KMS (kms:Decrypt) · AWS Service Control Policy (SCP) · SMB · NFS · UNC path</p>
+<p>Purview features: Lineage · Qualified name · Label policy · Auto-labeling · Trainable classifier · Named-entity SIT · Retention policy · Data Lifecycle Management · Legal hold · Review set · Activity explorer · Data explorer · Compliance score · Improvement action · Adaptive Protection · Purview browser extension · Browse-to-URL policy · Know Your Data policy · ItemClass · Oversharing · Grounding data</p>
+<p>Architecture frameworks: TOGAF ADM · DoDAF · OV-1 · SV-1</p>
+<h2>1. Data table (<code>nlm data-table create</code>)</h2>
+<pre><code class="language-text">Using only the sources, build a glossary table for an enterprise architect studying Microsoft Purview. One row per term below. Columns: Term | Category (Neighbor and platform, Government cloud and compliance, Runtime identity and network, Purview feature, Architecture framework) | Definition (one or two plain sentences, as the sources describe it) | Where it shows up in the Purview architecture (conceptual, logical, physical, or integration and AI view, and the component it touches) | Source (title of the supporting source). If the sources do not define a term, write NOT IN SOURCES in the Definition column and leave Source blank. Do not fill gaps from outside knowledge. Terms: Microsoft Sentinel; Microsoft Defender for Endpoint; Microsoft Entra ID; Copilot Studio; Microsoft Foundry; Microsoft 365 Copilot; SharePoint Online; OneTrust; OneLake; Fabric mirroring; Azure Government; FedRAMP P-ATO; Agency ATO; Security Assessment Report (SAR); DoD Impact Level 4 and 5; CJIS; IRS 1075; DFARS 7012; NIST SP 800-171; ITAR; Commercial baseline; Azure integration runtime; AWS integration runtime; Kubernetes self-hosted integration runtime; Private endpoint; Azure Key Vault; Role-based access control; Conditional Access; AWS IAM role; AWS KMS decrypt; AWS Service Control Policy; SMB; NFS; UNC path; Lineage; Qualified name; Label policy; Auto-labeling; Trainable classifier; Named-entity SIT; Retention policy; Data Lifecycle Management; Legal hold; Review set; Activity explorer; Data explorer; Compliance score; Improvement action; Adaptive Protection; Purview browser extension; Browse-to-URL policy; Know Your Data policy; ItemClass; Oversharing; Grounding data; TOGAF ADM; DoDAF; OV-1; SV-1.
+</code></pre>
+<h2>2. Quiz (<code>nlm quiz create --count 15 --difficulty 3</code>)</h2>
+<pre><code class="language-text">Architect-level questions on the parts of Microsoft Purview that sit at its edges: government cloud differences and accreditation terms (FedRAMP P-ATO versus High equivalency, Impact Levels, Azure Government Data Map exclusions), integration runtimes and connector authentication (AWS IAM role with external ID, KMS decrypt, SCPs, Snowflake key pair, Salesforce connected app, SMB and UNC paths), Purview features around evidence and retention (legal hold, review set, activity explorer, retention for AI interactions, ItemClass), and AI protections (Adaptive Protection, browser extension, browse-to-URL policies, Know Your Data policy, oversharing and grounding data). Prefer scenario questions an architect would face in a design review. Use only the sources.
+</code></pre>
+<h2>3. Flashcards (<code>nlm flashcards create --difficulty medium</code>)</h2>
+<pre><code class="language-text">One card per term an architect needs at the edges of Microsoft Purview: the neighbor systems (Sentinel, Defender for Endpoint, Entra ID, Copilot Studio, Foundry), government cloud and compliance terms (Azure Government, P-ATO, SAR, Impact Levels, CJIS, IRS 1075, DFARS 7012, NIST SP 800-171, ITAR), runtimes and network (Azure IR, AWS IR, Kubernetes SHIR, private endpoints, Key Vault, IAM role, KMS, SCP, SMB, NFS, UNC), and Purview features (lineage, label policy, auto-labeling, trainable classifier, retention, legal hold, review set, activity explorer, Adaptive Protection, browse-to-URL policy, Know Your Data policy, ItemClass). Front: the term or a short scenario. Back: the answer in one or two sentences, from the sources only.
+</code></pre>
+<h2>Review rule</h2>
+<p>NotebookLM output is secondary. Every definition that reaches the site is checked against the source ledger. Rows marked NOT IN SOURCES stay out of the site glossary unless a ledger row covers the term.</p></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\prompts\glossary-gap-prompts.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="prompts-decision-packet.html">&larr; Previous</a><a href="prompts-deep-dive-extra.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>
