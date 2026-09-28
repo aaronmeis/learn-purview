@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz bank — Microsoft Purview | Learn Purview</title>
+<meta name="description" content="Retrieval items for blocks 6-8.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Reference</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Reference</div>
+  <h1 class="doctitle">Quiz bank — Microsoft Purview</h1>
+  <p class="lead">Retrieval items for blocks 6-8.</p>
+  
+  <article>
+<h2>Conceptual / logical</h2>
+<ol>
+<li>Which logical component realizes capability C1, and what physical service realizes it?</li>
+<li>Name three external systems and the mechanism each uses.</li>
+<li>Which control stops an AI feature from grounding on data the user cannot open?</li>
+<li>Name the five capabilities Microsoft states as Purview's outcomes, and one actor for each.</li>
+<li>What's the difference between "Know your data" (C1) and "Govern data" (C3) — which components serve each?</li>
+<li>In the ERD, what does SENSITIVITY_LABEL's N—N relationship to CONTENT_ITEM tell you about how labels are modeled?</li>
+<li>Which entity emits AUDIT_RECORD, and what's the cardinality of that relationship? Why does that matter operationally?</li>
+<li>Trace the logical flow from a scanned data source to an investigation case — name every intermediate stage.</li>
+</ol>
+<h2>Physical / deployment</h2>
+<ol start="9">
+<li>Name the four "clouds" in the physical deployment topology and one thing that runs in each.</li>
+<li>Where does the Purview account itself physically live — M365 tenant or Azure subscription? What does Microsoft recommend around it?</li>
+<li>What OS, sizing, and database does the information protection scanner require?</li>
+<li>Which two data sources are explicitly excluded from the Data Map in Azure Government? Which cloud's Power BI is the exception?</li>
+<li>True or false, and cite the source: GCC and GCC High have conflicting FedRAMP levels documented by Microsoft.</li>
+<li>What licensing trap catches people scanning on-prem file shares with DLP?</li>
+<li>Which integration runtime would you choose to scan Amazon S3, and who operates it?</li>
+</ol>
+<h2>Integration and third-party</h2>
+<ol start="16">
+<li>What auth mechanism does the Amazon S3 connector use, and what's the one thing it explicitly does NOT return to Purview?</li>
+<li>Why is Snowflake migrating away from basic auth, and what should replace it? Name the one operational gotcha with how you store the replacement credential.</li>
+<li>What's the key difference between what the Snowflake connector classifies vs. what the Salesforce connector classifies?</li>
+<li>How does OneTrust data reach Purview DSPM — directly, or through an intermediary? Name the intermediary and its deployment status.</li>
+<li>Which external system integration is marked UNVERIFIED for gov-cloud support, and why?</li>
+<li>List two AWS-side failure modes for S3 scanning and their fixes.</li>
+</ol>
+<h2>AI elements</h2>
+<ol start="22">
+<li>What does DSPM for AI actually do that the semantic index alone doesn't?</li>
+<li>Where does a Copilot Studio agent's actual chat transcript get stored, and which tool retrieves it for review?</li>
+<li>What's the difference between an audit <em>event</em> and a captured <em>prompt/response</em> for Fabric or Security Copilot? What turns the latter on?</li>
+<li>Name two AI agent platforms explicitly NOT supported by Purview's agent protections.</li>
+<li>In the AI data path diagram, what happens between "grounding data" and "response" — name the control and describe what it checks.</li>
+<li>How does eDiscovery search AI interactions specifically? Give the ItemClass pattern.</li>
+</ol>
+<h2>Framework / synthesis</h2>
+<ol start="28">
+<li>Place the Data Map in a TOGAF ADM phase and a DoDAF viewpoint. Justify both.</li>
+<li>Name one design decision that only makes sense once you've seen the physical view (i.e., invisible at the logical altitude).</li>
+<li>If you had to redesign this system for a customer that also has an on-prem SQL Server data warehouse, which physical component would you add, and where does it run?</li>
+</ol></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\reference\quiz-bank.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="cheatsheet.html">&larr; Previous</a><a href="source-ledger.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

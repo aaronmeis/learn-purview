@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 7: Failure modes and security | Learn Purview</title>
+<meta name="description" content="Block 7 of the Microsoft Purview deep dive - failure modes and security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Day blocks</div>
+  <h1 class="doctitle">Block 7: Failure modes and security</h1>
+  <p class="lead">Block 7 of the Microsoft Purview deep dive - failure modes and security.</p>
+  
+  <article>
+<p><strong>Time:</strong> 45 minutes · <strong>Goal:</strong> What breaks, what leaks, and what the controls actually stop</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Context and boundary (block 1)</li>
+<li>Assume no prior knowledge: what Purview is, and what it is not (vs Defender, Entra, Sentinel)</li>
+<li>Two halves: Microsoft 365 data security and compliance · data governance (Data Map, Data Catalog)</li>
+<li>Capabilities: know your data · protect it · prevent loss · manage insider risk · respond and investigate · govern data estate · manage compliance posture · secure AI use</li>
+<li>Actors: compliance admin, security analyst, data owner and steward, investigator, end user, auditor</li>
+<li>Information Protection: sensitivity labels and label policies</li>
+<li>Insider Risk Management: indicators, policies, alerts and cases</li>
+<li>Data Map and Data Catalog: sources, scans, assets, lineage, glossary</li>
+<li>Portals, services, agents, and scanners that realize each logical component</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/purview/purview">Learn about Microsoft Purview (solution families)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-data-sources">Data sources that connect to Purview Data Map (capability matrix)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose">Choose the right integration runtime (IR matrix per source)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability">Feature availability for Microsoft Purview (Azure Government exclusions)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments">Plan for Microsoft Purview - GCC deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments">Plan for Microsoft Purview - GCC High deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments">Plan for Microsoft Purview - DoD deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability">Cloud feature availability for US Government customers</a></li>
+</ul>
+<h2>Actions</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> List the top failure modes per view (conceptual, logical, physical, integration).</li>
+<li class="task"><input type="checkbox" disabled> For each, name the tell and the control that should catch it.</li>
+<li class="task"><input type="checkbox" disabled> Include AI oversharing and third-party connector failure.</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>What is the most likely failure in a real Microsoft Purview deployment, and what is its first visible tell?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Leading candidate: <strong>S3 scanning unavailable</strong> in Azure Government Data Map; mitigate via Scan S3 from a commercial Purview account, or accept the gap; design decision for block 8.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Failure-mode table covers all four views.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\blocks\07-failure-modes-and-security.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="block-06-hands-on-lab.html">&larr; Previous</a><a href="block-08-design-review.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

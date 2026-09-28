@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tailored prompts — Microsoft Purview | Learn Purview</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Prompts</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Prompts</div>
+  <h1 class="doctitle">Tailored prompts — Microsoft Purview</h1>
+  
+  
+  <article>
+<p>Read by <code>w8-prepare</code> (T1-T4). Edit freely; keep the <code>### Tn</code> headings.</p>
+<h3>T1</h3>
+<p>Using only the sources, write the CONCEPTUAL architecture view of Microsoft Purview. Cover the problem it solves, the actors and their goals, the capabilities it provides, and the key concepts and how they relate. Do not name products, SKUs, services, or regions; this is the capability altitude. End with a table mapping each capability to the source that supports it. Mark where the sources are silent.</p>
+<h3>T2</h3>
+<p>Using only the sources, write the LOGICAL architecture view of Microsoft Purview. List the logical components with their responsibilities, inputs, and outputs; the logical data entities with key attributes and relationships; and the main flows between components (trigger, payload, sync or async). Stay vendor-neutral where the sources allow. Mark silence.</p>
+<h3>T3</h3>
+<p>Using only the sources, write the PHYSICAL architecture view of Microsoft Purview. Map each logical component to the named service or feature that realizes it, where it runs, the agents or connectors deployed on-premises, licensing tiers, data stores and residency, and the differences across commercial, GCC, GCC High, and DoD or government-secret clouds. Mark silence, especially on government-cloud availability.</p>
+<h3>T4</h3>
+<p>Using only the sources, describe the AI elements of Microsoft Purview: each AI or copilot feature, the data it reads and writes, the grounding path, the controls that govern it (labels, DLP, access, audit), and how AI interactions are logged and retained. Then list the integration surface: APIs, SDKs, connector frameworks, and identity. Mark silence.</p></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\prompts\tailored-prompts.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="prompt-library.html">&larr; Previous</a><a href="prompts-notebooklm-set.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

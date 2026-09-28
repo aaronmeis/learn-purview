@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 2: Conceptual view | Learn Purview</title>
+<meta name="description" content="Block 2 of the Microsoft Purview deep dive - conceptual view.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Day blocks</div>
+  <h1 class="doctitle">Block 2: Conceptual view</h1>
+  <p class="lead">Block 2 of the Microsoft Purview deep dive - conceptual view.</p>
+  
+  <article>
+<p><strong>Time:</strong> 60 minutes · <strong>Goal:</strong> Capabilities, actors, and value, with no products named</p>
+<p><strong>Work in:</strong> <a href="view-01-conceptual.html">Conceptual View</a></p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Assume no prior knowledge: what Purview is, and what it is not (vs Defender, Entra, Sentinel)</li>
+<li>Conceptual view (block 2)</li>
+<li>Logical view (block 3)</li>
+<li>eDiscovery: cases, holds, search, review, export</li>
+<li>Physical view (block 4)</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/purview/purview">Learn about Microsoft Purview (solution families)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-data-sources">Data sources that connect to Purview Data Map (capability matrix)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose">Choose the right integration runtime (IR matrix per source)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability">Feature availability for Microsoft Purview (Azure Government exclusions)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments">Plan for Microsoft Purview - GCC deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments">Plan for Microsoft Purview - GCC High deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments">Plan for Microsoft Purview - DoD deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability">Cloud feature availability for US Government customers</a></li>
+</ul>
+<h2>Actions</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Fill the actors and capabilities tables in the conceptual view.</li>
+<li class="task"><input type="checkbox" disabled> Draw the OV-1 style picture without naming a single product.</li>
+<li class="task"><input type="checkbox" disabled> Test: could a non-technical sponsor agree with every capability line?</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Which capability of Microsoft Purview would a sponsor miss first if it vanished, and why?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Leading candidate: <strong>Know your data</strong> — Visibility into data across the organization. Table order in <a href="view-01-conceptual.html">Conceptual View</a> is research-derived, not a survey result — confirm against your own sponsor conversation.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Conceptual view complete with no product names.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\blocks\02-conceptual-view.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="block-01-context-and-scope.html">&larr; Previous</a><a href="block-03-logical-view.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

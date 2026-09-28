@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 6: Hands-on lab | Learn Purview</title>
+<meta name="description" content="Block 6 of the Microsoft Purview deep dive - hands-on lab.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Day blocks</div>
+  <h1 class="doctitle">Block 6: Hands-on lab</h1>
+  <p class="lead">Block 6 of the Microsoft Purview deep dive - hands-on lab.</p>
+  
+  <article>
+<p><strong>Time:</strong> 60 minutes · <strong>Goal:</strong> Configure or trace one real end-to-end flow</p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Context and boundary (block 1)</li>
+<li>Conceptual view (block 2)</li>
+<li>Capabilities: know your data · protect it · prevent loss · manage insider risk · respond and investigate · govern data estate · manage compliance posture · secure AI use</li>
+<li>Classification: sensitive information types, trainable classifiers</li>
+<li>Information Protection: sensitivity labels and label policies</li>
+<li>Data Loss Prevention: policies, locations, actions</li>
+<li>Audit: unified audit log, retention of audit records</li>
+<li>Compliance Manager: assessments, improvement actions, score</li>
+<li>Portals, services, agents, and scanners that realize each logical component</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/purview/purview">Learn about Microsoft Purview (solution families)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-data-sources">Data sources that connect to Purview Data Map (capability matrix)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose">Choose the right integration runtime (IR matrix per source)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability">Feature availability for Microsoft Purview (Azure Government exclusions)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments">Plan for Microsoft Purview - GCC deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments">Plan for Microsoft Purview - GCC High deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments">Plan for Microsoft Purview - DoD deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability">Cloud feature availability for US Government customers</a></li>
+</ul>
+<h2>Actions</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Pick one end-to-end flow and configure it or trace it in a tenant, trial, or docs walkthrough.</li>
+<li class="task"><input type="checkbox" disabled> Capture screenshots or config snippets as evidence under assets/.</li>
+<li class="task"><input type="checkbox" disabled> Note every place the docs and the product disagree.</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>What did the lab show that the documentation did not?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Expected before running it: One end-to-end flow, chosen after the views are drafted (candidate: label → DLP → audit trail on SharePoint content). This is the one answer research alone can't give — record what actually happened here after the lab.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> One flow configured or traced with evidence saved.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\blocks\06-hands-on-lab.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="block-05-integration-and-ai.html">&larr; Previous</a><a href="block-07-failure-modes-and-security.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

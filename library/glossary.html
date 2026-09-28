@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOSSARY — Microsoft Purview | Learn Purview</title>
+<meta name="description" content="Terms earned during the day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Reference</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Reference</div>
+  <h1 class="doctitle">GLOSSARY — Microsoft Purview</h1>
+  <p class="lead">Terms earned during the day.</p>
+  
+  <article>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+<th>View</th>
+<th>Block</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sensitivity label</td>
+<td>A persistent marking on content that can carry protection (encryption, watermark, access restriction) and is published by a label policy</td>
+<td>Conceptual, Logical</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>Sensitive information type (SIT)</td>
+<td>A pattern or classifier used to detect a specific category of sensitive data in content or assets</td>
+<td>Conceptual, Logical</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>Classification</td>
+<td>The act of detecting SITs with classifiers against content or assets</td>
+<td>Conceptual</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Data Map</td>
+<td>The component that registers data sources, scans them, extracts metadata, classifies, and builds lineage</td>
+<td>Logical, Physical</td>
+<td>3, 4</td>
+</tr>
+<tr>
+<td>Unified Catalog</td>
+<td>The searchable, curated catalog built from Data Map assets</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Data source</td>
+<td>A registered connection (type, endpoint, collection) that the Data Map scans; contains assets</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Asset</td>
+<td>A cataloged object (qualified name, schema, classifications, lineage) belonging to a data source</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Policy</td>
+<td>A rule (DLP, retention, insider risk, or collection type) that targets locations and uses SITs/labels to decide an action</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>DSPM (Data Security Posture Management)</td>
+<td>The solution that assesses data-security risk and recommends/applies policies across the estate</td>
+<td>Conceptual, Logical</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>DSPM for AI</td>
+<td>DSPM's front door for AI: discovers AI use, recommends one-click policies, and runs a weekly oversharing risk assessment (e.g. top 100 SharePoint sites by usage)</td>
+<td>Logical, Integration/AI</td>
+<td>3, 5</td>
+</tr>
+<tr>
+<td>Insider Risk Management (IRM)</td>
+<td>Detects risky user activity from behavioral/activity signals, including AI interactions, and raises alerts/cases</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Compliance Manager</td>
+<td>Assesses organizational posture against named regulations and produces a compliance score</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Audit (unified audit log)</td>
+<td>Microsoft 365's system of record for user and admin activity, including AI interactions</td>
+<td>Logical, Physical</td>
+<td>3, 4</td>
+</tr>
+<tr>
+<td>eDiscovery</td>
+<td>Search, hold, review, and export content (including AI interactions) as legal/investigative evidence</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>AI interaction</td>
+<td>A prompt-and-response pair between a user or agent and an AI app; produces an audit record</td>
+<td>Logical, Integration/AI</td>
+<td>3, 5</td>
+</tr>
+<tr>
+<td>Case</td>
+<td>A container (eDiscovery or IRM type) that collects holds, review sets, and interactions</td>
+<td>Logical</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Integration runtime (IR)</td>
+<td>The compute that performs a Data Map scan; comes in four flavors: Azure IR (Microsoft-managed, public endpoints), AWS IR (Microsoft-hosted, for S3/RDS), Managed VNet IR (private endpoints), and self-hosted IR (SHIR, customer VM or Kubernetes)</td>
+<td>Logical, Physical</td>
+<td>3, 4</td>
+</tr>
+<tr>
+<td>Self-hosted integration runtime (SHIR)</td>
+<td>Customer-run compute (JDK 11) that scans sources Purview's managed runtimes can't reach directly, e.g. on-prem databases</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Managed VNet IR</td>
+<td>An Azure-managed integration runtime that scans through private endpoints instead of public ones</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Information protection scanner</td>
+<td>A Windows service (config in SQL Server) that discovers, classifies, labels, and protects content on on-prem file shares and SharePoint Server, and enforces on-prem DLP</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Data management landing zone</td>
+<td>Microsoft's recommended Azure Cloud Adoption Framework pattern: one dedicated Azure subscription per Entra tenant hosting the Purview account</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Collection (Purview)</td>
+<td>A container used to organize sources/assets and scope role-based access within a Purview account</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Key pair authentication</td>
+<td>RSA (PKCS#8) credential pair used for Snowflake connections, replacing basic auth (which Snowflake is retiring)</td>
+<td>Physical, Integration/AI</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>Role ARN / external ID</td>
+<td>The AWS IAM mechanism Purview's AWS-hosted IR assumes to scan S3 — a cross-account role trust with an external ID, not a stored access key</td>
+<td>Physical, Integration/AI</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>Connected app (Salesforce)</td>
+<td>The OAuth mechanism Purview uses to authenticate to Salesforce's REST API for metadata scanning</td>
+<td>Physical, Integration/AI</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>Collection policy (AI)</td>
+<td>A Purview policy that captures full prompt/response text for Fabric Copilot, Security Copilot, and non-Copilot AI apps; without it, only audit events (no text) are captured</td>
+<td>Integration/AI</td>
+<td>5</td>
+</tr>
+<tr>
+<td>CopilotInteraction</td>
+<td>The specific unified-audit-log record type emitted for a Copilot prompt/response event</td>
+<td>Logical, Integration/AI</td>
+<td>3, 5</td>
+</tr>
+<tr>
+<td>Agent (Purview context)</td>
+<td>A non-human actor (Copilot Studio, Foundry, etc.) that reads/writes data on a user's behalf and inherits its parent app's protections rather than getting its own</td>
+<td>Conceptual, Integration/AI</td>
+<td>2, 5</td>
+</tr>
+<tr>
+<td>Microsoft Entra Agent ID</td>
+<td>The directory entry type that gives non-human AI agents (from Copilot Studio, Foundry) an identity Purview and other tools can govern</td>
+<td>Integration/AI</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Multicloud scanning connector</td>
+<td>The Data Map connector family (S3, Snowflake, Salesforce, etc.) that returns metadata and classification only — never source content — back to Purview</td>
+<td>Logical, Physical</td>
+<td>3, 4</td>
+</tr>
+<tr>
+<td>GCC / GCC High / DoD</td>
+<td>Microsoft's three US-government Microsoft 365 cloud tiers, each with its own feature-parity gaps versus the commercial baseline; DoD tenants pair with Entra ID in Azure Government</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>FedRAMP Equivalency</td>
+<td>Microsoft's practice of demonstrating a higher FedRAMP Impact Level (e.g. High) via completed audit evidence (SARs) even where the formal Agency ATO instrument is a lower level (e.g. Moderate) — the resolution to the GCC "Moderate vs. High" apparent conflict</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Private Link (Azure)</td>
+<td>The network-isolation mechanism used to keep the Purview account off the public internet</td>
+<td>Physical</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Data Security Investigations</td>
+<td>A newer Purview solution that uses generative AI to help security teams analyze and respond to data breaches and risky-insider incidents</td>
+<td>Logical, Integration/AI</td>
+<td>3, 5</td>
+</tr>
+</tbody>
+</table></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\GLOSSARY.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><span></span><a href="cheatsheet.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

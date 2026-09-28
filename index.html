@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Purview</title>
+<meta name="description" content="Architect study console for Microsoft Purview: conceptual, logical, and physical views, integrations, the AI data path, and TOGAF/DoDAF mapping, grounded in Microsoft sources.">
+<link rel="icon" href="assets/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Default: GitHub Primer Dark */
+  :root, [data-theme="github-dark"] {
+    --bg-color:#0d1117; --sidebar-bg:#161b22; --card-bg:#21262d; --card-bg2:#161b22;
+    --text-primary:#f0f6fc; --text-secondary:#8b949e; --text-dim:#6e7681;
+    --accent-color:#58a6ff; --accent-glow:rgba(88,166,255,0.18); --hover-bg:rgba(88,166,255,0.1);
+    --border-color:#30363d;
+    --good:#3fb950; --good-bg:rgba(63,185,80,0.1);
+    --warn:#d29922; --warn-bg:rgba(210,153,34,0.1);
+    --bad:#f85149; --bad-bg:rgba(248,81,73,0.1);
+    --r100:#3fb950; --r200:#58a6ff; --r300:#bc8cff;
+    --transition-speed:0.25s;
+  }
+
+  /* GitHub Primer Light */
+  [data-theme="github-light"] {
+    --bg-color:#f6f8fa; --sidebar-bg:#ffffff; --card-bg:#ffffff; --card-bg2:#f6f8fa;
+    --text-primary:#1f2328; --text-secondary:#57606a; --text-dim:#8c959f;
+    --accent-color:#0969da; --accent-glow:rgba(9,105,218,0.12); --hover-bg:rgba(9,105,218,0.08);
+    --border-color:#d0d7de;
+    --good:#1a7f37; --good-bg:rgba(26,127,55,0.1);
+    --warn:#9a6700; --warn-bg:rgba(154,103,0,0.1);
+    --bad:#cf222e; --bad-bg:rgba(207,34,46,0.1);
+    --r100:#1a7f37; --r200:#0969da; --r300:#8250df;
+    --transition-speed:0.25s;
+  }
+
+  /* Vercel Geist Dark */
+  [data-theme="geist-dark"] {
+    --bg-color:#000000; --sidebar-bg:#0a0a0a; --card-bg:#111111; --card-bg2:#171717;
+    --text-primary:#ffffff; --text-secondary:#a1a1aa; --text-dim:#71717a;
+    --accent-color:#0070f3; --accent-glow:rgba(0,112,243,0.2); --hover-bg:rgba(0,112,243,0.1);
+    --border-color:#27272a;
+    --good:#22c55e; --good-bg:rgba(34,197,94,0.1);
+    --warn:#f59e0b; --warn-bg:rgba(245,158,11,0.1);
+    --bad:#ef4444; --bad-bg:rgba(239,68,68,0.1);
+    --r100:#22c55e; --r200:#0070f3; --r300:#a855f7;
+    --transition-speed:0.25s;
+  }
+
+  /* Vercel Geist Light */
+  [data-theme="geist-light"] {
+    --bg-color:#ffffff; --sidebar-bg:#fafafa; --card-bg:#ffffff; --card-bg2:#f4f4f5;
+    --text-primary:#09090b; --text-secondary:#71717a; --text-dim:#a1a1aa;
+    --accent-color:#0070f3; --accent-glow:rgba(0,112,243,0.1); --hover-bg:rgba(0,112,243,0.06);
+    --border-color:#e4e4e7;
+    --good:#16a34a; --good-bg:rgba(22,163,74,0.08);
+    --warn:#d97706; --warn-bg:rgba(217,119,6,0.08);
+    --bad:#dc2626; --bad-bg:rgba(220,38,38,0.08);
+    --r100:#16a34a; --r200:#0070f3; --r300:#9333ea;
+    --transition-speed:0.25s;
+  }
+
+  /* Catppuccin Mocha (Dark) */
+  [data-theme="catppuccin-dark"] {
+    --bg-color:#1e1e2e; --sidebar-bg:#181825; --card-bg:#313244; --card-bg2:#181825;
+    --text-primary:#cdd6f4; --text-secondary:#a6adc8; --text-dim:#7f849c;
+    --accent-color:#89b4fa; --accent-glow:rgba(137,180,250,0.2); --hover-bg:rgba(137,180,250,0.1);
+    --border-color:#45475a;
+    --good:#a6e3a1; --good-bg:rgba(166,227,161,0.1);
+    --warn:#f9e2af; --warn-bg:rgba(249,226,175,0.1);
+    --bad:#f38ba8; --bad-bg:rgba(243,139,168,0.1);
+    --r100:#a6e3a1; --r200:#89b4fa; --r300:#cba6f7;
+    --transition-speed:0.25s;
+  }
+
+  /* Catppuccin Latte (Light) */
+  [data-theme="catppuccin-light"] {
+    --bg-color:#eff1f5; --sidebar-bg:#e6e9ef; --card-bg:#ffffff; --card-bg2:#e6e9ef;
+    --text-primary:#4c4f69; --text-secondary:#6c6f85; --text-dim:#8c8fa1;
+    --accent-color:#1e66f5; --accent-glow:rgba(30,102,245,0.12); --hover-bg:rgba(30,102,245,0.08);
+    --border-color:#bcc0cc;
+    --good:#40a02b; --good-bg:rgba(64,160,43,0.1);
+    --warn:#df8e1d; --warn-bg:rgba(223,142,29,0.1);
+    --bad:#d20f39; --bad-bg:rgba(210,15,57,0.1);
+    --r100:#40a02b; --r200:#1e66f5; --r300:#8839ef;
+    --transition-speed:0.25s;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background-color:var(--bg-color);color:var(--text-primary);
+    display:flex;height:100vh;overflow:hidden;font-size:15px;line-height:1.55;
+    position:relative;
+  }
+  a{color:var(--accent-color);text-decoration:none;transition:color var(--transition-speed)}
+  a:hover{text-decoration:underline;color:#7dd3fc}
+  code{background:var(--card-bg2);padding:.15rem .4rem;border-radius:6px;font-size:.86em;color:var(--accent-color);border:1px solid var(--border-color)}
+
+  /* Soft Fixed Background Watermark & Ambient Glow */
+  .bg-watermark{
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    pointer-events:none;z-index:0;overflow:hidden;opacity:0.04;
+    background-image:radial-gradient(circle at 80% 20%, #38bdf8 0%, transparent 40%),
+                     radial-gradient(circle at 20% 80%, #c084fc 0%, transparent 40%);
+  }
+  .bg-svg-pattern{
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    pointer-events:none;z-index:0;opacity:0.035;
+    background-size:120px 120px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%2338bdf8' stroke-width='1'%3E%3Cpath d='M0 0h120v120H0z'/%3E%3Cpath d='M60 0v120M0 60h120' stroke-dasharray='4,4'/%3E%3Ccircle cx='60' cy='60' r='30'/%3E%3Cpath d='M30 30l60 60M90 30L30 90' stroke-opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Refined Left Sidebar */
+  .sidebar{
+    width:275px;background:var(--sidebar-bg);
+    border-right:1px solid var(--border-color);
+    display:flex;flex-direction:column;padding:1.75rem 0;flex-shrink:0;
+    z-index:10;position:relative;
+    box-shadow:4px 0 24px rgba(0,0,0,0.3);
+  }
+  .sidebar-header-box{padding:0 1.5rem 1.25rem;border-bottom:1px solid var(--border-color);margin-bottom:1rem}
+  .sidebar-badge{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:700;color:var(--accent-color);letter-spacing:1px;text-transform:uppercase;margin-bottom:.35rem}
+  .sidebar-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-color);box-shadow:0 0 8px var(--accent-color)}
+  .sidebar-header{font-size:1.15rem;font-weight:700;color:var(--text-primary);letter-spacing:-.4px;line-height:1.2}
+  .sidebar-sub{font-size:.72rem;color:var(--text-dim);margin-top:.2rem}
+
+  .nav-links{list-style:none;flex-grow:1;overflow-y:auto;padding:0 .75rem}
+  .nav-item{
+    padding:.65rem 1rem;cursor:pointer;transition:all var(--transition-speed);
+    color:var(--text-secondary);display:flex;align-items:center;gap:12px;
+    font-size:.88rem;border-radius:8px;margin-bottom:2px;font-weight:500;
+  }
+  .nav-item:hover{background:var(--hover-bg);color:var(--text-primary);transform:translateX(3px)}
+  .nav-item.active{
+    color:var(--accent-color);background:linear-gradient(90deg, rgba(56,189,248,0.12), rgba(56,189,248,0.02));
+    border:1px solid rgba(56,189,248,0.25);font-weight:600;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  }
+  .nav-item .ni-ic{width:18px;text-align:center;flex-shrink:0;font-size:.85rem;color:var(--text-dim);transition:color var(--transition-speed)}
+  .nav-item.active .ni-ic{color:var(--accent-color)}
+  .sidebar-foot{padding:1rem 1.5rem 0;border-top:1px solid var(--border-color);margin-top:auto;font-size:.72rem;color:var(--text-dim);line-height:1.5}
+
+  /* Main Content Area */
+  .main-content{flex-grow:1;overflow-y:auto;padding:2.2rem 3rem;scroll-behavior:smooth;z-index:5;position:relative}
+  @media(max-width:900px){
+    body{flex-direction:column;height:auto;overflow:auto}
+    .sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:1rem;gap:.25rem}
+    .sidebar-header-box{width:100%;padding:.25rem .5rem;border-bottom:none;margin-bottom:0}
+    .nav-links{display:flex;flex-wrap:wrap;gap:.25rem;flex-grow:0;padding:0}
+    .nav-item{border-radius:8px;padding:.5rem .8rem}
+    .main-content{padding:1.5rem}
+  }
+  section.view{display:none;animation:fadeIn .35s ease}
+  section.view.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  h1{font-size:1.75rem;font-weight:700;letter-spacing:-.4px;background:linear-gradient(135deg, #f0f6fc 30%, #94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  h2.vh{font-size:1.45rem;margin-bottom:1.4rem;border-bottom:1px solid var(--border-color);padding-bottom:.65rem;color:var(--text-primary)}
+  .lead{color:var(--text-secondary);font-size:.92rem;margin:.5rem 0 1.5rem;max-width:75ch;line-height:1.6}
+
+  .badge{display:inline-block;background:var(--hover-bg);border:1px solid rgba(56,189,248,0.3);color:var(--accent-color);padding:.3rem .75rem;border-radius:999px;font-size:.72rem;font-weight:600;letter-spacing:.4px}
+  .pill{display:inline-block;font-size:.68rem;padding:.15rem .55rem;border-radius:999px;border:1px solid var(--border-color);color:var(--text-dim);vertical-align:middle;margin-left:.35rem;font-weight:600}
+  .pill.r100{color:var(--r100);border-color:rgba(74,222,128,0.3);background:var(--good-bg)}
+  .pill.r200{color:var(--r200);border-color:rgba(56,189,248,0.3);background:var(--hover-bg)}
+  .pill.r300{color:var(--r300);border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.08)}
+
+  .card{
+    background:var(--card-bg);border:1px solid var(--border-color);
+    border-radius:14px;padding:1.4rem 1.6rem;margin-bottom:1.1rem;
+    transition:all var(--transition-speed);
+    box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  }
+  .card:hover{border-color:rgba(56,189,248,0.3);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,0.25)}
+  .card h3{font-size:1rem;margin-bottom:.3rem;color:var(--text-primary)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.1rem}
+  
+  .statcard{
+    background:linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg2) 100%);
+    border:1px solid var(--border-color);border-radius:14px;padding:1.25rem 1.35rem;
+    box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  }
+  .statcard .num{font-size:1.8rem;font-weight:700;color:var(--accent-color);line-height:1}
+  .statcard .lbl{font-size:.78rem;color:var(--text-secondary);margin-top:.4rem}
+
+  .progbar{height:9px;background:var(--card-bg2);border:1px solid var(--border-color);border-radius:6px;overflow:hidden;display:flex;margin-top:.55rem}
+  .progbar i{display:block;height:100%}
+  .progbar i.b100{background:var(--r100)} .progbar i.b200{background:var(--r200)} .progbar i.b300{background:var(--r300)}
+
+  .note{background:var(--card-bg2);border:1px solid var(--border-color);border-left:4px solid var(--accent-color);border-radius:0 10px 10px 0;padding:1rem 1.2rem;font-size:.86rem;color:var(--text-secondary);margin-bottom:1.35rem;line-height:1.6}
+  .note.danger{border-left-color:var(--bad)}
+  .note.good{border-left-color:var(--good)}
+  .note b{color:var(--text-primary)}
+
+  .btnrow{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem}
+  button.b{
+    background:var(--card-bg);border:1px solid var(--border-color);
+    color:var(--text-primary);padding:.5rem 1rem;border-radius:8px;
+    cursor:pointer;font-size:.83rem;font-family:inherit;
+    transition:all var(--transition-speed);box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  }
+  button.b:hover{border-color:var(--accent-color);color:var(--accent-color);background:var(--hover-bg)}
+  button.b.on{background:var(--hover-bg);border-color:var(--accent-color);color:var(--accent-color);font-weight:600}
+
+  /* Curriculum Action Steps & What Does This Look Like Boxes */
+  .week-opener{background:var(--card-bg2);border:1px solid var(--border-color);border-left:3px solid var(--accent-color);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.1rem;font-size:.88rem;color:var(--text-primary);line-height:1.6}
+  .week-opener b{color:var(--accent-color)}
+  .weekhead{display:flex;align-items:center;gap:.8rem;cursor:pointer}
+  .weekhead .wk{font-size:.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;font-weight:700;background:var(--card-bg2);padding:2px 6px;border-radius:4px;border:1px solid var(--border-color)}
+  .weekhead h3{flex:1;font-size:1.02rem}
+  .weekhead .pct{font-size:.78rem;color:var(--accent-color);font-weight:600}
+  .weekbody{margin-top:1rem;display:none}
+  .weekbody.open{display:block}
+  .obj{font-size:.87rem;color:var(--text-secondary);margin-bottom:.9rem}
+  .modrow{padding:1rem 0;border-top:1px solid var(--border-color)}
+  .modrow-top{display:flex;gap:.7rem;align-items:flex-start}
+  .modrow input{margin-top:.25rem;width:16px;height:16px;accent-color:var(--accent-color);flex-shrink:0;cursor:pointer}
+  .modrow .mt{flex:1;font-size:.9rem;font-weight:600;color:var(--text-primary)}
+  .modrow .mt .rl{color:var(--text-dim);font-size:.76rem;margin-top:.15rem;font-weight:400}
+  .modrow.done .mt{opacity:.5;text-decoration:line-through}
+  
+  .action-box{background:var(--card-bg2);border:1px solid var(--border-color);border-left:3px solid var(--good);border-radius:0 6px 6px 0;padding:.65rem .85rem;margin-top:.6rem;margin-left:1.7rem;font-size:.83rem;color:var(--text-secondary);line-height:1.55}
+  .action-box b{color:var(--good)}
+
+  details.look-box{background:var(--card-bg2);border:1px solid var(--border-color);border-left:3px solid var(--r200);border-radius:0 6px 6px 0;padding:.5rem .85rem;margin-top:.45rem;margin-left:1.7rem;font-size:.82rem;color:var(--text-primary);line-height:1.6}
+  details.look-box summary{cursor:pointer;font-weight:600;color:var(--accent-color);outline:none;user-select:none;font-size:.8rem}
+  details.look-box[open] summary{margin-bottom:.35rem;border-bottom:1px solid var(--border-color);padding-bottom:.25rem}
+  details.look-box pre{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--text-primary);background:var(--card-bg);border:1px solid var(--border-color);padding:.5rem .75rem;border-radius:6px;margin-top:.35rem;overflow-x:auto;white-space:pre-wrap}
+
+  details.why-matters{background:var(--card-bg2);border:1px solid var(--border-color);border-left:3px solid var(--warn);border-radius:0 6px 6px 0;padding:.5rem .85rem;margin-top:.45rem;margin-left:1.7rem;font-size:.82rem;color:var(--text-primary);line-height:1.5}
+  details.why-matters summary{cursor:pointer;font-weight:600;color:var(--warn);outline:none;user-select:none;font-size:.8rem}
+  details.why-matters[open] summary{margin-bottom:.35rem;border-bottom:1px solid var(--border-color);padding-bottom:.25rem}
+
+  .deliv{margin-top:.9rem;font-size:.8rem;color:var(--text-dim)}
+  .vidlist{margin-top:.7rem;font-size:.83rem}
+  .vidlist a{display:block;padding:.15rem 0}
+  .vidlist .meta{color:var(--text-dim);font-size:.74rem}
+
+  /* Progress map */
+  .lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  @media(max-width:820px){.lanes{grid-template-columns:1fr}}
+  .lane{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.15rem}
+  .lane h3{font-size:.92rem;margin-bottom:.7rem}
+  .rung{border-left:3px solid var(--border-color);padding:.5rem 0 .5rem .8rem;margin-bottom:.7rem;font-size:.83rem;color:var(--text-secondary)}
+  .rung.l100{border-color:var(--r100)} .rung.l200{border-color:var(--r200)} .rung.l300{border-color:var(--r300)}
+  .rung b{color:var(--text-primary);display:block;margin-bottom:.15rem;font-size:.78rem}
+  .rung .self{margin-top:.45rem;display:flex;gap:.3rem}
+  .rung .self button{flex:1;background:var(--card-bg2);border:1px solid var(--border-color);color:var(--text-dim);border-radius:6px;padding:.2rem 0;font-size:.68rem;cursor:pointer;font-family:inherit}
+  .rung .self button.on{background:var(--accent-color);color:var(--bg-color);border-color:var(--accent-color);font-weight:700}
+
+  /* Flashcards Deck Controls */
+  .deck-selector{display:flex;gap:.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .deck-btn{background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-secondary);padding:.6rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all var(--transition-speed)}
+  .deck-btn:hover,.deck-btn.active{background:var(--hover-bg);color:var(--accent-color);border-color:var(--accent-color)}
+
+  .fc-stage{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;padding:2.4rem 1.8rem;text-align:center;min-height:240px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;user-select:none;transition:all var(--transition-speed);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+  .fc-stage:hover{border-color:var(--accent-color)}
+  .fc-term{font-size:1.45rem;font-weight:700;color:var(--text-primary)}
+  .fc-cat{font-size:.74rem;color:var(--accent-color);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.6rem;font-weight:600}
+  .fc-def{font-size:.98rem;color:var(--text-secondary);margin-top:1rem;max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.6;text-align:left;background:var(--card-bg2);padding:1rem 1.2rem;border-radius:10px;border:1px solid var(--border-color)}
+  .fc-hint{color:var(--text-dim);font-size:.75rem;margin-top:1.2rem}
+  .fc-controls{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+  .fc-controls button{background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-primary);padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.83rem;transition:all var(--transition-speed)}
+  .fc-controls button:hover{border-color:var(--accent-color)}
+  .fc-controls button.again{border-color:var(--bad);color:var(--bad)}
+  .fc-controls button.again:hover{background:var(--bad-bg)}
+  .fc-controls button.hard{border-color:var(--warn);color:var(--warn)}
+  .fc-controls button.hard:hover{background:var(--warn-bg)}
+  .fc-controls button.good{border-color:var(--good);color:var(--good)}
+  .fc-controls button.good:hover{background:var(--good-bg)}
+  .fc-meta{display:flex;justify-content:space-between;font-size:.76rem;color:var(--text-dim);margin-bottom:.7rem}
+  .kbd-shortcut{background:var(--card-bg2);border:1px solid var(--border-color);border-radius:4px;padding:2px 6px;font-size:.72rem;color:var(--text-secondary);font-family:monospace}
+
+  /* External Reference Section Styling */
+  .ref-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.65rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:all var(--transition-speed)}
+  .ref-card:hover{border-color:var(--accent-color);transform:translateX(2px)}
+  .ref-info{flex:1;overflow:hidden}
+  .ref-anchor{font-size:.88rem;font-weight:600;color:var(--text-primary);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ref-url{font-size:.76rem;color:var(--accent-color);word-break:break-all}
+  .ref-sources{font-size:.72rem;color:var(--text-dim);margin-top:.2rem}
+
+  /* Quiz */
+  .qcard{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.25rem 1.4rem;margin-bottom:1rem}
+  .qcard .qq{font-weight:600;margin-bottom:.7rem}
+  .qopts label{display:block;padding:.55rem .8rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:.4rem;cursor:pointer;font-size:.86rem;transition:all var(--transition-speed)}
+  .qopts label:hover{border-color:var(--accent-color);background:var(--hover-bg)}
+  .qopts label.correct{border-color:var(--good);background:var(--good-bg)}
+  .qopts label.wrong{border-color:var(--bad);background:var(--bad-bg)}
+  .qexp{margin-top:.7rem;font-size:.84rem;color:var(--text-secondary);border-top:1px solid var(--border-color);padding-top:.7rem;display:none}
+  .qexp.show{display:block}
+  .qcard .reveal{margin-top:.6rem;background:var(--card-bg2);border:1px solid var(--border-color);color:var(--text-primary);padding:.4rem .9rem;border-radius:7px;cursor:pointer;font-size:.78rem;font-family:inherit}
+
+  /* Glossary */
+  .search{width:100%;background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-primary);padding:.65rem 1rem;border-radius:99px;font-size:.9rem;outline:none;margin-bottom:.9rem;font-family:inherit;box-shadow:0 2px 10px rgba(0,0,0,0.15)}
+  .search:focus{border-color:var(--accent-color);box-shadow:0 0 12px var(--accent-glow)}
+  .gfilters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+  .gterm{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:.85rem 1.1rem;margin-bottom:.55rem;transition:border-color var(--transition-speed)}
+  .gterm:hover{border-color:rgba(56,189,248,0.3)}
+  .gterm h4{font-size:.9rem;display:flex;align-items:center;gap:.25rem}
+  .gterm p{font-size:.84rem;color:var(--text-secondary);margin-top:.2rem;line-height:1.55}
+  .gterm .sa{font-size:.76rem;color:var(--text-dim);margin-top:.35rem}
+
+  /* Shorts gallery (vertical phone frame + episode rail) */
+  .shorts-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:1.1rem;align-items:start}
+  .shorts-player{display:flex;flex-direction:column;gap:.65rem;max-width:320px;width:100%;margin:0 auto}
+  .shorts-player .row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .carousel{width:100%;max-width:320px;aspect-ratio:9/16;max-height:min(70vh,620px);border:1px solid var(--border-color);background:#05080f;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.35);display:flex;flex-direction:column}
+  .carousel-stage{flex:1 1 auto;min-height:0;background:#000;position:relative}
+  .carousel video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;background:#000}
+  .carousel-cap{flex:0 0 auto;padding:.65rem .8rem;border-top:1px solid var(--border-color);font-size:.88rem;color:var(--accent-color);text-align:center;background:rgba(7,11,20,.92)}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.55rem;max-height:min(70vh,620px);overflow:auto;padding-right:2px;align-content:start}
+  .thumbs button{width:100%;min-height:84px;text-align:left;font-family:inherit;font-size:.74rem;line-height:1.35;padding:.7rem .75rem;border-radius:10px;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-secondary);cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:.45rem}
+  .thumbs button.active,.thumbs button:hover{border-color:var(--accent-color);color:var(--text-primary)}
+  .thumbs button.ready{border-left:3px solid var(--good)}
+  .thumbs button.pending{border-left:3px solid var(--bad);opacity:.85}
+  .thumbs .tagpill{font-size:.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+  @media(min-width:900px){
+    .shorts-gallery{grid-template-columns:320px minmax(0,1fr)}
+    .shorts-player{margin:0}
+  }
+  @media(max-width:899px){
+    .shorts-gallery{justify-items:center}
+    .thumbs{width:100%;max-height:none}
+  }
+
+  /* Prompts */
+  .promptcat h3{margin-top:1.2rem;font-size:1rem}
+  .promptbox{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;margin:.5rem 0}
+  .promptbox summary{padding:.75rem 1rem;cursor:pointer;font-size:.88rem;font-weight:600}
+  .promptbox pre{white-space:pre-wrap;font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--text-secondary);padding:0 1rem .9rem;line-height:1.5}
+  .copybtn{margin:0 1rem .9rem;background:var(--card-bg2);border:1px solid var(--border-color);color:var(--text-primary);padding:.35rem .8rem;border-radius:6px;cursor:pointer;font-size:.74rem;font-family:inherit}
+  .copybtn.copied{color:var(--good);border-color:var(--good)}
+
+  /* Practice Checklist */
+  .cl-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:.8rem;transition:border-color var(--transition-speed)}
+  .cl-card:hover{border-color:rgba(56,189,248,0.4)}
+  .cl-header{display:flex;gap:.8rem;align-items:flex-start;cursor:pointer}
+  .cl-header input{margin-top:.25rem;width:18px;height:18px;accent-color:var(--accent-color);cursor:pointer;flex-shrink:0}
+  .cl-header .cl-title{flex:1;font-size:.92rem;font-weight:600;color:var(--text-primary)}
+  .cl-header.done .cl-title{opacity:.5;text-decoration:line-through}
+  .cl-toggle-btn{background:var(--card-bg2);border:1px solid var(--border-color);color:var(--text-secondary);padding:.2rem .6rem;border-radius:6px;font-size:.74rem;cursor:pointer;font-family:inherit}
+  
+  .cl-detail{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border-color);display:none}
+  .cl-detail.open{display:block}
+  .good-bad-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.6rem}
+  @media(max-width:768px){.good-bad-grid{grid-template-columns:1fr}}
+  
+  .gb-box{border-radius:8px;padding:1rem;font-size:.84rem;line-height:1.55}
+  .gb-box.good-box{background:var(--good-bg);border:1px solid var(--good);color:var(--text-primary)}
+  .gb-box.good-box h5{color:var(--good);font-size:.88rem;margin-bottom:.4rem}
+  .gb-box.bad-box{background:var(--bad-bg);border:1px solid var(--bad);color:var(--text-primary)}
+  .gb-box.bad-box h5{color:var(--bad);font-size:.88rem;margin-bottom:.4rem}
+
+  /* Enterprise Architecture (EA Frameworks) Navigation & Sub-Tabs */
+  .ea-subnav{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;border-bottom:1px solid var(--border-color);padding-bottom:.8rem}
+  .ea-tab-btn{background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-secondary);padding:.55rem 1.1rem;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all var(--transition-speed)}
+  .ea-tab-btn:hover,.ea-tab-btn.active{background:var(--hover-bg);color:var(--accent-color);border-color:var(--accent-color)}
+  
+  .ea-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.35rem 1.5rem;margin-bottom:1.25rem}
+  .ea-card h3{color:var(--accent-color);font-size:1.1rem;margin-bottom:.4rem}
+  .ea-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem;margin-top:1rem}
+  .ea-box{background:var(--card-bg2);border:1px solid var(--border-color);border-radius:8px;padding:1rem;font-size:.84rem}
+  .ea-box h4{color:var(--text-primary);font-size:.88rem;margin-bottom:.4rem;border-bottom:1px solid var(--border-color);padding-bottom:.3rem}
+  .ea-box ul{list-style:none;padding:0}
+  .ea-box li{margin-bottom:.4rem;color:var(--text-secondary);position:relative;padding-left:14px}
+  .ea-box li::before{content:"•";position:absolute;left:0;color:var(--accent-color)}
+
+  /* EA Cross-Walk Table */
+  .ea-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.83rem}
+  .ea-table th,.ea-table td{border:1px solid var(--border-color);padding:.7rem .9rem;text-align:left}
+  .ea-table th{background:var(--card-bg2);color:var(--accent-color);font-weight:600}
+  .ea-table tr:nth-child(even){background:rgba(255,255,255,0.015)}
+  .eu-contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  @media (max-width:720px){
+    .eu-contrast-grid{grid-template-columns:1fr}
+  }
+
+  /* Print-Only Header & Footer Hidden by Default on Screen */
+  .print-header, .print-footer { display: none; }
+
+  @media print {
+    nav.sidebar, .sidebar, .sidebar-header-box, .nav-links, .sidebar-foot, .btnrow, .fc-controls, .ea-subnav, .deck-selector, .search, .gfilters, .site-disclaimer, .bg-watermark, .bg-svg-pattern, button {
+      display: none !important;
+      visibility: hidden !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    body {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 11pt !important;
+      line-height: 1.5 !important;
+      height: auto !important;
+      overflow: visible !important;
+      display: block !important;
+    }
+
+    .main-content {
+      padding: 0 !important;
+      margin: 0 !important;
+      overflow: visible !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    section.view {
+      display: block !important;
+      opacity: 1 !important;
+    }
+
+    /* Print Header & Footer */
+    .print-header {
+      display: block !important;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+    
+    .print-footer {
+      display: block !important;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 10px;
+      margin-top: 24px;
+      font-size: 8pt;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Auto-expand details and technical scenarios for printing */
+    details { display: block !important; }
+    details summary { display: block !important; font-weight: bold; margin-bottom: 4px; }
+    details.look-box, details.why-matters, .cl-detail { display: block !important; opacity: 1 !important; height: auto !important; }
+    .cl-detail { display: block !important; }
+
+    /* Card styling for clean PDF export */
+    .card, .statcard, .modrow, .ref-card, .gterm, .qcard, .cl-card {
+      border: 1px solid #cbd5e1 !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      margin-bottom: 12px !important;
+    }
+
+    code, pre {
+      background: #f8fafc !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      white-space: pre-wrap !important;
+    }
+
+    a { color: #0284c7 !important; text-decoration: underline !important; }
+  }
+  /* ---- Learn Purview additions ---- */
+  .cite{font-size:.78em;font-weight:600;padding:0 .2rem;border-radius:4px;background:var(--hover-bg);white-space:nowrap}
+  .diagram{display:block;width:100%;border-radius:12px;border:1px solid var(--border-color);background:#fff;margin:.8rem 0 1.2rem;cursor:zoom-in}
+  .tbl{width:100%;border-collapse:collapse;font-size:.83rem;margin:.6rem 0 1.2rem;display:block;overflow-x:auto}
+  .tbl th,.tbl td{border:1px solid var(--border-color);padding:.55rem .75rem;text-align:left;vertical-align:top}
+  .tbl th{background:var(--card-bg2);color:var(--accent-color);font-weight:600;white-space:nowrap}
+  .tbl tr:nth-child(even) td{background:var(--card-bg2)}
+  .tbl td.gap{color:var(--bad);font-weight:600}
+  .tbl td.warnc{color:var(--warn);font-weight:600}
+  .slides{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+  .slides figure{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;overflow:hidden;cursor:zoom-in}
+  .slides img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+  .slides figcaption{padding:.5rem .75rem;font-size:.78rem;color:var(--text-secondary)}
+  .slides figure.flag{border-color:var(--warn)}
+  .slides figure.flag figcaption{color:var(--warn)}
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:100;display:none;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:100%;max-height:92vh;border-radius:8px;background:#fff}
+  .wide-player{width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border-radius:14px;border:1px solid var(--border-color);display:block}
+  .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.8rem;margin-bottom:1.4rem}
+  .libcard{display:block;background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:.9rem 1.1rem;color:var(--text-primary);transition:all var(--transition-speed)}
+  .libcard:hover{border-color:var(--accent-color);text-decoration:none;transform:translateY(-1px)}
+  .libcard b{display:block;font-size:.9rem;margin-bottom:.2rem}
+  .libcard span{font-size:.78rem;color:var(--text-dim)}
+  .fm-meta{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto}
+  .rule{background:var(--card-bg);border:1px solid var(--border-color);border-left:3px solid var(--accent-color);border-radius:0 10px 10px 0;padding:.75rem 1rem;margin-bottom:.6rem;font-size:.87rem;color:var(--text-secondary)}
+  .rule b{color:var(--text-primary)}
+  .rule.falsifier{border-left-color:var(--warn)}
+  .timeline{display:grid;grid-template-columns:auto 1fr auto;gap:.2rem .9rem;font-size:.85rem;align-items:center}
+  .timeline .t{color:var(--text-dim);font-variant-numeric:tabular-nums}
+  .timeline .b{padding:.35rem 0;border-bottom:1px solid var(--border-color)}
+  .timeline .m{color:var(--accent-color);font-weight:600;font-size:.78rem}
+  @media(max-width:900px){.main-content{padding:1.25rem 16px}.tbl{font-size:.78rem}}
+  @media(max-width:600px){.cl-header{flex-wrap:wrap}.cl-header .cl-title{flex:1 1 calc(100% - 40px)}}
+  [data-theme$="-light"] h1{background:none;-webkit-text-fill-color:var(--text-primary)}
+</style>
+</head>
+<body>
+
+<div class="bg-watermark"></div>
+<div class="bg-svg-pattern"></div>
+
+<div class="print-header">
+  <div style="font-size:1.2rem;font-weight:700;color:#0f172a">Learn Microsoft Purview: Architect Study Console</div>
+  <div style="font-size:.8rem;color:#475569;margin-top:2px">Tech deep dive edition · Self-study use · Microsoft-grounded sources only</div>
+</div>
+
+<nav class="sidebar">
+  <div class="sidebar-header-box">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:.5rem">
+      <img id="sidebarHeroImg" src="assets/hero.jpg" alt="Microsoft Purview blueprint emblem" style="width:46px;height:46px;border-radius:10px;border:1px solid rgba(56,189,248,0.35);box-shadow:0 0 12px rgba(56,189,248,0.25);object-fit:cover;flex-shrink:0">
+      <div>
+        <div class="sidebar-badge" style="margin-bottom:.1rem">Console v1.0</div>
+        <div class="sidebar-header" style="font-size:1.05rem">Learn Purview</div>
+      </div>
+    </div>
+    <div class="sidebar-sub">Architect tech deep dive</div>
+  </div>
+  <ul class="nav-links" id="nav">
+    <li class="nav-item active" data-v="dashboard"><span class="ni-ic">▪</span>Dashboard</li>
+    <li class="nav-item" data-v="curriculum"><span class="ni-ic">▪</span>Curriculum (8 blocks)</li>
+    <li class="nav-item" data-v="views"><span class="ni-ic">▪</span>Architecture views</li>
+    <li class="nav-item" data-v="map"><span class="ni-ic">▪</span>Progress map</li>
+    <li class="nav-item" data-v="flash"><span class="ni-ic">▪</span>Flashcards</li>
+    <li class="nav-item" data-v="shorts"><span class="ni-ic">▪</span>Shorts &amp; media</li>
+    <li class="nav-item" data-v="deck"><span class="ni-ic">▪</span>Slide deck</li>
+    <li class="nav-item" data-v="quiz"><span class="ni-ic">▪</span>Quiz</li>
+    <li class="nav-item" data-v="glossary"><span class="ni-ic">▪</span>Glossary</li>
+    <li class="nav-item" data-v="prompts"><span class="ni-ic">▪</span>Prompts</li>
+    <li class="nav-item" data-v="counsel"><span class="ni-ic">▪</span>Failure modes</li>
+    <li class="nav-item" data-v="cheat"><span class="ni-ic">▪</span>Decision rules</li>
+    <li class="nav-item" data-v="ea"><span class="ni-ic">▪</span>EA mapping</li>
+    <li class="nav-item" data-v="library"><span class="ni-ic">▪</span>Library (all notes)</li>
+    <li class="nav-item" data-v="refs"><span class="ni-ic">▪</span>Source ledger</li>
+  </ul>
+  <div class="sidebar-foot">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:.85rem">
+      <button id="themeToggleBtn" style="flex:1;background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-primary);padding:.35rem .5rem;border-radius:6px;font-size:.74rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px">
+        <span id="themeToggleIcon">🌙</span> <span id="themeToggleText">Dark</span>
+      </button>
+      <select id="themeSelect" style="background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-primary);padding:.35rem .4rem;border-radius:6px;font-size:.74rem;cursor:pointer">
+        <option value="github">GitHub Primer</option>
+        <option value="geist">Vercel Geist</option>
+        <option value="catppuccin">Catppuccin</option>
+      </select>
+    </div>
+    Microsoft-grounded sources only. No tenant data or secrets in any model.<br><br>
+    Canonical path: Obsidian <code>Learning/tech-deep-dive/microsoft-purview/</code>. Progress saved locally.
+  </div>
+</nav>
+
+<main class="main-content">
+  <section class="view active" id="v-dashboard"></section>
+  <section class="view" id="v-curriculum"></section>
+  <section class="view" id="v-views"></section>
+  <section class="view" id="v-map"></section>
+  <section class="view" id="v-flash"></section>
+  <section class="view" id="v-shorts"></section>
+  <section class="view" id="v-deck"></section>
+  <section class="view" id="v-quiz"></section>
+  <section class="view" id="v-glossary"></section>
+  <section class="view" id="v-prompts"></section>
+  <section class="view" id="v-counsel"></section>
+  <section class="view" id="v-cheat"></section>
+  <section class="view" id="v-ea"></section>
+  <section class="view" id="v-library"></section>
+  <section class="view" id="v-refs"></section>
+  <div class="site-disclaimer" style="margin-top:2rem;font-size:.78rem;color:var(--text-dim);border-top:1px solid var(--border-color);padding-top:1rem">
+    Personal study material for enterprise architects. Every claim traces to a row in the Microsoft source ledger (<span class="cite">S#</span> links open the source). NotebookLM media and reports are secondary: where they differ from the architecture views, the views win. Verify licensing and government-cloud availability against current Microsoft documentation before relying on it.
+  </div>
+  <div class="print-footer">
+    <div>Learning tool only · Microsoft Learn, service descriptions, reference architectures, Microsoft Mechanics</div>
+    <div>Canonical path: Obsidian vault <code>Learning/tech-deep-dive/microsoft-purview/</code></div>
+  </div>
+</main>
+
+<div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
+<script src="library/manifest.js"></script>
+<script src="shorts-catalog.js"></script>
+<script>
+/* ============================================================
+   SOURCE LEDGER (reference/source-ledger.md, Microsoft-grounded)
+   ============================================================ */
+const SOURCES = [
+  {n:1,g:"Core product and capability docs",t:"Learn about Microsoft Purview (solution families)",u:"https://learn.microsoft.com/en-us/purview/purview",type:"docs",trust:"high",b:"1,2,3"},
+  {n:2,g:"Scanning, connectors, and on-prem",t:"Data sources that connect to Purview Data Map (capability matrix)",u:"https://learn.microsoft.com/en-us/purview/data-map-data-sources",type:"docs",trust:"high",b:"3,5"},
+  {n:3,g:"Scanning, connectors, and on-prem",t:"Choose the right integration runtime (IR matrix per source)",u:"https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose",type:"docs",trust:"high",b:"4,5"},
+  {n:4,g:"Gov-cloud, licensing, and compliance",t:"Feature availability for Microsoft Purview (Azure Government exclusions)",u:"https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability",type:"docs",trust:"high",b:"4,5"},
+  {n:5,g:"Gov-cloud, licensing, and compliance",t:"Plan for Microsoft Purview - GCC deployments",u:"https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments",type:"service description",trust:"high",b:"4"},
+  {n:6,g:"Gov-cloud, licensing, and compliance",t:"Plan for Microsoft Purview - GCC High deployments",u:"https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments",type:"service description",trust:"high",b:"4"},
+  {n:7,g:"Gov-cloud, licensing, and compliance",t:"Plan for Microsoft Purview - DoD deployments",u:"https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments",type:"service description",trust:"high",b:"4,5"},
+  {n:8,g:"Gov-cloud, licensing, and compliance",t:"Cloud feature availability for US Government customers",u:"https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability",type:"docs",trust:"high",b:"4"},
+  {n:9,g:"Scanning, connectors, and on-prem",t:"Amazon S3 multicloud scanning connector",u:"https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3",type:"docs",trust:"high",b:"5,6"},
+  {n:10,g:"Scanning, connectors, and on-prem",t:"Connect to and manage Snowflake",u:"https://learn.microsoft.com/en-us/purview/register-scan-snowflake",type:"docs",trust:"high",b:"5,7"},
+  {n:11,g:"Scanning, connectors, and on-prem",t:"Connect to and manage Salesforce",u:"https://learn.microsoft.com/en-us/purview/register-scan-salesforce",type:"docs",trust:"high",b:"5"},
+  {n:12,g:"Scanning, connectors, and on-prem",t:"Learn about the information protection scanner",u:"https://learn.microsoft.com/en-us/purview/deploy-scanner",type:"docs",trust:"high",b:"4,5,6"},
+  {n:13,g:"Scanning, connectors, and on-prem",t:"Information protection scanner prerequisites",u:"https://learn.microsoft.com/en-us/purview/deploy-scanner-prereqs",type:"docs",trust:"high",b:"4,6"},
+  {n:14,g:"Scanning, connectors, and on-prem",t:"DLP for on-premises repositories",u:"https://learn.microsoft.com/en-us/purview/dlp-on-premises-scanner-get-started",type:"docs",trust:"high",b:"5,6"},
+  {n:15,g:"AI protections",t:"Learn about DSPM for AI",u:"https://learn.microsoft.com/en-us/purview/dspm-for-ai",type:"docs",trust:"high",b:"5,6"},
+  {n:16,g:"AI protections",t:"Purview protections for Microsoft 365 Copilot",u:"https://learn.microsoft.com/en-us/purview/ai-m365-copilot",type:"docs",trust:"high",b:"5"},
+  {n:17,g:"AI protections",t:"Purview protections for AI agents (support matrix)",u:"https://learn.microsoft.com/en-us/purview/ai-agents",type:"docs",trust:"high",b:"5"},
+  {n:18,g:"AI protections",t:"Purview protections for Copilot Studio agents",u:"https://learn.microsoft.com/en-us/purview/ai-copilot-studio",type:"docs",trust:"high",b:"5"},
+  {n:19,g:"AI protections",t:"Considerations for deploying DSPM for AI",u:"https://learn.microsoft.com/en-us/purview/ai-microsoft-purview-considerations",type:"docs",trust:"high",b:"5,7"},
+  {n:20,g:"AI protections",t:"Configure DSPM for AI for custom AI apps (Purview SDK)",u:"https://learn.microsoft.com/en-us/purview/developer/configurepurview",type:"docs",trust:"high",b:"5"},
+  {n:21,g:"AI protections",t:"Copilot Studio audit fields (CopilotInteraction)",u:"https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-logging-copilot-studio",type:"docs",trust:"high",b:"5"},
+  {n:22,g:"AI protections",t:"Discover AI apps and agents (Entra Agent ID + DSPM for AI)",u:"https://learn.microsoft.com/en-us/security/security-for-ai/discover",type:"docs",trust:"high",b:"5"},
+  {n:23,g:"Scanning, connectors, and on-prem",t:"Data governance best practices for security (private endpoints, RBAC)",u:"https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices",type:"docs",trust:"high",b:"4,7"},
+  {n:24,g:"Gov-cloud, licensing, and compliance",t:"CAF reference architecture: unified data platform (Purview in a data management landing zone)",u:"https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/data/architecture-azure-landing-zones-unify-data-platform",type:"reference architecture",trust:"high",b:"4,8"},
+  {n:25,g:"Gov-cloud, licensing, and compliance",t:"Microsoft Purview service description (licensing)",u:"https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description",type:"service description",trust:"high",b:"4"},
+  {n:26,g:"Core product and capability docs",t:"What's new in Microsoft Purview",u:"https://learn.microsoft.com/en-us/purview/whats-new",type:"docs",trust:"high",b:"1,5"},
+  {n:27,g:"Third-party / partner (used with caution)",t:"OneTrust for Purview DSPM (Microsoft Marketplace listing, partner-authored)",u:"https://marketplace.microsoft.com/en-us/product/azure-applications/onetrustllc1594047340198.azure-sentinel-solution-onetrust?tab=overview",type:"marketplace",trust:"partner listing",b:"5"},
+  {n:28,g:"Named technical talks and videos",t:"Microsoft Mechanics: AI and Agent Data Security Controls in Microsoft Purview",u:"https://www.youtube.com/watch?v=4BcVWkSTZ3I",type:"video",trust:"high",b:"5"},
+  {n:29,g:"Named technical talks and videos",t:"Microsoft Mechanics: New Data Security Posture Management",u:"https://www.youtube.com/watch?v=NLfoFpFxhrA",type:"video",trust:"high",b:"1,5"},
+  {n:30,g:"Named technical talks and videos",t:"Microsoft Mechanics: New Agents in Microsoft Purview",u:"https://www.youtube.com/watch?v=cu2FJ2f7Jho",type:"video",trust:"high",b:"5,7"},
+  {n:31,g:"Third-party / partner (used with caution)",t:"OneTrust: Microsoft 365 integration (vendor page, far side of connector only)",u:"https://www.onetrust.com/integrations/microsoft-365/",type:"vendor",trust:"far-side only",b:"5"},
+  {n:32,g:"Named technical talks and videos",t:"Microsoft Mechanics: Azure Purview - Map, Discover, and Find Insights Across Data Sources (Mike Flasko + Jeremy Chapman)",u:"https://www.youtube.com/watch?v=27bA4KFiEKk",type:"video",trust:"high",b:"2,3"},
+  {n:33,g:"Named technical talks and videos",t:"Microsoft Ignite BRK256: Enhance data security investigations with Microsoft Purview",u:"https://www.youtube.com/watch?v=SKQyfHBfvpY",type:"video (conference talk)",trust:"high",b:"5,7"},
+  {n:34,g:"Named technical talks and videos",t:"Microsoft Mechanics: Introducing Microsoft Purview Data Security Investigations",u:"https://www.youtube.com/watch?v=0lefwZeVd2c",type:"video",trust:"high",b:"5,7"},
+  {n:35,g:"Gov-cloud, licensing, and compliance",t:"Understanding Compliance Between Commercial, Government, DoD & Secret Offerings (Microsoft Public Sector Blog)",u:"https://techcommunity.microsoft.com/blog/publicsectorblog/understanding-compliance-between-commercial-government-dod--secret-offerings---m/4225436",type:"blog (Microsoft official)",trust:"high",b:"4"},
+  {n:36,g:"Named technical talks and videos",t:"Microsoft Purview Data Map (official YouTube playlist)",u:"https://www.youtube.com/playlist?list=PLlUvFtDNTC9_vqdYkpKtJeRWnv3KGESTP",type:"video playlist",trust:"high",b:"2,3"}
+];
+
+/* ============================================================
+   CURRICULUM, LADDER, GLOSSARY, QUIZ, FAILURE MODES, EA
+   ============================================================ */
+const DATA = {
+  weeks:[
+    {n:1,title:"Context and scope",time:"45 min",rungs:"100",lib:"block-01-context-and-scope",
+     opener:"Before drawing anything, fix the boundary. Purview is one portal but four separable solution families with different licenses, and its most important neighbors (Defender for Endpoint, Entra ID, Sentinel, SharePoint, Key Vault) sit just outside it [S1].",
+     obj:"What Purview is, what it is not, the two halves (Microsoft 365 data security and compliance vs. data governance), and the clouds in scope: Commercial, GCC, GCC High, DoD, and Azure Government. No Secret or Top Secret, no air gap.",
+     deliv:"Boundary statement written; neighbor list has at least five systems.",
+     mods:[
+       {t:"Definition: one platform to govern, protect, and manage data wherever it lives [S1]",rl:"scope · 100",
+        action:"Write a two-sentence definition and a one-line boundary statement (what is in, what is out).",
+        lookLike:"<b>Boundary statement (example output)</b><pre>IN:  classification, sensitivity labels, DLP, Insider Risk, Data Map + Unified Catalog,\n     Audit, eDiscovery, Compliance Manager, DSPM / DSPM for AI\nOUT: Defender for Endpoint (shares the device sensor for Endpoint DLP)\n     Entra ID / Entra Agent ID (identity, RBAC, agent directory)\n     Sentinel (SIEM; hosts the OneTrust partner solution)\n     SharePoint / OneDrive / Teams (content stores Purview governs)\n     Azure Key Vault (scan secrets) · AWS, Snowflake, Salesforce (scanned sources)</pre>",
+        whyMatters:"Most bad Purview designs start by assuming it enforces something a neighbor owns, for example that cataloging data changes who can open it. It does not."},
+       {t:"Two halves and four families: data security, data governance, data compliance, AI protections [S1]",rl:"scope · 100",
+        action:"Sort every solution into its family and note which ones share classifiers, labels, and activity explorer.",
+        lookLike:"<b>Family split</b><pre>Data security    -> Information Protection, DLP, Insider Risk Management, DSPM\nData governance  -> Data Map, Unified Catalog\nData compliance  -> Audit, eDiscovery, Compliance Manager (+ lifecycle, records, comms compliance)\nAI protections   -> DSPM for AI, AI interaction auditing\nShared           -> classifiers, connectors, data/activity explorer, sensitivity labels</pre>",
+        whyMatters:"A request that spans families ('govern AND protect AND prove compliance') spans products and licenses. Name the split out loud [S25]."},
+       {t:"Clouds in scope and why government variants matter",rl:"physical · 100",
+        action:"List the five cloud variants and note that gov-cloud guides only list differences from the commercial baseline [S7].",
+        whyMatters:"Parity is the assumption that breaks designs. A blank cell in a gov-cloud table usually means parity, not absence, and a named gap means a real redesign."},
+       {t:"Source ledger triage: 36 Microsoft-grounded rows",rl:"sources · 100",
+        action:"Skim the ledger and tag each source to the views it feeds. Microsoft Learn, service descriptions, reference architectures, and Mechanics only.",
+        whyMatters:"The source rule is the falsifier for the whole day: a claim without a ledger row is marked UNVERIFIED, not repeated."}
+     ],
+     vids:[{s:1},{s:26},{s:29}]},
+    {n:2,title:"Conceptual view",time:"60 min",rungs:"100-200",lib:"view-01-conceptual",
+     opener:"Conceptual means what and why, not how. Capabilities and actors only; product names appear only where Microsoft uses them as the capability name.",
+     obj:"Microsoft's four pressures (fragmented data, low visibility, fast AI adoption, blurred IT roles) and the five outcomes Purview answers with [S1].",
+     deliv:"Conceptual view complete with no product names; OV-1 style picture drawn.",
+     mods:[
+       {t:"Five capabilities (C1-C5) as the top-level map",rl:"conceptual · 100",
+        action:"Fill the capability table with the actor who cares most about each.",
+        lookLike:"<b>Capability map [S1]</b><pre>C1 Know your data          -> data owner, steward, compliance admin\nC2 Protect sensitive data  -> compliance admin, end user\nC3 Govern data             -> data steward, data source admin\nC4 Manage risk/regulation  -> compliance admin, investigator, auditor\nC5 Secure AI use           -> security and compliance analyst</pre>",
+        whyMatters:"Sponsors buy outcomes. If a sponsor cannot agree with every capability line, the architecture will not survive the funding conversation."},
+       {t:"Actors, including the non-human one",rl:"conceptual · 200",
+        action:"Add the agent actor: it reads and writes data on a user's behalf and is governed like its parent app [S17].",
+        whyMatters:"Treating agents as a separate trust principal leads to inventing controls Purview does not have. Sources describe inheritance, not interception."},
+       {t:"Key concepts: classification, sensitivity label, policy, data estate, AI interaction",rl:"conceptual · 100",
+        action:"Write one sentence per concept and how it relates to the others.",
+        whyMatters:"Policies act on classified or labeled data. Nothing downstream works if classification never ran."},
+       {t:"Operational concept (OV-1)",rl:"conceptual · 200",
+        action:"Draw people and agents working with data inside the org boundary; non-Microsoft stores and AI apps outside; regulators receiving evidence.",
+        lookLike:"<b>OV-1 diagram</b><img class=\"diagram\" src=\"assets/diagrams/01-conceptual-1.png\" alt=\"Conceptual view diagram\">",
+        whyMatters:"This is the one picture an executive should be able to repeat back."}
+     ],
+     vids:[{s:1},{s:32},{s:36}]},
+    {n:3,title:"Logical view",time:"60 min",rungs:"200",lib:"view-02-logical",
+     opener:"Logical means which parts and how they talk. Components have responsibilities and interfaces; no regions, SKUs, or hostnames.",
+     obj:"Ten logical components, the logical data model, and six flows (scan, on-prem label, DLP evaluation, AI audit, AI insight, retain/discover).",
+     deliv:"Every capability has at least one logical component; data model drawn.",
+     mods:[
+       {t:"Decompose capabilities into components",rl:"logical · 200",
+        action:"Map each component to the capability it realizes, with inputs and outputs.",
+        lookLike:"<b>Component excerpt</b><pre>Classification engine  C1     content, scan results      -> classifications\nData Map               C1,C3  registered sources, creds  -> assets, classifications, lineage\nInformation Protection C2     label policies             -> labeled / encrypted content\nDLP                    C2     DLP policies               -> alerts, blocks, activity events\nAudit                  C4,C5  activity events            -> searchable audit records\nDSPM for AI            C5     AI interactions, SPO data  -> reports, one-click policies</pre>",
+        whyMatters:"When the question is 'what data do we have and where', the answer is Data Map + Unified Catalog, not DLP. DLP acts on data already classified; it does not discover it."},
+       {t:"Logical data model (ERD)",rl:"logical · 200",
+        action:"Draw the entities: label policy, sensitivity label, SIT, content item, data source, asset, policy, AI interaction, audit record, case.",
+        lookLike:"<b>Data model</b><img class=\"diagram\" src=\"assets/diagrams/02-logical-1.png\" alt=\"Logical data model\">",
+        whyMatters:"AI interaction emits exactly one audit record (1:1). That makes the audit log the completeness backbone for DSPM and eDiscovery."},
+       {t:"Logical flows F1-F6",rl:"logical · 200",
+        action:"Mark each flow's payload and trigger. Note F1: the scan returns metadata and classifications only [S9].",
+        lookLike:"<b>Flow chain</b><img class=\"diagram\" src=\"assets/diagrams/02-logical-2.png\" alt=\"Logical flows\">",
+        whyMatters:"Two design decisions live here: connectors never return content, and Fabric / Security Copilot prompts are not captured without a collection policy [S15]."}
+     ],
+     vids:[{s:2},{s:15},{s:32}]},
+    {n:4,title:"Physical view",time:"60 min",rungs:"200-300",lib:"view-03-physical",
+     opener:"Physical means what is deployed and where. Every row traces to a logical component. Blank cells are real gaps, not omissions.",
+     obj:"Logical-to-physical mapping, the four-cloud topology, scanner host requirements, government cloud variants, licensing traps, and the standards profile.",
+     deliv:"Every logical component maps to a physical realization or is marked as a gap.",
+     mods:[
+       {t:"Four clouds: M365 tenant, Azure subscription, AWS, customer estate",rl:"physical · 200",
+        action:"Place every runtime and store in one of the four boxes.",
+        lookLike:"<b>Deployment topology</b><img class=\"diagram\" src=\"assets/diagrams/03-physical-1.png\" alt=\"Physical deployment topology\">",
+        whyMatters:"The Purview account is an Azure resource, not an M365 tenant resource. Microsoft recommends a dedicated data management landing zone, one per Entra tenant [S24]."},
+       {t:"Integration runtimes: Azure IR, AWS IR, Managed VNet IR, self-hosted IR (SHIR, incl. Kubernetes)",rl:"physical · 200",
+        action:"For each registered source, pick the runtime and say who operates it [S3].",
+        lookLike:"<b>Runtime decision</b><pre>Public-endpoint Azure source  -> Azure IR (Microsoft-managed)\nPrivate endpoints             -> Managed VNet IR\nAmazon S3 / RDS               -> AWS IR, operated by Microsoft in its own AWS account\nOn-prem SQL, file systems     -> SHIR on a customer VM or Kubernetes (JDK 11)</pre>",
+        whyMatters:"The customer estate only hosts the SHIR, the scanner, file shares, and onboarded devices. Everything else runs in Microsoft or Azure."},
+       {t:"Information protection scanner host",rl:"physical · 200",
+        action:"Size the host: 64-bit Windows Server 2016-2025 (no Core/Nano), 4 cores, 8 GB RAM, about 10 GB temp, SQL Server 2016+ with case-insensitive collation, AD account synced to Entra ID [S13].",
+        whyMatters:"Every item on this list is a known install failure."},
+       {t:"Government cloud variants and the FedRAMP question",rl:"physical · 300",
+        action:"Fill the variant matrix. Resolve 'GCC is Moderate' vs 'GCC is High' with [S35].",
+        lookLike:"<b>Resolution [S35]</b><pre>GCC formal P-ATO (DHHS)      : FedRAMP Moderate\nGCC audits completed         : FedRAMP High (SARs) -> advertised High \"Equivalency\"\nGCC High agency ATOs         : both Moderate and High\n=> [S5] and [S8] are both accurate; different instruments, same environment</pre>",
+        whyMatters:"In an ATO review, calling this a documentation error costs credibility. Name the instruments instead."},
+       {t:"Licensing traps",rl:"physical · 300",
+        action:"Record: S3 connector is an add-on [S9]; on-prem DLP needs a license for every user who adds or consumes files in scanned locations [S14]; DSPM for AI Copilot insights need Copilot licenses [S19].",
+        whyMatters:"Portal configuration succeeds whether or not users are licensed. The failure shows up in an audit, not in the product."}
+     ],
+     vids:[{s:3},{s:13},{s:24},{s:35}]},
+    {n:5,title:"Integration and AI elements",time:"60 min",rungs:"200-300",lib:"view-04-integration-ai",
+     opener:"One row per system outside the Purview boundary, with gov-cloud support marked per row, because that is where designs fail. Then trace one AI data path end to end.",
+     obj:"Third-party inventory (S3, Snowflake, Salesforce, on-prem shares, OneTrust), APIs and identity, AI features, and the AI data path.",
+     deliv:"Third-party inventory has every known external system; AI data path drawn.",
+     mods:[
+       {t:"Third-party and external systems inventory",rl:"integration · 200",
+        action:"Fill mechanism, data exchanged, auth, and gov-cloud support per system.",
+        lookLike:"<b>Context diagram</b><img class=\"diagram\" src=\"assets/diagrams/04-integration-ai-1.png\" alt=\"Integration context diagram\">",
+        whyMatters:"S3 scanning is not supported in the Azure Government Data Map [S4]. OneTrust gov-cloud support is UNVERIFIED: no Microsoft source states it."},
+       {t:"Connector auth: Role ARN + external ID (S3), key pair (Snowflake), OAuth connected app (Salesforce)",rl:"integration · 200",
+        action:"Write the auth mechanism and one failure mode for each connector [S9], [S10], [S11].",
+        whyMatters:"Snowflake is retiring basic auth in 2026; store the RSA private key with the Azure CLI, not the portal (the portal corrupts multi-line PEM) [S10]."},
+       {t:"AI elements: DSPM for AI, interaction logging, collection policy, retention, eDiscovery, agent protections",rl:"AI · 200",
+        action:"For each AI feature, record what it reads, what it emits, and the control.",
+        whyMatters:"Without a collection policy, Fabric Copilot, Security Copilot, and non-Copilot AI apps emit audit events only, not prompt text [S15]."},
+       {t:"The AI data path and the query-time gate",rl:"AI · 300",
+        action:"Trace prompt -> AI app -> grounding data -> labels/DLP/access checks -> response, then audit -> DSPM for AI and retention/eDiscovery.",
+        lookLike:"<b>AI data path</b><img class=\"diagram\" src=\"assets/diagrams/04-integration-ai-2.png\" alt=\"AI data path\">",
+        whyMatters:"What stops Copilot leaking a file the user cannot open is the permission, label, and DLP check between grounding and response. Clean permissions and labels come first; DSPM for AI discovers and assesses, it does not fix bad ACLs."}
+     ],
+     vids:[{s:15},{s:17},{s:28},{s:30}]},
+    {n:6,title:"Hands-on lab",time:"60 min",rungs:"200",lib:"block-06-hands-on-lab",
+     opener:"The one answer research alone cannot give: what the product does when you run it.",
+     obj:"Configure or trace one end-to-end flow in a tenant, trial, or docs walkthrough. Candidate: label -> DLP -> audit trail on SharePoint content.",
+     deliv:"One flow configured or traced with evidence saved.",
+     mods:[
+       {t:"Pick the flow and write the expected outcome first",rl:"lab · 200",
+        action:"Write what the views predict before touching the tenant.",
+        lookLike:"<b>Lab card</b><pre>Flow        : sensitivity label -> DLP policy -> unified audit log (SharePoint Online)\nPrediction  : labeled file shared externally -> DLP action -> activity event -> audit record\nEvidence    : policy config, activity explorer entry, audit search result (screenshots)\nDiff log    : every place the docs and the product disagree</pre>",
+        whyMatters:"A prediction written in advance is what turns a click-through into evidence."},
+       {t:"Capture evidence and note doc/product disagreements",rl:"lab · 200",
+        action:"Save screenshots or config snippets. No tenant secrets or real customer data in notes or models.",
+        whyMatters:"Disagreements between docs and product are the most valuable output of the day."}
+     ],
+     vids:[{s:14},{s:16}]},
+    {n:7,title:"Failure modes and security",time:"45 min",rungs:"300",lib:"block-07-failure-modes-and-security",
+     opener:"What breaks, what leaks, and what the controls actually stop. Cover all four views.",
+     obj:"Top failure modes per view with the tell and the control that should catch it, including AI oversharing and connector failure.",
+     deliv:"Failure-mode table covers all four views.",
+     mods:[
+       {t:"Failure-mode table per view",rl:"security · 300",
+        action:"Work through the Failure modes section of this console and mark each as understood.",
+        whyMatters:"The most likely first failure in a gov-cloud design is S3 scanning being unavailable in the Azure Government Data Map [S4]."},
+       {t:"AI oversharing: permissions, labels, and DSPM for AI",rl:"AI · 300",
+        action:"Explain why a weekly DSPM for AI oversharing assessment (top 100 SharePoint sites by usage) is detection, not remediation [S15].",
+        whyMatters:"Copilot honors existing permissions. An unlabeled file with a permissive ACL is readable, so it is groundable."}
+     ],
+     vids:[{s:19},{s:33},{s:34}]},
+    {n:8,title:"Design review and teach-back",time:"30 min",rungs:"300",lib:"block-08-design-review",
+     opener:"Defend the three views and the integration map to a skeptical architect.",
+     obj:"Ten-minute teach-back, the quiz bank without notes, three design decisions you would defend and one you would not.",
+     deliv:"Teach-back delivered; quiz answered without notes.",
+     mods:[
+       {t:"Ten-minute teach-back",rl:"review · 300",
+        action:"Present conceptual, logical, physical, and integration views out loud or recorded.",
+        whyMatters:"If you cannot say what changes between altitudes, you cannot review someone else's design."},
+       {t:"Three decisions you would defend, one you would not",rl:"review · 300",
+        action:"Use the Prompts section's design-review challenger to rehearse.",
+        lookLike:"<b>Decision register (example)</b><pre>DEFEND : Purview account in a dedicated data management landing zone [S24]\nDEFEND : Private Link isolation for the Purview account [S23]\nDEFEND : Labels + permissions cleanup before enabling Copilot [S15]\nWOULD NOT: Relying on OneTrust -> DSPM in GCC High (UNVERIFIED, preview) [S26][S27]</pre>",
+        whyMatters:"Naming the decision you would not defend shows you know where the evidence runs out."}
+     ],
+     vids:[{s:24},{s:25}]}
+  ],
+
+  ladder:[
+    {key:"governance",img:"governance",name:"Data governance (Data Map & Catalog)",
+     r:[
+      {n:100,t:"Data Map registers sources, scans, extracts metadata, classifies, and builds lineage; Unified Catalog curates it. Sources contain assets."},
+      {n:200,t:"Pick the integration runtime per source (Azure, AWS, Managed VNet, SHIR) and connector auth (Role ARN, key pair, connected app). Connectors return metadata only."},
+      {n:300,t:"Landing zone placement, Private Link, RBAC by collection, Azure Government exclusions (S3, RDS, commercial Power BI, preview sources, Synapse lineage), catalog cleanup."}
+     ]},
+    {key:"security",img:"security",name:"Data security (labels, DLP, IRM)",
+     r:[
+      {n:100,t:"Sensitive information types, sensitivity labels and label policies, DLP policies, Insider Risk alerts and cases."},
+      {n:200,t:"Auto-labeling, the on-prem information protection scanner, Endpoint DLP with device onboarding, AI interactions as IRM signals, per-user licensing."},
+      {n:300,t:"Government cloud parity gaps (named-entity SITs), browser extension for third-party AI sites, labels and permissions as the real defense against AI oversharing."}
+     ]},
+    {key:"compliance",img:"compliance",name:"Data compliance (Audit, eDiscovery)",
+     r:[
+      {n:100,t:"Unified audit log as the system of record; eDiscovery cases, holds, review, export; Compliance Manager score."},
+      {n:200,t:"CopilotInteraction records, ItemClass searches for Copilot Studio, retention location 'Microsoft Copilot Experiences'."},
+      {n:300,t:"Evidentiary completeness: thread IDs vs transcripts, collection policies, FedRAMP instruments (P-ATO vs equivalency) in an ATO package."}
+     ]},
+    {key:"ai",img:"ai",name:"AI protections (DSPM for AI)",
+     r:[
+      {n:100,t:"AI interaction = prompt + response; DSPM for AI is the front door that discovers AI use and recommends policies."},
+      {n:200,t:"The query-time gate in the AI data path, collection policies, agent inheritance of parent-app protections, Entra Agent ID."},
+      {n:300,t:"Custom AI apps via Graph Purview APIs and SDK, unsupported agent platforms (ChatGPT Enterprise, Claude Enterprise), GCC High/DoD DSPM for AI limits."}
+     ]},
+    {key:"ea",img:"hero",name:"Architecture altitudes (EA)",
+     r:[
+      {n:100,t:"Say what belongs at each altitude: conceptual (what/why), logical (parts/talk), physical (deployed/where)."},
+      {n:200,t:"Place each view in TOGAF ADM phases and DoDAF viewpoints (OV-1, CV-2, OV-2, OV-5b, SV-1/2/4/6, DIV-1/2/3, StdV-1)."},
+      {n:300,t:"Name a decision only visible at the physical altitude and defend a full design in review."}
+     ]}
+  ],
+
+  miniModules:[
+    {name:"Microsoft Defender for Endpoint",t:"Shares the device sensor that Endpoint DLP and third-party AI site visibility rely on. Unonboarded devices are invisible [S19]."},
+    {name:"Microsoft Entra ID and Entra Agent ID",t:"Identity pairing (GCC High and DoD pair with Entra ID in Azure Government), RBAC, Conditional Access, and the agent directory [S8], [S22], [S23]."},
+    {name:"Microsoft Sentinel",t:"SIEM next door; hosts the OneTrust partner solution that feeds DSPM (preview, gov support unverified) [S26], [S27]."},
+    {name:"SharePoint, OneDrive, Teams",t:"Native locations for labels, DLP, eDiscovery, and audit, and the grounding data for Copilot [S5], [S15]."},
+    {name:"Azure Key Vault",t:"Holds the scan credentials the integration runtimes use [S10], [S11]."}
+  ],
+
+  prompts:[
+    {cat:"Briefing at an altitude",model:"any LLM",desc:"Get oriented on one Purview area at a chosen altitude and rung.",
+     items:["Conceptual briefing","Logical component walk","Physical deployment briefing","Gov-cloud diff briefing"],
+     flagship:"You are briefing an enterprise architect on Microsoft Purview.\nTopic: <e.g. Data Map scanning of Amazon S3>\nAltitude: <conceptual | logical | physical>\nRung: <100 | 200 | 300>\n\nRules:\n- Use only Microsoft Learn, Microsoft service descriptions, Microsoft reference architectures, and Microsoft Mechanics. Cite the page for every claim.\n- Stay at the requested altitude. Conceptual = capabilities and actors, no product names. Logical = components, entities, flows, no SKUs or regions. Physical = named services, runtimes, clouds, licensing.\n- End with: what changes one altitude down, and one thing the sources are silent on.\n- If you are not sure, say UNVERIFIED instead of guessing."},
+    {cat:"Socratic examiner (design review)",model:"any LLM",desc:"Be questioned like block 8: a skeptical architect challenges your views.",
+     items:["Physical-view challenge","AI data path challenge","Gov-cloud challenge"],
+     flagship:"Act as a skeptical principal architect reviewing my Microsoft Purview design.\nAsk me ONE question at a time, starting at the physical view. After each answer:\n1. Grade it (solid / shaky / wrong) with a one-line reason.\n2. Name the Microsoft doc that settles it.\n3. Ask a harder follow-up.\nProbe especially: where the Purview account lives, which integration runtime scans each source, what the connectors return, what stops Copilot oversharing, and what differs in GCC High / DoD / Azure Government.\nStop after 8 questions and give me the assumption most likely to fall first."},
+    {cat:"Failure-mode spotter",model:"any LLM",desc:"Feed a (synthetic) design; get the failure modes with tell and mitigation.",
+     items:["Connector failures","Licensing traps","AI oversharing","Gov-cloud gaps"],
+     flagship:"Here is a synthetic Microsoft Purview deployment design:\n<paste design, no real tenant names, secrets, or customer data>\n\nList every failure mode you can find as a table: failure | view (conceptual/logical/physical/integration-AI) | first visible tell | root cause | mitigation | Microsoft source.\nInclude at least: connector auth and scope, integration runtime placement, scanner host prerequisites, per-user licensing, collection policies for AI prompt capture, and government cloud exclusions.\nMark anything you cannot source to Microsoft documentation as UNVERIFIED."},
+    {cat:"Design redline",model:"any LLM",desc:"Redline an architecture proposal paragraph by paragraph.",
+     items:["Landing zone placement","Network isolation","Label-first Copilot rollout"],
+     flagship:"Redline this Microsoft Purview architecture section as a reviewer would.\n<paste section>\n\nFor each sentence: KEEP, FIX, or CUT. For FIX, give the corrected sentence and the Microsoft source. Flag overclaims such as 'Purview intercepts retrieval' (sources describe agents inheriting their parent app's protections) or 'the audit log always stores prompt text' (a collection policy is needed for some apps; Copilot Studio audit stores a thread ID)."},
+    {cat:"Translation (architect to sponsor)",model:"any LLM",desc:"Turn a technical finding into a one-paragraph sponsor decision.",
+     items:["Gov-cloud gap to decision","Licensing trap to budget line","AI oversharing to rollout gate"],
+     flagship:"Translate this Microsoft Purview finding for a non-technical sponsor:\n<paste finding, e.g. 'Amazon S3 scanning is not supported in the Azure Government Data Map'>\n\nWrite: (1) what it means in one sentence, (2) the decision they must make with two options and the trade-off, (3) what it costs to be wrong. No jargon; keep the source link."}
+  ],
+
+  checklist:[
+    {title:"Treating cataloging as enforcement",view:"Conceptual",src:"S1",
+     good:"Bind classification to sensitivity labels with protection and to DLP rules that act. Cataloging is visibility; labels, permissions, and DLP are enforcement.",
+     bad:"Tell: sensitive data is discovered and cataloged but still open to users, guests, and AI. Root cause: assuming a scan or catalog entry changes ACLs."},
+    {title:"No owner per solution family",view:"Conceptual",src:"S1",
+     good:"Assign owners by family: compliance admin (policies), security analyst (DLP, IRM, DSPM triage), data source admin / steward (sources, runtimes), investigator (eDiscovery, audit).",
+     bad:"Tell: unreviewed DLP and IRM queues, stale catalog assets, unacted improvement actions."},
+    {title:"Copilot prompt text missing from investigations",view:"Logical",src:"S15",
+     good:"Turn on a collection policy for Copilot in Fabric, Security Copilot, and non-Copilot AI apps; bring custom apps in via Graph Purview APIs / SDK [S20].",
+     bad:"Tell: audit shows interaction events but no prompt or response text."},
+    {title:"Searching raw Audit for Copilot Studio transcripts",view:"Logical",src:"S21",
+     good:"Use DSPM for AI activity explorer to retrieve chat text, or an eDiscovery search on ItemClass IPM.SkypeTeams.Message.Copilot.Studio.* [S18].",
+     bad:"Tell: audit search returns a transcript thread ID only."},
+    {title:"Expecting enforcement on Amazon S3 from the Data Map",view:"Logical",src:"S9",
+     good:"Treat the multicloud connector as read-only discovery and classification; enforce access and encryption natively in AWS.",
+     bad:"Tell: expecting DLP or encryption at the bucket. The connector returns metadata and classification only."},
+    {title:"Designing S3 or RDS scanning into Azure Government",view:"Physical",src:"S4",
+     good:"Scan S3 from a commercial Purview account, or record the accepted gap as a block 8 design decision.",
+     bad:"Tell: S3, RDS, and commercial Power BI are excluded from the Data Map in Azure Government (Power BI GCC is supported)."},
+    {title:"Assuming DSPM for AI parity in GCC High and DoD",view:"Physical",src:"S7",
+     good:"Plan around the limits: no browse-to-URL policy creation; only supported AI sites.",
+     bad:"Tell: the policy you designed in commercial cannot be created in the gov tenant."},
+    {title:"Scanner host built on the wrong platform",view:"Physical",src:"S13",
+     good:"64-bit Windows Server 2016-2025 with desktop experience, 4 cores / 8 GB, SQL Server 2016+ with case-insensitive collation, AD account synced to Entra ID, HTTPS 443 to the listed endpoints, full client installed.",
+     bad:"Tell: install or service start fails (Server Core/Nano), DB init fails (case-sensitive collation), or access denied on shares (unsynced account)."},
+    {title:"Licensing only the scanner service account",view:"Physical",src:"S14",
+     good:"License every user who adds or consumes files in scanned on-prem locations; license Copilot users for DSPM for AI Copilot insights [S19].",
+     bad:"Tell: everything configures fine, then fails a license audit."},
+    {title:"KMS-encrypted buckets fail to scan",view:"Integration",src:"S9",
+     good:"Add kms:Decrypt to the IAM role Purview assumes.",
+     bad:"Tell: access denied on encrypted buckets only."},
+    {title:"SCP or bucket policy blocks the scanner",view:"Integration",src:"S9",
+     good:"Allow AssumeRole, GetBucketLocation, GetObject, ListBucket, GetBucketPublicAccessBlock, and region us-east-1.",
+     bad:"Tell: scan fails even though the role trust looks right."},
+    {title:"Role ARN / external ID mismatch",view:"Integration",src:"S9",
+     good:"Copy the Microsoft account ID and the external ID from the Purview credential into the IAM role trust relationship exactly.",
+     bad:"Tell: the AWS IR cannot assume the role."},
+    {title:"Snowflake basic auth and corrupted private keys",view:"Integration",src:"S10",
+     good:"Move to key pair (RSA, PKCS#8) and store the private key with the Azure CLI, not the portal.",
+     bad:"Tell: auth fails after basic auth retirement, or key-pair auth fails because the portal broke the multi-line PEM."},
+    {title:"Expecting classification on Salesforce",view:"Integration",src:"S11",
+     good:"Plan for technical metadata only (org, objects, fields) from Salesforce; classify elsewhere if needed [S2].",
+     bad:"Tell: Salesforce assets appear with no classifications, unlike S3 or Snowflake."},
+    {title:"Deleted source objects linger in the catalog",view:"Integration",src:"S10",
+     good:"Schedule periodic catalog cleanup for Snowflake and Salesforce sources [S11].",
+     bad:"Tell: orphan assets for tables or objects that no longer exist."},
+    {title:"Committing to OneTrust -> DSPM in a gov tenant",view:"Integration",src:"S27",
+     good:"Treat as UNVERIFIED until Microsoft documents gov support; partner solutions for non-Microsoft sources are in preview [S26].",
+     bad:"Tell: the design relies on a Sentinel partner feed with no Microsoft gov-cloud statement."},
+    {title:"AI oversharing through permissive SharePoint access",view:"Integration / AI",src:"S15",
+     good:"Clean permissions and labels first; use DSPM for AI's weekly oversharing assessment (top 100 SharePoint sites by usage) to find the worst sites.",
+     bad:"Tell: Copilot answers with content the user technically could open but should not see. DSPM discovers; it does not fix ACLs."},
+    {title:"No visibility into third-party AI sites",view:"Integration / AI",src:"S19",
+     good:"Onboard devices and deploy the Purview browser extension so DLP and IRM see pastes into AI sites.",
+     bad:"Tell: sensitive data pasted into consumer AI tools produces no events."},
+    {title:"Assuming every agent platform is covered",view:"Integration / AI",src:"S17",
+     good:"Check the agent support matrix; Copilot Studio and Foundry agents get classification, labels, DLP, IRM.",
+     bad:"Tell: ChatGPT Enterprise and Claude Enterprise agents are not supported by Purview's agent protections."},
+    {title:"Calling the GCC FedRAMP difference a doc error",view:"Physical",src:"S35",
+     good:"Name the instruments: Moderate P-ATO (DHHS) plus FedRAMP High equivalency from completed High audits; GCC High holds agency ATOs at both levels.",
+     bad:"Tell: an ATO reviewer catches the 'conflict' and the design loses credibility."}
+  ],
+
+  cheat:[
+    {h:"Scope and capability",r:[
+      "When you need to know <b>what data do we have and where</b>, reach for <b>Data Map + Unified Catalog</b>, not DLP. DLP acts on data you've already classified [S1], [S2].",
+      "When the ask is <b>stop this AI app from oversharing</b>, the answer is <b>clean permissions + labels first, DSPM for AI second</b>. DSPM discovers and assesses; it doesn't fix bad ACLs [S15].",
+      "When a request spans families (govern AND protect AND prove compliance), name the split: one portal, four separable products with different licenses [S1], [S25]."]},
+    {h:"Scanning and connectors",r:[
+      "Scanning <b>Amazon S3 or RDS</b>: Purview reaches them only via an <b>AWS IR that Microsoft operates</b> in its own AWS account [S3], [S9].",
+      "Scanning <b>on-prem file shares, SQL, or SharePoint Server</b>: you need a <b>self-hosted IR or the information protection scanner</b> on customer Windows Server, the only place customer infrastructure appears [S12], [S13].",
+      "Default assumption for connectors: <b>metadata and classification only, never content</b> [S9], [S2].",
+      "Snowflake auth breaks: check for <b>basic auth</b> (retiring in 2026); move to <b>key pair (RSA, PKCS#8)</b> stored via Azure CLI [S10].",
+      "Salesforce returns <b>technical metadata only, no classification</b> [S2], [S11]."]},
+    {h:"Gov-cloud and licensing",r:[
+      "<b>S3 or RDS + Azure Government</b> is a hard incompatibility; scan from a commercial account or accept the gap [S4].",
+      "<b>GCC Moderate vs High: both are right.</b> Moderate P-ATO, High equivalency [S35].",
+      "Gov-cloud tables list <b>differences from the commercial baseline</b>; a blank cell usually means parity [S7].",
+      "DSPM for AI in GCC High / DoD: <b>no browse-to-URL policy</b>, supported AI sites only [S7].",
+      "<b>Every user who touches a scanned on-prem location needs a license</b>, not just the scanner account [S14]."]},
+    {h:"AI data path",r:[
+      "What stops Copilot leaking a file the user can't open: the <b>query-time permission/label/DLP check between grounding and response</b> [S15], [S16].",
+      "Copilot Studio: <b>Audit stores only a thread ID</b>; DSPM for AI activity explorer retrieves the text [S21].",
+      "Prompts 'missing'? Check the <b>collection policy</b> [S15].",
+      "Agent support matrix has a <b>hard exclusion list</b>: ChatGPT Enterprise and Claude Enterprise agents [S17]."]},
+    {h:"Architecture placement",r:[
+      "The Purview account is <b>an Azure resource</b>; one dedicated data management landing zone per Entra tenant [S24].",
+      "Four clouds: <b>M365 tenant</b> (portal, solutions, audit) · <b>Azure subscription</b> (account, Key Vault, Managed VNet IR) · <b>AWS</b> (Microsoft-hosted IR) · <b>customer estate</b> (SHIR, scanner, shares, devices).",
+      "Network isolation is <b>Azure Private Link</b>, not a firewall allowlist alone [S23]."]}
+  ],
+  falsifier:"'Purview intercepts the retrieval' is imprecise. Sources describe agents as inheriting their parent app's protections (labels, DLP), not Purview sitting inline as a proxy. Narrate it as inheritance, not interception.",
+
+  quizSections:{1:"Conceptual / logical",2:"Physical / deployment",3:"Integration and third-party",4:"AI elements",5:"Framework / synthesis"},
+  quiz:[
+    {week:1,rung:200,pillar:"Logical",type:"open",question:"Which logical component realizes capability C1 (Know your data), and what physical service realizes it?",answer:"The classification engine and the Data Map. The Data Map is realized as a Purview account in a customer Azure subscription (ideally its own data management landing zone), scanning through integration runtimes.",explanation:"Logical view component table [S1], [S2]; physical mapping [S24], [S3]."},
+    {week:1,rung:200,pillar:"Integration",type:"open",question:"Name three external systems and the mechanism each uses.",answer:"Amazon S3: Data Map multicloud connector via the Microsoft-hosted AWS IR with an IAM role ARN + external ID. Snowflake: Data Map connector via Azure IR, Managed VNet IR, or SHIR with key-pair auth. Salesforce: Data Map connector over REST API v41.0 with an OAuth connected app. (Also: on-prem shares via the scanner over SMB; OneTrust via Sentinel into DSPM.)",explanation:"Integration inventory [S9], [S10], [S11], [S12], [S27]."},
+    {week:1,rung:200,pillar:"AI",type:"mc",question:"Which control stops an AI feature from grounding on data the user cannot open?",options:["The Data Map scan schedule","Query-time permission, label, and DLP checks between grounding and response","The Compliance Manager score","A one-time check when the semantic index is built"],answer:"Query-time permission, label, and DLP checks between grounding and response",explanation:"AI data path: every grounding result is re-checked at query time [S15], [S16]."},
+    {week:1,rung:100,pillar:"Conceptual",type:"open",question:"Name the five capabilities Microsoft states as Purview's outcomes, and one actor for each.",answer:"C1 Know your data (data steward), C2 Protect sensitive data (compliance admin), C3 Govern data (data source admin), C4 Manage risk and regulation (investigator), C5 Secure AI use (security and compliance analyst).",explanation:"Conceptual view capability table [S1]."},
+    {week:1,rung:200,pillar:"Logical",type:"mc",question:"Which components serve C3 (Govern data) rather than C1 (Know your data)?",options:["Data Map and Unified Catalog","DLP and Insider Risk","Audit and eDiscovery","DSPM for AI"],answer:"Data Map and Unified Catalog",explanation:"C1 is served by the classification engine and Data Map; C3 by Data Map and the Unified Catalog that curates its assets [S2]."},
+    {week:1,rung:300,pillar:"Logical",type:"open",question:"In the ERD, what does SENSITIVITY_LABEL's many-to-many relationship to CONTENT_ITEM tell you about how labels are modeled?",answer:"Labels are reusable definitions (published by a label policy) applied across many items, and an item's label can change over its life. The ERD is a modeling simplification: at any moment an item typically carries one sensitivity label (general Microsoft behavior, not in the ledger; verify).",explanation:"Logical data model in the Logical view."},
+    {week:1,rung:200,pillar:"Logical",type:"open",question:"Which entity emits AUDIT_RECORD, what's the cardinality, and why does that matter operationally?",answer:"AI_INTERACTION emits exactly one AUDIT_RECORD (1:1). Every interaction is therefore accounted for in the audit log, which feeds DSPM for AI, IRM, and eDiscovery. But the record may not contain the prompt text (collection policy, Copilot Studio thread IDs).",explanation:"ERD and flows F4-F6 [S16], [S21]."},
+    {week:1,rung:200,pillar:"Logical",type:"open",question:"Trace the logical flow from a scanned data source to an investigation case. Name every stage.",answer:"Data source -> scan and extract metadata -> classify -> (Data Map and catalog) and label and protect -> DLP policy decision -> activity events and alerts -> unified audit log -> DSPM / IRM / eDiscovery -> case.",explanation:"Logical flows diagram."},
+    {week:2,rung:200,pillar:"Physical",type:"open",question:"Name the four 'clouds' in the physical topology and one thing that runs in each.",answer:"Microsoft 365 tenant: Purview portal, compliance solutions, unified audit log. Azure subscription: Purview account (Data Map + Unified Catalog), Key Vault, Managed VNet IR. AWS: the AWS IR hosted by Purview for S3. Customer estate: SHIR, information protection scanner + SQL Server, file shares, onboarded devices.",explanation:"Physical deployment topology."},
+    {week:2,rung:200,pillar:"Physical",type:"mc",question:"Where does the Purview account itself physically live?",options:["In the Microsoft 365 tenant","In an Azure subscription, ideally a dedicated data management landing zone per Entra tenant","On a customer Windows Server","In the customer's AWS account"],answer:"In an Azure subscription, ideally a dedicated data management landing zone per Entra tenant",explanation:"CAF unified data platform reference architecture [S24]."},
+    {week:2,rung:200,pillar:"Physical",type:"open",question:"What OS, sizing, and database does the information protection scanner require?",answer:"64-bit Windows Server 2016, 2019, 2022, or 2025 (no Server Core or Nano); 4 cores, 8 GB RAM, about 10 GB free for temp files; SQL Server 2016 or later with case-insensitive collation.",explanation:"Scanner prerequisites [S13]."},
+    {week:2,rung:300,pillar:"Physical",type:"mc",question:"Which sources are explicitly excluded from the Data Map in Azure Government?",options:["Snowflake and Salesforce","Amazon S3, Amazon RDS, and commercial Power BI (Power BI GCC is supported)","SharePoint Online and OneDrive","Azure SQL and Azure Blob"],answer:"Amazon S3, Amazon RDS, and commercial Power BI (Power BI GCC is supported)",explanation:"Azure Government feature availability; preview sources and Synapse lineage are also unsupported [S4]."},
+    {week:2,rung:300,pillar:"Physical",type:"mc",question:"True or false: Microsoft documents conflicting FedRAMP levels for GCC, so one of the pages is wrong.",options:["True: one page is a documentation error","False: both are accurate; GCC has a Moderate P-ATO and advertises FedRAMP High equivalency after completed High audits"],answer:"False: both are accurate; GCC has a Moderate P-ATO and advertises FedRAMP High equivalency after completed High audits",explanation:"Resolved by the Microsoft Public Sector Blog [S35]; GCC High holds agency ATOs at both Moderate and High."},
+    {week:2,rung:200,pillar:"Physical",type:"open",question:"What licensing trap catches people scanning on-prem file shares with DLP?",answer:"Every user who adds or consumes files in a scanned location needs a license, not just the scanner service account.",explanation:"DLP for on-premises repositories [S14]."},
+    {week:2,rung:200,pillar:"Physical",type:"mc",question:"Which integration runtime scans Amazon S3, and who operates it?",options:["A self-hosted IR on a customer EC2 instance","The AWS IR, hosted by Microsoft (Purview) in its own AWS account","The Managed VNet IR in Azure","The information protection scanner"],answer:"The AWS IR, hosted by Microsoft (Purview) in its own AWS account",explanation:"IR decision matrix and S3 connector docs [S3], [S9]."},
+    {week:3,rung:200,pillar:"Integration",type:"open",question:"What auth does the Amazon S3 connector use, and what does it explicitly NOT return to Purview?",answer:"An IAM role (Role ARN) trusting the Microsoft account ID with an external ID, not a stored access key. It never returns file content; only metadata and classification.",explanation:"S3 connector [S9]."},
+    {week:3,rung:200,pillar:"Integration",type:"open",question:"What replaces Snowflake basic auth, and what's the gotcha when storing the credential?",answer:"Key pair authentication (RSA, PKCS#8). Store the private key with the Azure CLI rather than pasting it into the portal, which corrupts multi-line PEM.",explanation:"Snowflake connector; Snowflake is retiring basic auth in 2026 [S10]."},
+    {week:3,rung:200,pillar:"Integration",type:"mc",question:"What's the key difference between the Snowflake and Salesforce connectors?",options:["Snowflake returns content; Salesforce returns metadata","Snowflake returns technical metadata, classification, and static lineage; Salesforce returns technical metadata only, with no classification","Both classify, only Salesforce does lineage","Neither is supported in commercial clouds"],answer:"Snowflake returns technical metadata, classification, and static lineage; Salesforce returns technical metadata only, with no classification",explanation:"Data source capability matrix [S2], [S10], [S11]."},
+    {week:3,rung:300,pillar:"Integration",type:"open",question:"How does OneTrust data reach Purview DSPM, and what's the status?",answer:"Through Microsoft Sentinel: a partner solution in the Content Hub feeds OneTrust findings into DSPM. It needs an active OneTrust account and a Sentinel workspace; partner solutions for non-Microsoft sources are in preview.",explanation:"[S27], [S26]."},
+    {week:3,rung:300,pillar:"Integration",type:"open",question:"Which integration is marked UNVERIFIED for gov-cloud support, and why?",answer:"OneTrust. No Microsoft source states gov-cloud support; the only sources are a partner-authored Marketplace listing and a vendor page.",explanation:"[S27], [S31]; the source rule forbids treating vendor claims as Microsoft-grounded."},
+    {week:3,rung:200,pillar:"Integration",type:"open",question:"List two AWS-side failure modes for S3 scanning and their fixes.",answer:"KMS-encrypted buckets: add kms:Decrypt to the IAM role. SCP or bucket policy blocks: allow AssumeRole, GetBucketLocation, GetObject, ListBucket, GetBucketPublicAccessBlock, and us-east-1. (Also: Role ARN / external ID mismatch.)",explanation:"[S9]."},
+    {week:4,rung:200,pillar:"AI",type:"open",question:"What does DSPM for AI do that the index Copilot grounds on doesn't?",answer:"It discovers AI use across Copilots, agents, and third-party AI apps, recommends and applies one-click policies (DLP, IRM, retention, eDiscovery), and runs a weekly oversharing risk assessment of the top 100 SharePoint sites by usage.",explanation:"[S15]."},
+    {week:4,rung:300,pillar:"AI",type:"mc",question:"Where does the Copilot Studio chat text live for review?",options:["Inline in the unified audit log record","Audit stores only a transcript thread ID; DSPM for AI activity explorer retrieves the text (eDiscovery can search it by ItemClass)","Only in the Copilot Studio maker portal","Nowhere; it is never retained"],answer:"Audit stores only a transcript thread ID; DSPM for AI activity explorer retrieves the text (eDiscovery can search it by ItemClass)",explanation:"[S21], [S18]."},
+    {week:4,rung:200,pillar:"AI",type:"open",question:"Difference between an audit event and a captured prompt/response for Fabric or Security Copilot? What turns on the latter?",answer:"Without a collection policy, you get the audit event (who, when, which app) but no prompt or response text. A collection policy captures the full text.",explanation:"[S15]."},
+    {week:4,rung:200,pillar:"AI",type:"mc",question:"Which agent platforms are explicitly NOT supported by Purview's agent protections?",options:["Copilot Studio and Microsoft Foundry","ChatGPT Enterprise and Claude Enterprise agents","Microsoft 365 Copilot and Security Copilot","All agents are supported"],answer:"ChatGPT Enterprise and Claude Enterprise agents",explanation:"Agent support matrix [S17]."},
+    {week:4,rung:200,pillar:"AI",type:"open",question:"In the AI data path, what happens between 'grounding data' and 'response'?",answer:"A query-time gate: labels, DLP, and access checks re-evaluate every grounding result against the caller's identity. Only allowed content reaches the response. The interaction is then written to the unified audit log as CopilotInteraction.",explanation:"AI data path diagram [S15], [S16]."},
+    {week:4,rung:300,pillar:"AI",type:"open",question:"How does eDiscovery search AI interactions? Give the ItemClass pattern.",answer:"Search AI interactions in an eDiscovery case by ItemClass, for example IPM.SkypeTeams.Message.Copilot.Studio.* for Copilot Studio agents. Retention uses the Data Lifecycle Management location 'Microsoft Copilot Experiences'.",explanation:"[S18]."},
+    {week:5,rung:300,pillar:"EA",type:"open",question:"Place the Data Map in a TOGAF ADM phase and a DoDAF viewpoint. Justify both.",answer:"Logically, TOGAF Phase C (data architecture) and DoDAF SV-1 (logical) / DIV-2: it is a component with responsibilities (register, scan, classify, lineage) and owns asset entities. Physically, Phase D and SV-1/SV-2 plus DIV-3: a Purview account in an Azure subscription reached through integration runtimes.",explanation:"View framework lenses in the Logical and Physical views."},
+    {week:5,rung:300,pillar:"EA",type:"open",question:"Name one design decision that only makes sense once you've seen the physical view.",answer:"Examples: scanning S3 from a commercial Purview account because the Azure Government Data Map excludes S3 [S4]; placing a SHIR in the customer estate for on-prem SQL; licensing every user of scanned shares [S14]; isolating the account with Private Link [S23].",explanation:"Invisible at the logical altitude, where there are no clouds, runtimes, or SKUs."},
+    {week:5,rung:300,pillar:"EA",type:"open",question:"A customer also has an on-prem SQL Server data warehouse. Which physical component do you add, and where does it run?",answer:"A self-hosted integration runtime (JDK 11) on a customer VM or Kubernetes in the customer estate, registered to the Purview account, with scan credentials in Key Vault.",explanation:"IR decision matrix [S3]."}
+  ],
+
+  views:{
+    conceptual:{lib:"view-01-conceptual",img:["01-conceptual-1.png"],
+      rule:"Conceptual means what and why, not how. Capabilities and actors only.",
+      tables:[
+        {h:"Capabilities",cols:["#","Capability","Outcome","Actors","Source"],rows:[
+          ["C1","Know your data","Visibility into data across the organization","Data owner, steward, compliance admin","[S1]"],
+          ["C2","Protect sensitive data","Safeguard sensitive data across its lifecycle, wherever it lives","Compliance admin, end user","[S1]"],
+          ["C3","Govern data","Catalog, classify, and curate the data estate","Data steward, data source admin","[S1], [S2]"],
+          ["C4","Manage risk and regulation","Manage critical data risks and regulatory requirements","Compliance admin, investigator, auditor","[S1]"],
+          ["C5","Secure AI use","Prevent oversharing and leakage in generative AI","Security and compliance analyst","[S1], [S15]"]]},
+        {h:"Solution families",cols:["Family","Question it answers","Solutions"],rows:[
+          ["Data security","Is sensitive data protected and not leaking?","Information Protection, DLP, Insider Risk Management, DSPM"],
+          ["Data governance","What data do we have, where, and who owns it?","Data Map, Unified Catalog"],
+          ["Data compliance","Can we prove and enforce obligations?","Audit, eDiscovery, Compliance Manager (+ lifecycle, records, communication compliance)"],
+          ["AI protections","Is AI use safe and auditable?","DSPM for AI, AI interaction auditing"]]}]},
+    logical:{lib:"view-02-logical",img:["02-logical-3.png","02-logical-1.png","02-logical-2.png"],
+      rule:"Logical means which parts and how they talk. No regions, SKUs, or hostnames.",
+      tables:[
+        {h:"Logical components",cols:["Component","Responsibility","Realizes","Outputs","Source"],rows:[
+          ["Classification engine","Detect sensitive info types with classifiers","C1","Classifications","[S1]"],
+          ["Information Protection","Define and apply sensitivity labels and protection","C2","Labeled or encrypted content","[S1]"],
+          ["Data Loss Prevention","Detect and act on sensitive data in use and in motion","C2","Alerts, blocks, activity events","[S1], [S14]"],
+          ["Insider Risk Management","Detect risky user activity from signals","C4, C5","Alerts, cases","[S1], [S15]"],
+          ["Data Map","Register sources, scan, extract metadata, classify, build lineage","C1, C3","Assets, classifications, lineage","[S2]"],
+          ["Unified Catalog","Search and curate assets from the Data Map","C3","Curated catalog","[S1], [S9]"],
+          ["Audit","Record user, admin, and AI activity in the unified audit log","C4, C5","Searchable audit records","[S1], [S16]"],
+          ["eDiscovery","Search, hold, review, export content as evidence","C4","Cases, holds, exports","[S1], [S18]"],
+          ["Compliance Manager","Assess posture against regulations","C4","Compliance score","[S1], [S25]"],
+          ["DSPM / DSPM for AI","Discover AI use, recommend and apply policies, assess oversharing","C5","Reports, one-click policies, risk assessments","[S15], [S16]"]]},
+        {h:"Logical flows",cols:["Flow","From","To","Payload","Trigger","Source"],rows:[
+          ["F1 Scan","Data source","Data Map","Metadata and classifications only","Schedule or once","[S9]"],
+          ["F2 On-prem label","Scanner","File share","Label and protection applied in place","Scan job","[S12]"],
+          ["F3 DLP evaluation","Content activity","DLP engine","Content plus classifications","User action or scan","[S14]"],
+          ["F4 AI audit","AI app","Unified audit log","Interaction metadata; prompt/response where captured","Each interaction","[S16]"],
+          ["F5 AI insight","Audit log","DSPM for AI activity explorer","AI interaction events","Continuous","[S16]"],
+          ["F6 Retain or discover","AI interactions","Retention and eDiscovery","Interaction items","Policy or case","[S18]"]]}]},
+    physical:{lib:"view-03-physical",img:["03-physical-1.png"],
+      rule:"Physical means what is deployed and where. Every row traces to a logical component.",
+      tables:[
+        {h:"Logical to physical",cols:["Logical component","Physical realization","Where it runs","Source"],rows:[
+          ["All solutions (admin)","Microsoft Purview portal","Microsoft cloud (SaaS)","[S1]"],
+          ["Data Map / Unified Catalog","Purview account; dedicated data management landing zone, one per Entra tenant","Customer Azure subscription","[S24]"],
+          ["Data Map scanning","Azure IR, AWS IR (hosted by Purview), Managed VNet IR, SHIR, Kubernetes SHIR","Microsoft-managed, or customer VM / Kubernetes","[S3]"],
+          ["Scan credentials","Purview credentials backed by Key Vault secrets","Customer Key Vault","[S10], [S11]"],
+          ["On-prem Information Protection and DLP","Information protection scanner: Windows service, config in SQL Server, multi-node","Customer Windows Server","[S12], [S13], [S14]"],
+          ["Endpoint DLP, third-party AI sites","Device onboarding (shared with Defender for Endpoint) + Purview browser extension","Managed Windows devices","[S19], [S22]"],
+          ["Audit and AI interactions","Microsoft 365 unified audit log","Microsoft cloud","[S16]"],
+          ["DSPM for AI","Portal solution; one-click policies; weekly top-100 SharePoint site assessment","Microsoft cloud","[S15]"]]},
+        {h:"Standards and protocols (StdV-1)",cols:["Standard","Used for","Source"],rows:[
+          ["SMB, NFS (preview) via UNC paths","On-prem file share scanning","[S12]"],
+          ["HTTPS 443","Scanner to Microsoft cloud","[S13]"],
+          ["AWS IAM role assumption with external ID","S3 scanning","[S9]"],
+          ["Salesforce REST API v41.0, OAuth connected app","Salesforce metadata","[S11]"],
+          ["RSA key pair (PKCS#8)","Snowflake authentication","[S10]"],
+          ["Azure Private Link","Network isolation of the Purview account","[S23]"],
+          ["Microsoft Graph Purview APIs","Custom AI app integration","[S20]"]]}]},
+    integration:{lib:"view-04-integration-ai",img:["04-integration-ai-1.png","04-integration-ai-2.png"],
+      rule:"One row per system outside the boundary, with gov-cloud support per row.",
+      tables:[
+        {h:"Third-party and external systems",cols:["System","Direction","Mechanism","Data exchanged","Auth","Gov-cloud support"],rows:[
+          ["Amazon S3","in","Multicloud scanning connector; AWS IR hosted by Purview [S3], [S9]","Metadata and classification only","IAM role (Role ARN) with external ID","GAP:Not supported in Azure Government [S4]"],
+          ["Snowflake","in","Connector via Azure IR, Managed VNet IR v2, or SHIR [S10]","Technical metadata, classification, static lineage","Key pair (basic auth retiring 2026)","Not on the Azure Gov exclusion list; verify in tenant"],
+          ["Salesforce","in","Connector over REST API v41.0; Azure IR or SHIR [S11]","Technical metadata only; no classification","OAuth connected app + user password in Key Vault","Not on the Azure Gov exclusion list; verify in tenant"],
+          ["On-prem file shares","bi","Information protection scanner over UNC (SMB; NFS preview) [S12]","Discovery, classification, labels and protection in place; on-prem DLP","AD service account synced to Entra ID","Scanner GA in GCC, GCC High, DoD [S8]"],
+          ["OneTrust","in (to DSPM)","Partner solution via Microsoft Sentinel feeding DSPM (preview) [S27], [S26]","Sensitive-data findings from OneTrust-scanned sources","OneTrust account + Sentinel workspace","WARN:UNVERIFIED: no Microsoft source"]]},
+        {h:"AI elements",cols:["AI feature","What it does","Emits","Controls","Source"],rows:[
+          ["DSPM for AI","Secure data for AI apps and monitor AI use","Reports, one-click policies, risk assessments","DLP, IRM, retention, eDiscovery policies it creates","[S15]"],
+          ["AI interaction logging","Prompts and responses land in the unified audit log","CopilotInteraction records","Audit retention","[S16], [S21]"],
+          ["Collection policy","Captures prompts/responses for Fabric Copilot, Security Copilot, non-Copilot AI apps","Stored interactions","Without it: events only, no text","[S15]"],
+          ["Retention for AI","Retain or delete via location 'Microsoft Copilot Experiences'","Retained items","Retention policy","[S18]"],
+          ["eDiscovery for AI","Search by ItemClass, e.g. IPM.SkypeTeams.Message.Copilot.Studio.*","Case content","eDiscovery case","[S18]"],
+          ["Agent protections","Agents inherit parent-app protections; Copilot Studio and Foundry covered","Audit, DSPM insights","ChatGPT Enterprise, Claude Enterprise agents not supported","[S17]"],
+          ["Third-party AI sites","Visibility into sensitive data pasted into AI sites","DLP and IRM events","Device onboarding + browser extension","[S19]"]]}]},
+    govcloud:{lib:"view-03-physical",img:[],
+      rule:"Baseline = the commercial plan. Government guides list only differences from it [S7].",
+      tables:[
+        {h:"Cloud and tenant variants",cols:["Capability","Commercial","GCC","GCC High","DoD","Source"],rows:[
+          ["Compliance posture claims","—","FedRAMP Moderate P-ATO + High equivalency [S35], CJIS, IRS 1075","DoD IL4/5, DFARS 7012, NIST 800-171, ITAR","same as GCC High","[S5], [S8], [S35]"],
+          ["Identity pairing","Entra ID (commercial)","Entra ID (commercial)","Entra ID in Azure Government","Entra ID in Azure Government","[S8]"],
+          ["Sensitivity labels, auto-labeling","Baseline","Available","Available","Available","[S5], [S6], [S7]"],
+          ["Information protection scanner","Baseline","GA","GA","GA","[S8]"],
+          ["Named-entity SITs","Baseline","WARN:In development","WARN:Engineering backlog","WARN:In development","[S5], [S6], [S7]"],
+          ["DLP: files, email, endpoint, Teams, on-prem scanner","Baseline","Available","Available","confirm in [S7]","[S5], [S6]"],
+          ["Insider Risk: data theft by departing users","Baseline","confirm","confirm","Available (analytics in preview)","[S7]"],
+          ["Audit (Standard and Premium)","Baseline","confirm","confirm","Available","[S7]"],
+          ["DSPM for AI: policies and analytics","Baseline","confirm","WARN:Available with limits","WARN:Available with limits","[S7]"]]},
+        {h:"Data Map in Azure Government",cols:["Item","Status","Source"],rows:[
+          ["Amazon S3, Amazon RDS","GAP:Not supported","[S4]"],
+          ["Power BI (commercial)","GAP:Not supported (Power BI GCC is supported)","[S4]"],
+          ["Preview sources","GAP:Not supported","[S4]"],
+          ["Synapse pipeline lineage","GAP:Not supported","[S4]"],
+          ["Everything else","Fully supported","[S4]"]]}]}
+  },
+
+  eaFrameworks:{
+    togaf:[
+      {phase:"Phase A: Architecture Vision",t:"Conceptual view",items:["Four pressures: fragmented data, low visibility, fast AI adoption, blurred roles [S1].","Five capabilities C1-C5 as the capability map.","Boundary statement and neighbor list (block 1)."]},
+      {phase:"Phase B: Business Architecture",t:"Actors and families",items:["Actors: compliance admin, analyst, data source admin, investigator, end user, agent.","Four solution families with separate owners and licenses [S1], [S25]."]},
+      {phase:"Phase C: Information Systems (Data + Application)",t:"Logical view",items:["Ten logical components with responsibilities and interfaces.","Logical data model: label, SIT, policy, source, asset, audit record, AI interaction, case.","Flows F1-F6; connectors return metadata only [S9]."]},
+      {phase:"Phase D: Technology Architecture",t:"Physical view",items:["Four-cloud topology; Purview account in a data management landing zone [S24].","Integration runtimes, scanner host, Key Vault, Private Link [S3], [S13], [S23].","Gov-cloud variants and Azure Government Data Map exclusions [S4]."]},
+      {phase:"Phase E: Opportunities and Solutions",t:"Gaps and options",items:["S3 in Azure Government: scan from commercial or accept the gap.","OneTrust in gov tenants: UNVERIFIED; defer.","Licensing coverage per capability [S25]."]},
+      {phase:"Architecture Governance (AI)",t:"Integration and AI elements",items:["DSPM for AI policies, collection policies, retention and eDiscovery for AI [S15], [S18].","Agent support matrix and Entra Agent ID [S17], [S22]."]}
+    ],
+    dodaf:[
+      {view:"OV-1 / CV-2 / DIV-1",t:"Conceptual",items:["High-level operational concept (people and agents, external stores, AI apps, regulators).","Capability taxonomy C1-C5.","Conceptual data: classification, label, policy, data estate, AI interaction."]},
+      {view:"OV-2 / OV-5b / SV-1 (logical) / DIV-2",t:"Logical",items:["Operational resource flows F1-F6.","Activity model: scan, classify, label, evaluate, audit, investigate.","Logical data model (ERD)."]},
+      {view:"SV-1/SV-2 / SV-4 / DIV-3 / StdV-1",t:"Physical",items:["Systems interfaces across M365, Azure, AWS, customer estate.","Systems functionality per runtime and scanner.","Standards profile: SMB/NFS, HTTPS 443, IAM external ID, REST v41.0, PKCS#8, Private Link, Graph APIs."]},
+      {view:"SV-6 / OV-3 / StdV-1 (APIs)",t:"Integration and AI",items:["Resource flow matrix for S3, Snowflake, Salesforce, file shares, OneTrust.","AI data path and audit flows.","API and protocol standards for connectors and custom AI apps."]}
+    ],
+    altitudes:[
+      {name:"Conceptual",q:"What and why",allowed:"Capabilities, actors, value, concepts",forbidden:"Product names, SKUs, regions, hostnames",lib:"view-01-conceptual"},
+      {name:"Logical",q:"Which parts and how they talk",allowed:"Components, responsibilities, interfaces, entities, flows",forbidden:"Regions, SKUs, hostnames",lib:"view-02-logical"},
+      {name:"Physical",q:"What is deployed and where",allowed:"Named services, runtimes, clouds, tenants, licensing, protocols",forbidden:"Unmapped components (every row traces to a logical component)",lib:"view-03-physical"},
+      {name:"Integration and AI",q:"Who we trust and how data crosses the boundary",allowed:"External systems, auth, APIs, identity, AI data path",forbidden:"Gov-cloud claims without a source (mark UNVERIFIED)",lib:"view-04-integration-ai"}
+    ],
+    table:[
+      ["Classification engine / Information Protection","Phase C, D","SV-1, DIV-2","C1, C2"],
+      ["Data Map / Unified Catalog","Phase C (logical), D (physical)","SV-1/SV-2, DIV-2/DIV-3","C1, C3"],
+      ["Integration runtimes + scanner","Phase D, E","SV-2, SV-4, StdV-1","C1, C2, C3"],
+      ["DLP / Insider Risk","Phase C, D","OV-5b, SV-4","C2, C4, C5"],
+      ["Audit / eDiscovery / Compliance Manager","Phase C, Governance","OV-2, SV-6","C4"],
+      ["DSPM for AI + AI interaction logging","Phase C, D, Governance for AI","OV-3, SV-6","C5"],
+      ["Third-party connectors (S3, Snowflake, Salesforce, OneTrust)","Phase C interfaces, D","SV-1/SV-2 external, SV-6, StdV-1","C1, C3"]
+    ]
+  },
+
+  deckFlags:{2:"UNVERIFIED: '78% of users bring their own AI tools' is not in the ledger",10:"Overstated: agents inherit parent-app protections [S17]; Copilot Studio audit holds a thread ID [S21]",12:"Inaccurate: both GCC High and DoD support IL4/5 [S8]; the S3 gap is the Azure Government Data Map [S4]",14:"Illustrative: DSPM for AI needs about a day for data [S16]",15:"Deck opinion: 30/60/90 plan is not sourced"}
+};
+
+DATA.glossary = [
+  {category:"Conceptual",term:"Sensitivity label",rung:100,essential:true,definition:"A persistent marking on content that can carry protection (encryption, watermark, access restriction) and is published by a label policy.",see_also:"Label policy, Information Protection"},
+  {category:"Conceptual",term:"Sensitive information type (SIT)",rung:100,essential:true,definition:"A pattern or classifier used to detect a specific category of sensitive data in content or assets.",see_also:"Classification"},
+  {category:"Conceptual",term:"Classification",rung:100,essential:true,definition:"The act of detecting sensitive information types with classifiers against content or assets.",see_also:"SIT, Data Map"},
+  {category:"Conceptual",term:"Data estate",rung:100,definition:"All sources the Data Map knows about, including non-Microsoft ones [S2].",see_also:"Data source, Asset"},
+  {category:"Conceptual",term:"Agent (Purview context)",rung:200,essential:true,definition:"A non-human actor (Copilot Studio, Foundry, etc.) that reads and writes data on a user's behalf and inherits its parent app's protections rather than getting its own [S17].",see_also:"Microsoft Entra Agent ID"},
+  {category:"Conceptual",term:"DSPM (Data Security Posture Management)",rung:200,definition:"The solution that assesses data-security risk and recommends or applies policies across the estate.",see_also:"DSPM for AI"},
+  {category:"Logical",term:"Data Map",rung:100,essential:true,definition:"The component that registers data sources, scans them, extracts metadata, classifies, and builds lineage [S2].",see_also:"Unified Catalog, Integration runtime"},
+  {category:"Logical",term:"Unified Catalog",rung:100,essential:true,definition:"The searchable, curated catalog built from Data Map assets.",see_also:"Data Map, Asset"},
+  {category:"Logical",term:"Data source",rung:100,definition:"A registered connection (type, endpoint, collection) that the Data Map scans; contains assets.",see_also:"Asset, Collection"},
+  {category:"Logical",term:"Asset",rung:100,definition:"A cataloged object (qualified name, schema, classifications, lineage) belonging to a data source.",see_also:"Data source"},
+  {category:"Logical",term:"Policy",rung:100,essential:true,definition:"A rule (DLP, retention, insider risk, or collection type) that targets locations and uses SITs and labels to decide an action.",see_also:"DLP, Collection policy"},
+  {category:"Logical",term:"Data Loss Prevention (DLP)",rung:100,essential:true,definition:"Detects and acts on sensitive data in use and in motion using DLP policies and classifications; emits alerts, blocks, and activity events [S1], [S14].",see_also:"Endpoint DLP, Policy"},
+  {category:"Logical",term:"Insider Risk Management (IRM)",rung:200,essential:true,definition:"Detects risky user activity from behavioral and activity signals, including AI interactions, and raises alerts and cases.",see_also:"Case"},
+  {category:"Logical",term:"Compliance Manager",rung:100,definition:"Assesses organizational posture against named regulations and produces a compliance score.",see_also:""},
+  {category:"Logical",term:"Audit (unified audit log)",rung:100,essential:true,definition:"Microsoft 365's system of record for user and admin activity, including AI interactions [S16].",see_also:"CopilotInteraction"},
+  {category:"Logical",term:"eDiscovery",rung:100,definition:"Search, hold, review, and export content (including AI interactions) as legal or investigative evidence.",see_also:"Case, ItemClass"},
+  {category:"Logical",term:"AI interaction",rung:100,essential:true,definition:"A prompt-and-response pair between a user or agent and an AI app; produces exactly one audit record.",see_also:"CopilotInteraction"},
+  {category:"Logical",term:"Case",rung:200,definition:"A container (eDiscovery or IRM type) that collects holds, review sets, and interactions.",see_also:"eDiscovery"},
+  {category:"Logical",term:"Data Security Investigations",rung:300,definition:"A newer Purview solution that uses generative AI to help security teams analyze and respond to data breaches and risky-insider incidents [S34].",see_also:"IRM"},
+  {category:"Physical",term:"Integration runtime (IR)",rung:200,essential:true,definition:"The compute that performs a Data Map scan: Azure IR (Microsoft-managed, public endpoints), AWS IR (Microsoft-hosted, for S3/RDS), Managed VNet IR (private endpoints), and self-hosted IR (customer VM or Kubernetes) [S3].",see_also:"SHIR, Managed VNet IR"},
+  {category:"Physical",term:"Self-hosted integration runtime (SHIR)",rung:200,essential:true,definition:"Customer-run compute (JDK 11) that scans sources Purview's managed runtimes can't reach directly, such as on-prem databases.",see_also:"Integration runtime"},
+  {category:"Physical",term:"Managed VNet IR",rung:200,definition:"An Azure-managed integration runtime that scans through private endpoints instead of public ones.",see_also:"Private Link"},
+  {category:"Physical",term:"Information protection scanner",rung:200,essential:true,definition:"A Windows service (config in SQL Server) that discovers, classifies, labels, and protects content on on-prem file shares and SharePoint Server, and enforces on-prem DLP [S12].",see_also:"SHIR"},
+  {category:"Physical",term:"Data management landing zone",rung:300,definition:"Microsoft's Cloud Adoption Framework pattern: a dedicated Azure subscription per Entra tenant hosting the Purview account [S24].",see_also:"Purview account"},
+  {category:"Physical",term:"Collection (Purview)",rung:200,definition:"A container that organizes sources and assets and scopes role-based access within a Purview account [S23].",see_also:"Data source"},
+  {category:"Physical",term:"GCC / GCC High / DoD",rung:200,essential:true,definition:"Microsoft's three US-government Microsoft 365 cloud tiers, each with feature-parity gaps versus commercial; GCC High and DoD pair with Entra ID in Azure Government [S8].",see_also:"FedRAMP Equivalency"},
+  {category:"Physical",term:"FedRAMP Equivalency",rung:300,essential:true,definition:"Microsoft demonstrating a higher FedRAMP level (High) via completed audit evidence even where the formal instrument is lower (Moderate P-ATO). Resolves the GCC 'Moderate vs High' apparent conflict [S35].",see_also:"GCC"},
+  {category:"Physical",term:"Private Link (Azure)",rung:200,definition:"The network-isolation mechanism that keeps the Purview account off the public internet [S23].",see_also:"Managed VNet IR"},
+  {category:"Physical",term:"Endpoint DLP",rung:200,definition:"DLP enforced on onboarded Windows devices, sharing the device sensor with Defender for Endpoint; with the Purview browser extension it sees pastes into third-party AI sites [S19].",see_also:"DLP"},
+  {category:"Integration & AI",term:"Multicloud scanning connector",rung:200,essential:true,definition:"The Data Map connector family (S3, Snowflake, Salesforce, etc.) that returns metadata and classification only, never source content [S9].",see_also:"Data Map"},
+  {category:"Integration & AI",term:"Role ARN / external ID",rung:200,definition:"The AWS IAM mechanism Purview's AWS-hosted IR assumes to scan S3: a cross-account role trust with an external ID, not a stored access key [S9].",see_also:"AWS IR"},
+  {category:"Integration & AI",term:"Key pair authentication",rung:200,definition:"RSA (PKCS#8) credential pair for Snowflake, replacing basic auth, which Snowflake is retiring [S10].",see_also:"Snowflake"},
+  {category:"Integration & AI",term:"Connected app (Salesforce)",rung:200,definition:"The OAuth mechanism Purview uses to authenticate to Salesforce's REST API for metadata scanning [S11].",see_also:""},
+  {category:"Integration & AI",term:"DSPM for AI",rung:200,essential:true,definition:"DSPM's front door for AI: discovers AI use, recommends one-click policies, and runs a weekly oversharing risk assessment of the top 100 SharePoint sites by usage [S15].",see_also:"Collection policy"},
+  {category:"Integration & AI",term:"Collection policy (AI)",rung:200,essential:true,definition:"Captures full prompt and response text for Fabric Copilot, Security Copilot, and non-Copilot AI apps. Without it, only audit events are captured [S15].",see_also:"AI interaction"},
+  {category:"Integration & AI",term:"CopilotInteraction",rung:200,essential:true,definition:"The unified-audit-log record type emitted for a Copilot prompt/response event. For Copilot Studio it holds a transcript thread ID, not the chat text [S21].",see_also:"Audit"},
+  {category:"Integration & AI",term:"Microsoft Entra Agent ID",rung:300,definition:"The directory entry type that gives AI agents from Copilot Studio and Foundry an identity Purview and other tools can govern [S22].",see_also:"Agent"},
+  {category:"Integration & AI",term:"Microsoft Copilot Experiences (retention location)",rung:300,definition:"The Data Lifecycle Management location used to retain or delete AI interactions [S18].",see_also:"eDiscovery"},
+  {category:"Integration & AI",term:"Graph Purview APIs / Purview SDK",rung:300,definition:"The surface for bringing a custom AI app's prompts and responses under DSPM for AI [S20].",see_also:"DSPM for AI"}
+];
+
+/* ============================================================
+   UI ENGINE & ROUTING
+   ============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=t=>t?String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"):"";
+const SRC=Object.fromEntries(SOURCES.map(s=>[s.n,s]));
+function cite(html){
+  return html.replace(/\[((?:S\d+)(?:\s*,\s*S\d+)*)\]/g,(m,inner)=>"["+inner.replace(/S(\d+)/g,(x,n)=>{const s=SRC[+n];return s?`<a class="cite" href="${esc(s.u)}" target="_blank" rel="noopener" title="${esc(s.t)}">S${n}</a>`:x;})+"]");
+}
+const ec=t=>cite(esc(t));
+
+const LS={
+  get(k,d=null){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
+  del(k){try{localStorage.removeItem(k);}catch(e){}}
+};
+const KEY="lp:";
+
+function go(v){
+  $$("#nav .nav-item").forEach(el=>el.classList.toggle("active",el.dataset.v===v));
+  $$("section.view").forEach(el=>el.classList.toggle("active",el.id==="v-"+v));
+  LS.set(KEY+"view",v);
+  if(location.hash!=="#"+v) history.replaceState(null,"","#"+v);
+  window.scrollTo(0,0); const mc=$(".main-content"); if(mc) mc.scrollTop=0;
+}
+$$("#nav .nav-item").forEach(el=>el.onclick=()=>go(el.dataset.v));
+
+function lib(slug,label){return `<a href="library/${slug}.html">${esc(label||"Open full note")} ↗</a>`;}
+
+/* ---- Lightbox for diagrams and slides ---- */
+document.addEventListener("click",e=>{
+  const img=e.target.closest("img.diagram, .slides img");
+  if(img){e.preventDefault();$("#lightboxImg").src=img.dataset.full||img.src;$("#lightbox").classList.add("open");}
+});
+$("#lightbox").onclick=()=>$("#lightbox").classList.remove("open");
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#lightbox").classList.remove("open");});
+
+/* ---- Dashboard ---- */
+function renderDashboard(){
+  const el=$("#v-dashboard");
+  const mods=allModules();
+  const done=mods.filter(m=>LS.get(moduleKey(m.w,m.i),false)).length;
+  const pct=Math.round((done/mods.length)*100);
+  const learned=DATA.glossary.filter(g=>fcState(g.term).box>=4).length;
+  const due=DATA.glossary.filter(g=>fcState(g.term).due<=Date.now()).length;
+  const selfSolid=DATA.ladder.reduce((a,l)=>a+l.r.filter(r=>LS.get(KEY+"self:"+l.key+":"+r.n)==="solid").length,0);
+  const totalRungs=DATA.ladder.reduce((a,l)=>a+l.r.length,0);
+  const fmDone=DATA.checklist.filter((_,i)=>LS.get(KEY+"cl:"+i,false)).length;
+  const libCount=(window.LIBRARY||[]).length;
+  const pillar=(img,title,sub,color)=>`<div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:12px">
+      <img src="assets/${img}.jpg" alt="" style="width:48px;height:48px;border-radius:10px;border:1px solid ${color};object-fit:cover;flex-shrink:0">
+      <div><div style="font-weight:700;font-size:.88rem;color:var(--text-primary)">${title}</div><div style="font-size:.74rem;color:var(--text-dim)">${sub}</div></div></div>`;
+  let h=`<span class="badge">ENTERPRISE ARCHITECT CONSOLE</span>
+  <h1 style="margin-top:.9rem">Microsoft Purview: Architect Study Console</h1>
+  <p class="lead">One long, architecture-heavy day (about 7 hours, 8 blocks) on Microsoft Purview: conceptual, logical, and physical views, third-party integrations, the AI data path, and a TOGAF / DoDAF lens, ending in a design review. Every claim is grounded in a 36-row Microsoft source ledger.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-bottom:1.5rem">
+    ${pillar("security","Data security","Labels · DLP · Insider Risk","var(--r200)")}
+    ${pillar("governance","Data governance","Data Map · Unified Catalog","var(--r300)")}
+    ${pillar("compliance","Data compliance","Audit · eDiscovery · Compliance Mgr","var(--r100)")}
+    ${pillar("ai","AI protections","DSPM for AI · AI audit","var(--warn)")}
+  </div>
+  <div class="grid" style="margin-bottom:1.5rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="statcard"><div class="num">${pct}%</div><div class="lbl">curriculum complete (${done}/${mods.length} modules)</div>
+      <div class="progbar" id="dProg"><i class="b100"></i><i class="b200"></i><i class="b300"></i></div></div>
+    <div class="statcard"><div class="num">${due}</div><div class="lbl">flashcards due now (${learned}/${DATA.glossary.length} in long-term memory)</div></div>
+    <div class="statcard"><div class="num">${selfSolid}/${totalRungs}</div><div class="lbl">ladder rungs self-rated "solid"</div></div>
+    <div class="statcard"><div class="num">${fmDone}/${DATA.checklist.length}</div><div class="lbl">failure modes reviewed</div></div>
+  </div>
+  <div class="note"><b>Mission.</b> By the end you can draw the conceptual, logical, and physical views from memory and say what changes between them; list the external systems Purview integrates with and how; trace the AI data path and name the control that stops oversharing; place the platform in TOGAF and DoDAF; and survive the block 8 design review. ${lib("mission","Mission note")} · ${lib("day-plan","Timed day plan")}</div>
+  <div class="grid">
+    <div class="card"><h3>Curriculum</h3><p style="color:var(--text-secondary);font-size:.86rem">Eight timed blocks with action steps, artifact previews, and "why this matters" notes.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('curriculum')">Open curriculum →</button></div></div>
+    <div class="card"><h3>Architecture views</h3><p style="color:var(--text-secondary);font-size:.86rem">Conceptual, logical, physical, integration and AI, plus the government cloud matrix, with diagrams.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('views')">Open views →</button></div></div>
+    <div class="card"><h3>Progress map</h3><p style="color:var(--text-secondary);font-size:.86rem">The 100 / 200 / 300 ladder across five lanes. Self-rate each rung.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('map')">Open map →</button></div></div>
+    <div class="card"><h3>Flashcards and quiz</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.glossary.length} spaced-repetition cards and the ${DATA.quiz.length}-question design-review quiz bank.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('flash')">Flashcards →</button><button class="b" onclick="go('quiz')">Quiz →</button></div></div>
+    <div class="card"><h3>Shorts and media</h3><p style="color:var(--text-secondary);font-size:.86rem">Six vertical NotebookLM explainers, the 8.5-minute narrated deep-dive cut, and the audio overview.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('shorts')">Open media →</button><button class="b" onclick="go('deck')">Slide deck →</button></div></div>
+    <div class="card"><h3>Failure modes</h3><p style="color:var(--text-secondary);font-size:.86rem">${DATA.checklist.length} failure modes across all four views: the tell, the fix, and the source.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('counsel')">Failure modes →</button><button class="b" onclick="go('cheat')">Decision rules →</button></div></div>
+    <div class="card"><h3>EA mapping</h3><p style="color:var(--text-secondary);font-size:.86rem">TOGAF ADM phases, DoDAF viewpoints, altitude rules, and a component cross-walk.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('ea')">EA mapping →</button></div></div>
+    <div class="card"><h3>Library</h3><p style="color:var(--text-secondary);font-size:.86rem">${libCount} vault notes and NotebookLM reports rendered as web pages, with live source links.</p><div class="btnrow" style="margin:.8rem 0 0"><button class="b" onclick="go('library')">Open library →</button><button class="b" onclick="go('refs')">Source ledger →</button></div></div>
+  </div>`;
+  el.innerHTML=h;
+  const by={100:0,200:0,300:0}; mods.forEach(m=>{if(LS.get(moduleKey(m.w,m.i),false))by[m.rung]++;});
+  const p=$("#dProg"); if(p){["100","200","300"].forEach((r,i)=>p.children[i].style.width=(by[r]/mods.length*100)+"%");}
+}
+
+/* ---- Curriculum ---- */
+function moduleKey(w,i){return KEY+"mod:"+w+":"+i;}
+function allModules(){let a=[];DATA.weeks.forEach(w=>w.mods.forEach((m,i)=>a.push({w:w.n,i,rung:(m.rl.match(/\b(100|200|300)\b/)||[])[1]||"200"})));return a;}
+function renderCurriculum(){
+  const el=$("#v-curriculum");
+  let h=`<h2 class="vh">Eight-block curriculum</h2>
+  <p class="lead">Work the blocks in order (about 420 focused minutes plus breaks). Each block has an architect context, action steps, artifact previews ("What does this look like?"), the primary Microsoft sources, and an exit criterion. ${lib("day-plan","Timed day plan")}</p>
+  <div class="timeline" style="margin-bottom:1.4rem">${DATA.weeks.map(w=>`<span class="t">Block ${w.n}</span><span class="b">${esc(w.title)}</span><span class="m">${esc(w.time)}</span>`).join("")}</div>`;
+  DATA.weeks.forEach(w=>{
+    const total=w.mods.length, done=w.mods.filter((_,i)=>LS.get(moduleKey(w.n,i),false)).length;
+    h+=`<div class="card">
+      <div class="weekhead" data-wk="${w.n}"><span class="wk">Block ${w.n}</span><h3>${esc(w.title)} <span class="pill">${w.rungs}</span> <span class="pill">${esc(w.time)}</span></h3><span class="pct">${done}/${total}</span></div>
+      <div class="weekbody" id="wb-${w.n}">
+        <div class="week-opener"><b>Architect context:</b> ${ec(w.opener)}</div>
+        <div class="obj">${ec(w.obj)}</div>
+        ${w.mods.map((m,i)=>{const dn=LS.get(moduleKey(w.n,i),false);
+          return `<div class="modrow ${dn?"done":""}">
+            <div class="modrow-top"><input type="checkbox" ${dn?"checked":""} data-mk="${w.n}:${i}"><div class="mt">${ec(m.t)}<div class="rl">${esc(m.rl)}</div></div></div>
+            ${m.action?`<div class="action-box"><b>Action step:</b> ${ec(m.action)}</div>`:""}
+            ${m.lookLike?`<details class="look-box"><summary>What does this look like in practice?</summary><div style="margin-top:.4rem">${cite(m.lookLike)}</div></details>`:""}
+            ${m.whyMatters?`<details class="why-matters"><summary>Why this matters to an architect</summary><p style="margin-top:.4rem">${ec(m.whyMatters)}</p></details>`:""}
+          </div>`;}).join("")}
+        <div class="deliv"><b>Exit criteria:</b> ${esc(w.deliv)} · ${lib(w.lib,"Full block / view note")}</div>
+        <div class="vidlist"><b>Primary sources:</b>${w.vids.map(v=>{const s=SRC[v.s];return `<a href="${esc(s.u)}" target="_blank" rel="noopener">• ${esc(s.t)} <span class="meta">S${s.n} · ${esc(s.type)}</span></a>`;}).join("")}</div>
+      </div></div>`;
+  });
+  el.innerHTML=h;
+  $$(".weekhead",el).forEach(hd=>hd.onclick=()=>$("#wb-"+hd.dataset.wk).classList.toggle("open"));
+  if(!LS.get(KEY+"seenCurric",false)){$("#wb-1").classList.add("open");LS.set(KEY+"seenCurric",true);}
+  $$("input[data-mk]",el).forEach(cb=>cb.onchange=()=>{
+    const [wk,i]=cb.dataset.mk.split(":"); LS.set(moduleKey(wk,i),cb.checked);
+    renderCurriculum(); $("#wb-"+wk).classList.add("open"); renderDashboard();
+  });
+}
+
+/* ---- Architecture views ---- */
+function cell(c){
+  const s=String(c);
+  if(s.startsWith("GAP:")) return `<td class="gap">${ec(s.slice(4))}</td>`;
+  if(s.startsWith("WARN:")) return `<td class="warnc">${ec(s.slice(5))}</td>`;
+  return `<td>${ec(s)}</td>`;
+}
+function tableHTML(t){return `<h3 style="margin:1.2rem 0 .3rem;font-size:1rem">${esc(t.h)}</h3><table class="tbl"><thead><tr>${t.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(cell).join("")}</tr>`).join("")}</tbody></table>`;}
+function renderViews(){
+  const el=$("#v-views");
+  const tabs=[["conceptual","Conceptual"],["logical","Logical"],["physical","Physical"],["integration","Integration & AI"],["govcloud","Government clouds"]];
+  const tab=LS.get(KEY+"viewTab","conceptual");
+  const V=DATA.views[tab];
+  let h=`<h2 class="vh">Architecture views</h2>
+  <p class="lead">The four views built during blocks 2-5, at their own altitude. Click any diagram to enlarge. The full notes (with the Mermaid sources and every table) are in the Library.</p>
+  <div class="ea-subnav">${tabs.map(([k,l])=>`<button class="ea-tab-btn ${tab===k?"active":""}" data-vt="${k}">${l}</button>`).join("")}</div>
+  <div class="note"><b>Altitude rule.</b> ${ec(V.rule)} ${lib(V.lib,"Full view note")}</div>`;
+  if(tab==="govcloud") h+=`<div class="note good"><b>Resolved, not a conflict.</b> ${ec("GCC's formal P-ATO (from DHHS) is FedRAMP Moderate, but Microsoft has completed FedRAMP High audits in GCC and advertises High \"Equivalency\"; GCC High carries agency ATOs at both Moderate and High [S35]. DSPM for AI in GCC High and DoD: no browse-to-URL policy, supported AI sites only [S7].")}</div>`;
+  V.img.forEach(f=>h+=`<img class="diagram" src="assets/diagrams/${f}" alt="${esc(f)}" loading="lazy">`);
+  V.tables.forEach(t=>h+=tableHTML(t));
+  if(tab==="integration") h+=`<div class="note"><b>Copilot Studio note.</b> ${ec("The Audit solution stores only the transcript thread ID; DSPM for AI retrieves the chat text [S21].")}</div>`;
+  el.innerHTML=h;
+  $$("[data-vt]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"viewTab",b.dataset.vt);renderViews();});
+}
+
+/* ---- Progress map ---- */
+function renderMap(){
+  const el=$("#v-map");
+  let h=`<h2 class="vh">Progress map (100 / 200 / 300 ladder)</h2>
+  <p class="lead">Self-rate each rung. The dashboard counts your "solid" ratings.</p><div class="lanes">`;
+  DATA.ladder.forEach(l=>{
+    h+=`<div class="lane"><div style="display:flex;align-items:center;gap:10px;margin-bottom:.8rem">
+        <img src="assets/${l.img}.jpg" alt="" style="width:32px;height:32px;border-radius:6px;object-fit:cover;border:1px solid var(--border-color)">
+        <h3 style="margin-bottom:0">${esc(l.name)}</h3></div>`;
+    l.r.forEach(r=>{
+      const st=LS.get(KEY+"self:"+l.key+":"+r.n,"none");
+      h+=`<div class="rung l${r.n}"><b>${r.n} level</b>${esc(r.t)}
+        <div class="self" data-k="${l.key}:${r.n}">
+          <button data-s="none" class="${st==="none"?"on":""}">not yet</button>
+          <button data-s="shaky" class="${st==="shaky"?"on":""}">shaky</button>
+          <button data-s="solid" class="${st==="solid"?"on":""}">solid</button>
+        </div></div>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div><h3 style="margin:1.5rem 0 .5rem;font-size:1rem">Neighbor systems (just outside the boundary)</h3><div class="grid">`;
+  DATA.miniModules.forEach(m=>h+=`<div class="card"><h3>${esc(m.name)}</h3><div class="obj" style="margin:.4rem 0 0">${ec(m.t)}</div></div>`);
+  el.innerHTML=h+`</div>`;
+  $$(".self button",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"self:"+b.parentElement.dataset.k,b.dataset.s);renderMap();renderDashboard();});
+}
+
+/* ---- Flashcards ---- */
+let fcQueue=[],fcIdx=0,fcShown=false;
+const BOX_DELAY=[0,0,12e5,864e5,2592e5,6048e5,18144e5];
+function fcState(t){return LS.get(KEY+"fc:"+t,{box:1,due:0});}
+function buildFcQueue(){
+  const deck=LS.get(KEY+"fcDeck","essential"), now=Date.now();
+  const src=deck==="essential"?DATA.glossary.filter(g=>g.essential):DATA.glossary;
+  const all=src.map(g=>({...g,st:fcState(g.term)}));
+  const duec=all.filter(g=>g.st.due<=now).sort((a,b)=>a.st.box-b.st.box||a.st.due-b.st.due);
+  fcQueue=duec.length?duec:all; fcIdx=0; fcShown=false;
+}
+function renderFlash(){
+  const el=$("#v-flash");
+  const deck=LS.get(KEY+"fcDeck","essential");
+  const src=deck==="essential"?DATA.glossary.filter(g=>g.essential):DATA.glossary;
+  if(!fcQueue.length) buildFcQueue();
+  const learned=src.filter(g=>fcState(g.term).box>=4).length;
+  let h=`<h2 class="vh">Flashcards</h2>
+  <p class="lead">Shortcuts: <span class="kbd-shortcut">Space</span> flip, <span class="kbd-shortcut">←</span> / <span class="kbd-shortcut">→</span> navigate, <span class="kbd-shortcut">1</span> / <span class="kbd-shortcut">2</span> / <span class="kbd-shortcut">3</span> grade.</p>
+  <div class="deck-selector">
+    <button class="deck-btn ${deck==="essential"?"active":""}" data-fdeck="essential">Quick essentials (${DATA.glossary.filter(g=>g.essential).length} cards)</button>
+    <button class="deck-btn ${deck==="full"?"active":""}" data-fdeck="full">Full mastery (${DATA.glossary.length} cards)</button>
+  </div>`;
+  const bindDeck=()=>$$(".deck-btn",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"fcDeck",b.dataset.fdeck);buildFcQueue();renderFlash();});
+  const reset=()=>{src.forEach(g=>LS.del(KEY+"fc:"+g.term));buildFcQueue();renderFlash();renderDashboard();};
+  if(fcIdx>=fcQueue.length){
+    el.innerHTML=h+`<div class="card" style="text-align:center;padding:2.5rem"><h3 style="margin-bottom:.5rem">Round complete</h3><p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:1.2rem">Reviewed all ${fcQueue.length} cards.</p>
+      <div class="btnrow" style="justify-content:center"><button class="b" id="fcRestart">Review again</button><button class="b" id="fcReset">Reset deck progress</button></div></div>`;
+    bindDeck(); $("#fcRestart").onclick=()=>{buildFcQueue();renderFlash();}; $("#fcReset").onclick=reset; return;
+  }
+  const c=fcQueue[fcIdx];
+  h+=`<div class="fc-meta"><span>Card ${fcIdx+1} / ${fcQueue.length} · box ${fcState(c.term).box} · rung ${c.rung}</span><span>${learned} / ${src.length} in long-term memory</span></div>
+    <div class="fc-stage" id="fcStage" title="Click or press Space to flip">
+      <div class="fc-cat">${esc(c.category)} ${c.essential?'<span class="pill r100">Essential</span>':''}</div>
+      <div class="fc-term">${esc(c.term)}</div>
+      ${fcShown?`<div class="fc-def">${ec(c.definition)}</div>${c.see_also?`<div class="fc-hint">see also: ${esc(c.see_also)}</div>`:""}`:`<div class="fc-hint">Click the card or press <span class="kbd-shortcut">Space</span> to flip</div>`}
+    </div>
+    <div class="btnrow" style="justify-content:center;margin-top:1rem">
+      <button class="b" id="fcPrev" ${fcIdx===0?"disabled style='opacity:.4'":""}>← Prev</button>
+      <button class="b" id="fcToggleFlip">${fcShown?"Hide definition":"Show definition"}</button>
+      <button class="b" id="fcNext" ${fcIdx>=fcQueue.length-1?"disabled style='opacity:.4'":""}>Next →</button>
+    </div>
+    ${fcShown?`<div class="fc-controls"><button class="again" data-g="0">Again (1)</button><button class="hard" data-g="1">Hard (2)</button><button class="good" data-g="2">Good (3)</button></div>`:""}
+    <div class="btnrow" style="margin-top:1.5rem"><button class="b" id="fcReset2">Reset deck progress</button></div>`;
+  el.innerHTML=h; bindDeck();
+  const flip=e=>{if(e&&e.target.closest("a"))return;fcShown=!fcShown;renderFlash();};
+  $("#fcStage").onclick=flip; $("#fcToggleFlip").onclick=()=>flip();
+  $("#fcPrev").onclick=()=>{if(fcIdx>0){fcIdx--;fcShown=false;renderFlash();}};
+  $("#fcNext").onclick=()=>{if(fcIdx<fcQueue.length-1){fcIdx++;fcShown=false;renderFlash();}};
+  $$(".fc-controls button[data-g]",el).forEach(b=>b.onclick=()=>{
+    const g=+b.dataset.g,st=fcState(c.term);
+    if(g===0)st.box=1; else if(g===2)st.box=Math.min(6,st.box+1);
+    st.due=Date.now()+BOX_DELAY[st.box];
+    LS.set(KEY+"fc:"+c.term,st); fcIdx++; fcShown=false; renderFlash(); renderDashboard();
+  });
+  $("#fcReset2").onclick=reset;
+}
+document.addEventListener("keydown",e=>{
+  if(!$("#v-flash").classList.contains("active"))return;
+  if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+  if(e.code==="Space"){e.preventDefault();fcShown=!fcShown;renderFlash();}
+  else if(e.code==="ArrowLeft"){e.preventDefault();if(fcIdx>0){fcIdx--;fcShown=false;renderFlash();}}
+  else if(e.code==="ArrowRight"){e.preventDefault();if(fcIdx<fcQueue.length-1){fcIdx++;fcShown=false;renderFlash();}}
+  else if(fcShown&&["1","2","3"].includes(e.key)){const b=$(`.fc-controls button[data-g="${+e.key-1}"]`);if(b)b.click();}
+});
+
+/* ---- Shorts and media ---- */
+let shortItems=(window.SHORTS&&window.SHORTS.items)||[],shortI=0;
+const DEEP=(window.SHORTS&&window.SHORTS.deep_dive)||{file:"media/deep-dive-cut.mp4",youtube:""};
+const ytSrc=id=>`https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1`;
+function loadShorts(){renderShorts();}
+function renderShorts(){
+  const el=$("#v-shorts");
+  const ready=shortItems.filter(it=>it.status==="ready").length;
+  el.innerHTML=`<h2 class="vh">Shorts and media <span style="font-size:1rem;color:var(--text-dim)">${ready}/${shortItems.length} shorts ready</span></h2>
+  <p class="lead">Vertical NotebookLM explainers tied to the blocks, plus the long-form cut and audio overview.</p>
+  <div class="note danger"><b>Secondary source.</b> NotebookLM media can overstate. Known issues: "Purview intercepts the retrieval" (agents inherit parent-app protections [S17]); "audit always holds prompt text" (Copilot Studio audit holds a thread ID [S21]). The architecture views win.</div>
+  <div class="shorts-gallery">
+    <div class="shorts-player">
+      <div class="row"><button class="b" type="button" id="shortPrev">Prev</button><button class="b" type="button" id="shortNext">Next</button><span id="shortMeta" style="font-size:.78rem;color:var(--text-dim)"></span></div>
+      <div class="carousel"><div class="carousel-stage" id="shortStage"></div><div class="carousel-cap" id="shortCap"></div></div>
+    </div>
+    <div class="thumbs" id="shortThumbs" aria-label="Shorts episode list"></div>
+  </div>
+  <h3 style="margin:2rem 0 .5rem;font-size:1.05rem">Deep dive cut <span class="pill">8 min 29 s</span></h3>
+  <p class="obj">All 15 deck slides inset on a plate, a question card before each slide after the first, narrated with a ducked music bed. The narration avoids the deck claims flagged in the Slide deck section.</p>
+  ${DEEP.youtube?`<iframe class="wide-player" src="${ytSrc(DEEP.youtube)}" title="Microsoft Purview deep dive cut" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy" style="border:0"></iframe><p class="obj" style="margin-top:.4rem"><a href="https://www.youtube.com/watch?v=${DEEP.youtube}" target="_blank" rel="noopener">Open on YouTube ↗</a></p>`:`<video class="wide-player" controls preload="metadata" src="${DEEP.file}"></video>`}
+  <h3 style="margin:2rem 0 .5rem;font-size:1.05rem">Audio overview <span class="pill">8 min 44 s</span></h3>
+  <p class="obj">NotebookLM audio overview generated from the same notebook ("Fixing Microsoft Purview technical curriculum gaps").</p>
+  <audio controls preload="metadata" src="media/audio-overview.m4a" style="width:100%;max-width:640px"></audio>`;
+  el.querySelector(".note").innerHTML=cite(el.querySelector(".note").innerHTML);
+  const thumbs=$("#shortThumbs");
+  thumbs.innerHTML=shortItems.map((it,i)=>`<button type="button" class="${i===shortI?"active":""} ${it.status==="ready"?"ready":"pending"}" data-i="${i}">${esc(it.title)}<br><span class="tagpill">${esc(it.tag||it.status)}</span></button>`).join("");
+  $$("button",thumbs).forEach(b=>b.onclick=()=>{shortI=+b.dataset.i;showShort();});
+  $("#shortPrev").onclick=()=>{shortI=(shortI-1+shortItems.length)%shortItems.length;showShort();};
+  $("#shortNext").onclick=()=>{shortI=(shortI+1)%shortItems.length;showShort();};
+  showShort();
+}
+function showShort(){
+  const it=shortItems[shortI]; if(!it)return;
+  const stage=$("#shortStage");
+  if(stage.dataset.cur!==it.name){
+    stage.dataset.cur=it.name;
+    stage.innerHTML=it.youtube
+      ?`<iframe src="${ytSrc(it.youtube)}" title="${esc(it.title)}" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>`
+      :`<video id="shortVideo" controls playsinline preload="metadata" src="${esc(it.file)}"></video>`;
+  }
+  $("#shortCap").innerHTML=esc(it.title)+(it.youtube?` · <a href="https://www.youtube.com/shorts/${it.youtube}" target="_blank" rel="noopener">YouTube ↗</a>`:"");
+  $("#shortMeta").textContent=`${shortI+1} / ${shortItems.length}`;
+  $$("#shortThumbs button").forEach((b,i)=>b.classList.toggle("active",i===shortI));
+}
+
+/* ---- Slide deck ---- */
+function renderDeck(){
+  const el=$("#v-deck");
+  let h=`<h2 class="vh">Slide deck <span style="font-size:1rem;color:var(--text-dim)">15 slides</span></h2>
+  <p class="lead">The NotebookLM detailed deck as images. Click a slide to enlarge. Slides outlined in amber carry claims the source ledger does not support; the caption says what is wrong.</p>
+  <div class="slides">`;
+  for(let i=1;i<=15;i++){
+    const f=DATA.deckFlags[i], n=String(i).padStart(2,"0");
+    h+=`<figure class="${f?"flag":""}"><img src="assets/slides/slide-${n}.jpg" alt="Slide ${i}" loading="lazy"><figcaption>Slide ${i}${f?" · "+ec(f):""}</figcaption></figure>`;
+  }
+  el.innerHTML=h+`</div>`;
+}
+
+/* ---- Quiz ---- */
+function renderQuiz(){
+  const el=$("#v-quiz");
+  const secs=Object.keys(DATA.quizSections).map(Number);
+  const sel=LS.get(KEY+"quizSec",secs[0]);
+  let h=`<h2 class="vh">Design-review quiz</h2>
+  <p class="lead">The block 8 quiz bank (${DATA.quiz.length} questions). Answer out loud before revealing. ${lib("quiz-bank","Quiz bank note")}</p>
+  <div class="btnrow">${secs.map(s=>`<button class="b ${s==sel?"on":""}" data-qs="${s}">${esc(DATA.quizSections[s])} (${DATA.quiz.filter(q=>q.week==s).length})</button>`).join("")}</div>`;
+  const qs=DATA.quiz.filter(q=>q.week==sel);
+  qs.forEach((q,qi)=>{
+    h+=`<div class="qcard" data-qi="${qi}"><div class="qq">${esc(q.question)} <span class="pill r${q.rung}">${q.rung}</span> <span class="pill">${esc(q.pillar)}</span></div>`;
+    if(q.type==="mc") h+=`<div class="qopts">${q.options.map((o,oi)=>`<label data-o="${oi}"><input type="radio" name="q${qi}" style="margin-right:8px">${esc(o)}</label>`).join("")}</div>`;
+    else h+=`<button class="reveal">Show model answer</button>`;
+    h+=`<div class="qexp"><b>Answer:</b> ${ec(q.answer)}<br><br><b>Why / source:</b> ${ec(q.explanation)}</div></div>`;
+  });
+  el.innerHTML=h;
+  $$("[data-qs]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"quizSec",+b.dataset.qs);renderQuiz();});
+  $$(".qcard",el).forEach(card=>{
+    const q=qs[+card.dataset.qi];
+    $$(".qopts label",card).forEach(l=>l.onclick=()=>{
+      $$(".qopts label",card).forEach(x=>x.classList.remove("correct","wrong"));
+      const ok=$$(".qopts label",card).find(x=>q.options[+x.dataset.o]===q.answer);
+      if(l!==ok) l.classList.add("wrong"); if(ok) ok.classList.add("correct");
+      $(".qexp",card).classList.add("show");
+    });
+    const rv=$(".reveal",card); if(rv) rv.onclick=()=>$(".qexp",card).classList.add("show");
+  });
+}
+
+/* ---- Glossary ---- */
+function renderGlossary(){
+  const el=$("#v-glossary");
+  const q=(LS.get(KEY+"gq","")||"").toLowerCase(), cat=LS.get(KEY+"gcat","all");
+  const cats=[...new Set(DATA.glossary.map(g=>g.category))];
+  let h=`<h2 class="vh">Glossary <span style="font-size:1rem;color:var(--text-dim)">${DATA.glossary.length} terms</span></h2>
+  <p class="lead">Feeds the flashcard deck. Grouped by the view where the term is earned. ${lib("glossary","Glossary note")}</p>
+  <input class="search" id="gSearch" placeholder="filter terms…" value="${esc(q)}">
+  <div class="gfilters"><button class="b ${cat==="all"?"on":""}" data-gc="all">All (${DATA.glossary.length})</button>${cats.map(c=>`<button class="b ${cat===c?"on":""}" data-gc="${esc(c)}">${esc(c)} (${DATA.glossary.filter(g=>g.category===c).length})</button>`).join("")}</div>`;
+  cats.filter(c=>cat==="all"||c===cat).forEach(c=>{
+    const items=DATA.glossary.filter(g=>g.category===c&&(!q||(g.term+g.definition+(g.see_also||"")).toLowerCase().includes(q)));
+    if(!items.length)return;
+    h+=`<h3 style="margin:1.1rem 0 .5rem;font-size:.95rem">${esc(c)} <span style="color:var(--text-dim);font-weight:400">· ${items.length}</span></h3>`;
+    items.forEach(g=>h+=`<div class="gterm"><h4>${esc(g.term)} <span class="pill r${g.rung}">${g.rung}</span> ${g.essential?'<span class="pill r100">Essential</span>':''}</h4><p>${ec(g.definition)}</p>${g.see_also?`<div class="sa">see also: ${esc(g.see_also)}</div>`:""}</div>`);
+  });
+  el.innerHTML=h;
+  const s=$("#gSearch");
+  s.oninput=()=>{LS.set(KEY+"gq",s.value);const p=s.selectionStart;renderGlossary();const ns=$("#gSearch");ns.focus();ns.setSelectionRange(p,p);};
+  $$("[data-gc]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"gcat",b.dataset.gc);renderGlossary();});
+}
+
+/* ---- Prompts ---- */
+function renderPrompts(){
+  const el=$("#v-prompts");
+  const pl=(window.LIBRARY||[]).filter(p=>p.section==="Prompts");
+  let h=`<h2 class="vh">Prompt library</h2>
+  <p class="lead">Study prompts for any LLM, plus the NotebookLM prompts that generated this pack's reports and media.</p>
+  <div class="note danger"><b>Data hygiene.</b> No tenant names, secrets, credentials, or customer data in any model. Use synthetic designs and public Microsoft documentation.</div>`;
+  DATA.prompts.forEach(p=>{
+    h+=`<div class="promptcat"><h3>${esc(p.cat)} <span class="pill">${esc(p.model)}</span></h3>
+      <div class="obj" style="margin:.15rem 0 .4rem">${esc(p.desc)}</div>
+      <div style="font-size:.8rem;color:var(--text-dim);margin-bottom:.4rem">Variants: ${p.items.map(esc).join(" · ")}</div>
+      <details class="promptbox"><summary>Flagship prompt</summary><pre>${esc(p.flagship)}</pre><button class="copybtn" data-c="${encodeURIComponent(p.flagship)}">Copy</button></details></div>`;
+  });
+  h+=`<h3 style="margin:1.8rem 0 .6rem;font-size:1rem">NotebookLM prompt notes</h3><div class="libgrid">${pl.map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc)}</span></a>`).join("")}</div>`;
+  el.innerHTML=h;
+  $$(".copybtn",el).forEach(b=>b.onclick=()=>{try{navigator.clipboard.writeText(decodeURIComponent(b.dataset.c));b.textContent="Copied";b.classList.add("copied");setTimeout(()=>{b.textContent="Copy";b.classList.remove("copied");},1200);}catch(e){}});
+}
+
+/* ---- Failure modes (practice checklist) ---- */
+function renderCounsel(){
+  const el=$("#v-counsel");
+  const f=LS.get(KEY+"fmView","all");
+  const views=[...new Set(DATA.checklist.map(c=>c.view))];
+  const done=DATA.checklist.filter((_,i)=>LS.get(KEY+"cl:"+i,false)).length;
+  let h=`<h2 class="vh">Failure modes</h2>
+  <p class="lead">Block 7: what breaks, what leaks, and what the controls actually stop. Check an item once you can name its tell and its fix without looking. ${lib("block-07-failure-modes-and-security","Block 7 note")} · ${lib("nblm-failure-modes","NotebookLM failure catalog")}</p>
+  <div class="card" style="margin-bottom:1rem"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><h3>Failure-mode review</h3><span class="pct" style="font-weight:700;color:var(--accent-color)">${done} / ${DATA.checklist.length} reviewed</span></div></div>
+  <div class="gfilters"><button class="b ${f==="all"?"on":""}" data-fv="all">All views</button>${views.map(v=>`<button class="b ${f===v?"on":""}" data-fv="${esc(v)}">${esc(v)}</button>`).join("")}</div>`;
+  DATA.checklist.forEach((item,i)=>{
+    if(f!=="all"&&item.view!==f) return;
+    const dn=LS.get(KEY+"cl:"+i,false), open=LS.get(KEY+"cl-open:"+i,false);
+    h+=`<div class="cl-card"><div class="cl-header ${dn?"done":""}">
+        <input type="checkbox" ${dn?"checked":""} data-cl="${i}">
+        <div class="cl-title" data-cl-toggle="${i}">${esc(item.title)}</div>
+        <span class="pill">${esc(item.view)}</span> ${ec("["+item.src+"]")}
+        <button class="cl-toggle-btn" data-cl-toggle="${i}">${open?"Hide":"Show"}</button></div>
+      <div class="cl-detail ${open?"open":""}"><div class="good-bad-grid">
+        <div class="gb-box good-box"><h5>Mitigation</h5>${ec(item.good)}</div>
+        <div class="gb-box bad-box"><h5>Tell and root cause</h5>${ec(item.bad)}</div>
+      </div></div></div>`;
+  });
+  el.innerHTML=h;
+  $$("[data-fv]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"fmView",b.dataset.fv);renderCounsel();});
+  $$("input[data-cl]",el).forEach(cb=>cb.onchange=()=>{LS.set(KEY+"cl:"+cb.dataset.cl,cb.checked);renderCounsel();renderDashboard();});
+  $$("[data-cl-toggle]",el).forEach(b=>b.onclick=()=>{const k=KEY+"cl-open:"+b.dataset.clToggle;LS.set(k,!LS.get(k,false));renderCounsel();});
+}
+
+/* ---- Decision rules (cheatsheet) ---- */
+function renderCheat(){
+  const el=$("#v-cheat");
+  let h=`<h2 class="vh">Decision rules</h2><p class="lead">The cheatsheet: "when X, reach for Y", each tied to a source. ${lib("cheatsheet","Cheatsheet note")}</p>`;
+  DATA.cheat.forEach(s=>{h+=`<h3 style="margin:1.3rem 0 .6rem;font-size:1rem;color:var(--accent-color)">${esc(s.h)}</h3>`+s.r.map(r=>`<div class="rule">${cite(r)}</div>`).join("");});
+  h+=`<h3 style="margin:1.3rem 0 .6rem;font-size:1rem;color:var(--warn)">Falsifier</h3><div class="rule falsifier">${ec(DATA.falsifier)}</div>`;
+  el.innerHTML=h;
+}
+
+/* ---- EA mapping ---- */
+function renderEA(){
+  const el=$("#v-ea");
+  const tab=LS.get(KEY+"eaTab","all"), E=DATA.eaFrameworks;
+  const box=(head,sub,items,color)=>`<div class="ea-box"><h4>${esc(head)}</h4><div style="font-weight:600;font-size:.8rem;color:${color||"var(--accent-color)"};margin-bottom:.4rem">${esc(sub)}</div><ul>${items.map(i=>`<li>${ec(i)}</li>`).join("")}</ul></div>`;
+  let h=`<h2 class="vh">Enterprise architecture mapping</h2>
+  <p class="lead">Where each view and component lands in TOGAF ADM and DoDAF, and the altitude rules that keep the views honest. ${lib("nblm-crosswalk","NotebookLM crosswalk report")}</p>
+  <div class="ea-subnav">${[["all","All"],["togaf","TOGAF ADM"],["dodaf","DoDAF viewpoints"],["alt","Altitude rules"],["table","Component cross-walk"]].map(([k,l])=>`<button class="ea-tab-btn ${tab===k?"active":""}" data-eatab="${k}">${l}</button>`).join("")}</div>`;
+  if(tab==="all"||tab==="togaf") h+=`<div class="ea-card"><h3>TOGAF ADM</h3><div class="ea-grid">${E.togaf.map(t=>box(t.phase,t.t,t.items)).join("")}</div></div>`;
+  if(tab==="all"||tab==="dodaf") h+=`<div class="ea-card"><h3>DoDAF viewpoints</h3><div class="ea-grid">${E.dodaf.map(t=>box(t.view,t.t,t.items,"var(--r300)")).join("")}</div></div>`;
+  if(tab==="all"||tab==="alt") h+=`<div class="ea-card"><h3>Altitude rules</h3><table class="ea-table"><thead><tr><th>View</th><th>Question</th><th>Allowed</th><th>Not allowed</th><th>Note</th></tr></thead><tbody>${E.altitudes.map(a=>`<tr><td><b>${esc(a.name)}</b></td><td>${esc(a.q)}</td><td>${esc(a.allowed)}</td><td>${esc(a.forbidden)}</td><td>${lib(a.lib,"Open")}</td></tr>`).join("")}</tbody></table></div>`;
+  if(tab==="all"||tab==="table") h+=`<div class="ea-card"><h3>Component cross-walk</h3><table class="ea-table"><thead><tr><th>Component</th><th>TOGAF</th><th>DoDAF</th><th>Capabilities</th></tr></thead><tbody>${E.table.map(r=>`<tr>${r.map((c,i)=>`<td>${i?esc(c):"<b>"+esc(c)+"</b>"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  el.innerHTML=h;
+  $$(".ea-tab-btn",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"eaTab",b.dataset.eatab);renderEA();});
+}
+
+/* ---- Library ---- */
+function renderLibrary(){
+  const el=$("#v-library");
+  const L=window.LIBRARY||[];
+  const secs=[...new Set(L.map(p=>p.section))];
+  let h=`<h2 class="vh">Library <span style="font-size:1rem;color:var(--text-dim)">${L.length} pages</span></h2>
+  <p class="lead">Every postable note from the Obsidian deep-dive pack and the NotebookLM exports, rendered as a web page with diagrams, Mermaid charts, and live source links. The vault stays the source of truth; rebuild with <code>python scripts/build_library.py</code>.</p>`;
+  if(!L.length) h+=`<div class="note danger">Library manifest not found. Run <code>python scripts/build_library.py</code>.</div>`;
+  secs.forEach(s=>{
+    h+=`<h3 style="margin:1.2rem 0 .6rem;font-size:1rem;color:var(--accent-color)">${esc(s)}</h3>`;
+    if(s==="NotebookLM reports") h+=`<div class="note danger" style="margin-bottom:.8rem"><b>Secondary.</b> NotebookLM reports carry a caveat banner; where they differ from the architecture views, the views win.</div>`;
+    h+=`<div class="libgrid">${L.filter(p=>p.section===s).map(p=>`<a class="libcard" href="library/${p.slug}.html"><b>${esc(p.title)}</b><span>${esc(p.desc||"")}</span></a>`).join("")}</div>`;
+  });
+  el.innerHTML=h;
+}
+
+/* ---- Source ledger ---- */
+function renderReferences(){
+  const el=$("#v-refs");
+  const q=(LS.get(KEY+"refq","")||"").toLowerCase(), sel=LS.get(KEY+"refcat","all");
+  const cats=[...new Set(SOURCES.map(s=>s.g))];
+  let h=`<h2 class="vh">Source ledger <span style="font-size:1rem;color:var(--text-dim)">${SOURCES.length} sources</span></h2>
+  <p class="lead">Microsoft Learn, service descriptions, reference architectures, and Microsoft Mechanics only. Row 27 is partner-authored; row 31 is a vendor page used only to confirm the far side of the OneTrust connection. ${lib("source-ledger","Ledger note")} · ${lib("resources","Resources by kind")}</p>
+  <input class="search" id="refSearch" placeholder="filter by title, URL, or type…" value="${esc(q)}">
+  <div class="gfilters"><button class="b ${sel==="all"?"on":""}" data-rcat="all">All (${SOURCES.length})</button>${cats.map(c=>`<button class="b ${sel===c?"on":""}" data-rcat="${esc(c)}">${esc(c)} (${SOURCES.filter(s=>s.g===c).length})</button>`).join("")}</div>`;
+  cats.filter(c=>sel==="all"||sel===c).forEach(c=>{
+    const items=SOURCES.filter(s=>s.g===c&&(!q||(s.t+s.u+s.type).toLowerCase().includes(q)));
+    if(!items.length)return;
+    h+=`<h3 style="margin:1.4rem 0 .6rem;font-size:1rem;color:var(--accent-color)">${esc(c)} <span style="color:var(--text-dim);font-weight:400">· ${items.length}</span></h3>`;
+    items.forEach(s=>h+=`<div class="ref-card"><div class="ref-info">
+        <a class="ref-anchor" href="${esc(s.u)}" target="_blank" rel="noopener">S${s.n} · ${esc(s.t)}</a>
+        <div class="ref-url">${esc(s.u)}</div>
+        <div class="ref-sources">${esc(s.type)} · trust: ${esc(s.trust)} · blocks ${esc(s.b)}</div></div>
+        <a class="b" href="${esc(s.u)}" target="_blank" rel="noopener" style="font-size:.76rem;flex-shrink:0">Open ↗</a></div>`);
+  });
+  el.innerHTML=h;
+  const s=$("#refSearch");
+  s.oninput=()=>{LS.set(KEY+"refq",s.value);const p=s.selectionStart;renderReferences();const ns=$("#refSearch");ns.focus();ns.setSelectionRange(p,p);};
+  $$("[data-rcat]",el).forEach(b=>b.onclick=()=>{LS.set(KEY+"refcat",b.dataset.rcat);renderReferences();});
+}
+
+/* ---- Theme engine (keys shared with library pages) ---- */
+function applyTheme(palette,mode){
+  document.documentElement.setAttribute("data-theme",palette+"-"+mode);
+  LS.set("appPalette",palette); LS.set("appMode",mode);
+  $("#themeToggleIcon").textContent=mode==="dark"?"🌙":"☀️";
+  $("#themeToggleText").textContent=mode==="dark"?"Dark":"Light";
+  $("#themeSelect").value=palette;
+}
+function initTheme(){
+  applyTheme(LS.get("appPalette","github"),LS.get("appMode","dark"));
+  $("#themeToggleBtn").onclick=()=>applyTheme(LS.get("appPalette","github"),LS.get("appMode","dark")==="dark"?"light":"dark");
+  $("#themeSelect").onchange=()=>applyTheme($("#themeSelect").value,LS.get("appMode","dark"));
+}
+
+/* ---- Init ---- */
+initTheme();renderDashboard();renderCurriculum();renderViews();renderMap();renderFlash();renderDeck();renderQuiz();renderGlossary();renderPrompts();renderCounsel();renderCheat();renderEA();renderLibrary();renderReferences();
+loadShorts();
+(function restore(){const v=(location.hash||"").slice(1)||LS.get(KEY+"view","dashboard");if($("#v-"+v))go(v);})();
+window.addEventListener("hashchange",()=>{const v=location.hash.slice(1);if($("#v-"+v))go(v);});
+</script>
+</body>
+</html>

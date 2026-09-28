@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheatsheet — Microsoft Purview | Learn Purview</title>
+<meta name="description" content="Decision rules and tells.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Reference</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Reference</div>
+  <h1 class="doctitle">Cheatsheet — Microsoft Purview</h1>
+  <p class="lead">Decision rules and tells.</p>
+  
+  <article>
+<p>Decision rules only.</p>
+<h2>Scope and capability</h2>
+<ul>
+<li>When you need to know "what data do we have and where," reach for <strong>Data Map + Unified Catalog</strong> (C1/C3), not DLP — DLP acts on data you've already classified, it doesn't discover it [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>].</li>
+<li>When the ask is "stop this AI app from oversharing," the answer is always <strong>clean permissions + labels first, DSPM for AI second</strong> — DSPM discovers and assesses, it doesn't retroactively fix bad ACLs [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>].</li>
+<li>When a request spans multiple solution families (e.g. "govern AND protect AND prove compliance"), name the family split explicitly — Purview is one portal but four separable products (data security / data governance / data compliance / AI protections) with different licenses [<a class="cite" href="https://learn.microsoft.com/en-us/purview/purview" target="_blank" rel="noopener" title="Learn about Microsoft Purview (solution families)">S1</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description" target="_blank" rel="noopener" title="Microsoft Purview service description (licensing)">S25</a>].</li>
+</ul>
+<h2>Scanning and connectors</h2>
+<ul>
+<li>When scanning <strong>Amazon S3 or RDS</strong>, remember Purview only reaches them via an <strong>AWS-hosted IR that Microsoft itself operates</strong> in its own AWS account — you are not standing up your own runtime for these [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose" target="_blank" rel="noopener" title="Choose the right integration runtime (IR matrix per source)">S3</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>].</li>
+<li>When scanning <strong>on-prem file shares, SQL, or SharePoint Server</strong>, you need a <strong>self-hosted IR or the information protection scanner</strong> running on customer-owned Windows Server — that's the only place customer infrastructure actually appears in the topology [<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner" target="_blank" rel="noopener" title="Learn about the information protection scanner">S12</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/deploy-scanner-prereqs" target="_blank" rel="noopener" title="Information protection scanner prerequisites">S13</a>].</li>
+<li>When a connector returns data to Purview, default assumption is <strong>metadata and classification only, never content</strong> — confirmed explicitly for the S3 connector [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-amazon-s3" target="_blank" rel="noopener" title="Amazon S3 multicloud scanning connector">S9</a>] and implied by the Data Map's whole design [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>].</li>
+<li>When Snowflake auth breaks, check for <strong>basic auth</strong> — Snowflake is retiring it in 2026; move to <strong>key pair (RSA, PKCS#8)</strong> and store the private key via Azure CLI, not the portal (the portal corrupts multi-line PEM) [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-snowflake" target="_blank" rel="noopener" title="Connect to and manage Snowflake">S10</a>].</li>
+<li>When Salesforce scanning is incomplete, remember it returns <strong>technical metadata only — no classification</strong> runs on Salesforce objects/fields, unlike S3 or Snowflake [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-map-data-sources" target="_blank" rel="noopener" title="Data sources that connect to Purview Data Map (capability matrix)">S2</a>], [<a class="cite" href="https://learn.microsoft.com/en-us/purview/register-scan-salesforce" target="_blank" rel="noopener" title="Connect to and manage Salesforce">S11</a>].</li>
+</ul>
+<h2>Gov-cloud and licensing</h2>
+<ul>
+<li>When a design needs <strong>S3 or RDS scanning AND Azure Government</strong>, that's a hard incompatibility — the Data Map explicitly excludes S3, RDS, and commercial Power BI in Azure Government (Power BI GCC is fine) [<a class="cite" href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability" target="_blank" rel="noopener" title="Feature availability for Microsoft Purview (Azure Government exclusions)">S4</a>]. Scan from a commercial Purview account instead, or accept the gap.</li>
+<li>When someone claims "GCC is FedRAMP Moderate" and someone else claims "GCC is FedRAMP High," <strong>both are right</strong> — GCC's formal P-ATO is Moderate, but Microsoft has separately passed FedRAMP High audits and claims High "Equivalency." Don't treat this as a documentation error [<a class="cite" href="https://techcommunity.microsoft.com/blog/publicsectorblog/understanding-compliance-between-commercial-government-dod--secret-offerings---m/4225436" target="_blank" rel="noopener" title="Understanding Compliance Between Commercial, Government, DoD &amp; Secret Offerings (Microsoft Public Sector Blog)">S35</a>].</li>
+<li>When comparing GCC / GCC High / DoD feature tables, remember <strong>"Baseline" = commercial</strong> — the gov-cloud service descriptions only list <em>differences</em> from commercial, so a blank cell usually means parity, not absence [<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - DoD deployments">S7</a>].</li>
+<li>When DSPM for AI is needed in GCC High or DoD, know the <strong>specific limit</strong>: no browse-to-URL policy creation, and only a supported subset of AI sites [<a class="cite" href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments" target="_blank" rel="noopener" title="Plan for Microsoft Purview - DoD deployments">S7</a>].</li>
+<li>When scoping licenses, remember <strong>every user who touches a scanned on-prem location needs a license</strong>, not just the scanner service account — this is a common under-licensing trap [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dlp-on-premises-scanner-get-started" target="_blank" rel="noopener" title="DLP for on-premises repositories">S14</a>].</li>
+</ul>
+<h2>AI data path</h2>
+<ul>
+<li>When asked "what stops Copilot from leaking a file the user can't open," the answer is the <strong>query-time permission/label/DLP check between grounding and response</strong> — not a one-time index-build check [conceptually shown in the AI data path diagram, S15]/[<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-m365-copilot" target="_blank" rel="noopener" title="Purview protections for Microsoft 365 Copilot">S16</a>].</li>
+<li>When investigating a Copilot interaction, remember the <strong>Audit solution only stores a transcript thread ID</strong> for Copilot Studio — DSPM for AI's activity explorer is what actually retrieves the chat text, not raw Audit search [<a class="cite" href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-logging-copilot-studio" target="_blank" rel="noopener" title="Copilot Studio audit fields (CopilotInteraction)">S21</a>].</li>
+<li>When prompts/responses seem to be "missing" from an investigation, check whether a <strong>collection policy</strong> is turned on — without it, Fabric/Security Copilot/non-Copilot AI apps only emit audit <em>events</em>, not prompt/response text [<a class="cite" href="https://learn.microsoft.com/en-us/purview/dspm-for-ai" target="_blank" rel="noopener" title="Learn about DSPM for AI">S15</a>].</li>
+<li>When comparing agent platforms, know the support matrix has a <strong>hard exclusion list</strong>: ChatGPT Enterprise and Claude Enterprise agents are not supported by Purview's agent protections [<a class="cite" href="https://learn.microsoft.com/en-us/purview/ai-agents" target="_blank" rel="noopener" title="Purview protections for AI agents (support matrix)">S17</a>].</li>
+</ul>
+<h2>Architecture placement</h2>
+<ul>
+<li>When deciding where the Purview account itself lives, it's <strong>an Azure resource</strong> (Data Map + Unified Catalog), not a Microsoft 365 tenant resource — Microsoft recommends one dedicated data-management landing zone per Entra tenant [<a class="cite" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/data/architecture-azure-landing-zones-unify-data-platform" target="_blank" rel="noopener" title="CAF reference architecture: unified data platform (Purview in a data management landing zone)">S24</a>].</li>
+<li>When mapping the 4-cloud topology, the pattern is: <strong>M365 tenant</strong> = admin portal + compliance solutions + unified audit log; <strong>Azure subscription</strong> = Purview account + Key Vault + Managed VNet IR; <strong>AWS</strong> = Microsoft-hosted IR only, for S3; <strong>customer estate</strong> = self-hosted IR, scanner, file shares, onboarded devices — nothing else runs on customer infrastructure [diagram, view 03].</li>
+<li>When network security is in scope, Purview account isolation is via <strong>Azure Private Link</strong>, not a firewall allowlist alone [<a class="cite" href="https://learn.microsoft.com/en-us/purview/data-gov-classic-security-best-practices" target="_blank" rel="noopener" title="Data governance best practices for security (private endpoints, RBAC)">S23</a>].</li>
+</ul>
+<h2>Falsifier</h2>
+<ul>
+<li>"Purview intercepts the retrieval" is imprecise — sources describe agents as <strong>inheriting their parent app's protections</strong> (labels, DLP), not Purview sitting inline as a proxy. Narrate it as inheritance, not interception.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\reference\cheatsheet.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="glossary.html">&larr; Previous</a><a href="quiz-bank.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>

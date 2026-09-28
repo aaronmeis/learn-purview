@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block 5: Integration and AI elements | Learn Purview</title>
+<meta name="description" content="Block 5 of the Microsoft Purview deep dive - integration and ai elements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="library.css">
+<script>try{var p=JSON.parse(localStorage.getItem("appPalette"))||"github",m=JSON.parse(localStorage.getItem("appMode"))||"dark";document.documentElement.setAttribute("data-theme",p+"-"+m);}catch(e){document.documentElement.setAttribute("data-theme","github-dark");}</script>
+</head>
+<body>
+<header class="topbar">
+  <a href="../index.html" class="home">&larr; Learn Purview console</a>
+  <span class="crumb">Library · Day blocks</span>
+  <a href="index.html" class="home">All pages</a>
+</header>
+<main class="doc">
+  <div class="kicker">Day blocks</div>
+  <h1 class="doctitle">Block 5: Integration and AI elements</h1>
+  <p class="lead">Block 5 of the Microsoft Purview deep dive - integration and ai elements.</p>
+  
+  <article>
+<p><strong>Time:</strong> 60 minutes · <strong>Goal:</strong> Third-party and external systems, APIs, identity, and the AI features and their data paths</p>
+<p><strong>Work in:</strong> <a href="view-04-integration-ai.html">Integration and AI Elements</a></p>
+<h2>Focus from mind map</h2>
+<ul>
+<li>Context and boundary (block 1)</li>
+<li>Assume no prior knowledge: what Purview is, and what it is not (vs Defender, Entra, Sentinel)</li>
+<li>Two halves: Microsoft 365 data security and compliance · data governance (Data Map, Data Catalog)</li>
+<li>Clouds: Commercial (global), GCC, GCC High, DoD, Azure Government. No Secret or Top Secret, no air gap.</li>
+<li>Capabilities: know your data · protect it · prevent loss · manage insider risk · respond and investigate · govern data estate · manage compliance posture · secure AI use</li>
+<li>Actors: compliance admin, security analyst, data owner and steward, investigator, end user, auditor</li>
+<li>Classification: sensitive information types, trainable classifiers</li>
+<li>Information Protection: sensitivity labels and label policies</li>
+<li>Insider Risk Management: indicators, policies, alerts and cases</li>
+<li>Data Map and Data Catalog: sources, scans, assets, lineage, glossary</li>
+<li>DSPM for AI: discovery of AI use, policies, reports</li>
+<li>Portals, services, agents, and scanners that realize each logical component</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/purview/purview">Learn about Microsoft Purview (solution families)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-data-sources">Data sources that connect to Purview Data Map (capability matrix)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/data-map-integration-runtime-choose">Choose the right integration runtime (IR matrix per source)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/legacy/classic-feature-availability">Feature availability for Microsoft Purview (Azure Government exclusions)</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-deployments">Plan for Microsoft Purview - GCC deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-gcc-high-deployments">Plan for Microsoft Purview - GCC High deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/plan-for-microsoft-purview-dod-deployments">Plan for Microsoft Purview - DoD deployments</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability">Cloud feature availability for US Government customers</a></li>
+</ul>
+<h2>Actions</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Fill the third-party and external systems inventory, one row per system.</li>
+<li class="task"><input type="checkbox" disabled> Draw the context diagram with the platform boundary.</li>
+<li class="task"><input type="checkbox" disabled> Fill the AI elements table and trace one AI data path end to end.</li>
+</ul>
+<h2>Retrieval check</h2>
+<div class="callout question" markdown="0"><div class="callout-title">Question</div><p>Name three external systems Microsoft Purview integrates with and the mechanism each uses. Which control governs the AI data path?</p></div>
+
+<div class="callout success" markdown="0"><div class="callout-title">Answer cues</div><p>Named systems: Amazon S3, Snowflake, Salesforce. AI data path control: DLP, IRM, retention, eDiscovery policies it creates.</p></div>
+
+<h2>Exit criteria</h2>
+<ul>
+<li class="task"><input type="checkbox" disabled> Third-party inventory has every known external system; AI data path drawn.</li>
+</ul></article>
+  <footer class="docfoot">
+    Rendered from <code>Learning\tech-deep-dive\microsoft-purview\blocks\05-integration-and-ai.md</code> in the Obsidian vault (source of truth). Study material only. Citations <span class="cite">S#</span> link to the Microsoft source ledger.
+    <div class="prevnext"><a href="block-04-physical-view.html">&larr; Previous</a><a href="block-06-hands-on-lab.html">Next &rarr;</a></div>
+  </footer>
+</main>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+const dark=(document.documentElement.getAttribute("data-theme")||"").endsWith("dark");
+mermaid.initialize({startOnLoad:true,theme:dark?"dark":"default",securityLevel:"strict"});
+</script>
+</body>
+</html>
